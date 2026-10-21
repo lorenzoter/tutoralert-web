@@ -13,8 +13,8 @@ const ROUTE = [35, 36, 37, 38, 45, 46, 47, 48];
 
 // ---------- Impostazioni (per dispositivo) ----------
 const DEFAULTS = {
-  audio: 'voce', volume: 1, tapSound: 'voce', approach: 1000, slowRepeat: true, endAverage: true,
-  targetExact: false, personalMax: null, rain: false, decimals: 1, speedoPct: 0, testMode: false,
+  audio: 'nulla', volume: 1, tapSound: 'bip', approach: 1000, slowRepeat: false, endAverage: true,
+  targetExact: true, personalMax: null, rain: false, decimals: 1, speedoPct: 0, testMode: false,
 };
 const settings = { ...DEFAULTS, ...store.get('settings', {}) };
 if (settings.voice === false && !store.get('settings', {}).audio) settings.audio = 'nulla';
