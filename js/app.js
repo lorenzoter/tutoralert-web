@@ -13,14 +13,18 @@ const ROUTE = [35, 36, 37, 38, 45, 46, 47, 48];
 
 // ---------- Impostazioni (per dispositivo) ----------
 const DEFAULTS = {
-  voice: true, volume: 1, tapSound: 'voce', approach: 1000, slowRepeat: true, endAverage: true,
+  audio: 'voce', volume: 1, tapSound: 'voce', approach: 1000, slowRepeat: true, endAverage: true,
   targetExact: false, personalMax: null, rain: false, decimals: 1, speedoPct: 0, testMode: false,
 };
 const settings = { ...DEFAULTS, ...store.get('settings', {}) };
+if (settings.voice === false && !store.get('settings', {}).audio) settings.audio = 'nulla';
+delete settings.voice;
 function applySettings() {
   Policy.settings = { targetExact: settings.targetExact, personalMax: settings.personalMax, rain: settings.rain };
   if (gain) gain.gain.value = settings.volume;
   document.body.classList.toggle('test', settings.testMode);
+  const ab = document.getElementById('audioBtn');
+  if (ab) ab.textContent = { voce: '🔊 Voce', bip: '🔔 Bip', nulla: '🔇 Muto' }[settings.audio];
 }
 function setSetting(k, v) { settings[k] = v; store.set('settings', settings); applySettings(); renderSettings(); render(); }
 
@@ -52,8 +56,10 @@ async function loadVoice() {
 }
 const num = n => { n = Math.round(n); return n >= 1 && n <= 200 ? 'n' + n : null; };
 /** Pronuncia una frase fatta di pezzi registrati, in coda alle precedenti. */
-function say(keys, force = false) {
-  if (!ac || (!settings.voice && !force)) return;
+function say(keys, force = false, urgent = false) {
+  if (!ac) return;
+  if (!force && settings.audio === 'nulla') return;
+  if (!force && settings.audio === 'bip') { for (let i = 0; i < (urgent ? 3 : 2); i++) setTimeout(beep, i * 260); return; }
   const parts = keys.filter(k => k && clips[k]);
   if (!parts.length) return;
   speakQueue = speakQueue.then(() => new Promise(done => {
@@ -195,9 +201,9 @@ function onTrip(t) {
 function overSpeech(s, now) {
   lastOverSpeech = now;
   const rec = s.recommendedKmh != null ? Math.round(s.recommendedKmh) : null;
-  if (s.cannotRecover) say(['oltre']);
-  else if (rec != null && s.limitKmh != null && rec < s.limitKmh) say(['rallenta', num(rec)]);
-  else say(['attenzione']);
+  if (s.cannotRecover) say(['oltre'], false, true);
+  else if (rec != null && s.limitKmh != null && rec < s.limitKmh) say(['rallenta', num(rec)], false, true);
+  else say(['attenzione'], false, true);
 }
 
 /** Prossimo portale di inizio davanti, sullo stesso tracciato, entro 2 km. */
@@ -363,9 +369,10 @@ function renderTratte() {
   $('tratteList').innerHTML = `<p class="dim">Database tratte: versione ${dataVersion} (si aggiorna da solo a ogni avvio)</p>` + list.map(s => `<div class="item">
       <div><b>${s.label}</b><div class="dim">${s.json.direction ?? ''} · ${km(s.officialLength, 2)} · limite ${s.limitKmh ?? '?'}</div>
       <div class="dim">${disabled.has(s.id) ? '⛔ Disattivata' : s.portalsMeasured ? '🟢 Portali verificati in auto' : '⚪ Portali da verificare'}</div></div>
-      <button class="small ${disabled.has(s.id) ? '' : 'danger'}" data-id="${s.id}">${disabled.has(s.id) ? 'Riattiva' : 'Non esiste'}</button></div>`).join('');
-  $('tratteList').querySelectorAll('button').forEach(b => b.onclick = () => {
+      <label class="switch"><input type="checkbox" data-id="${s.id}" ${disabled.has(s.id) ? '' : 'checked'}><span></span></label></div>`).join('');
+  $('tratteList').querySelectorAll('input[data-id]').forEach(b => b.onchange = () => {
     const id = Number(b.dataset.id);
+    b.checked = !disabled.has(id); // lo stato vero lo decide la conferma
     if (disabled.has(id)) { setDisabled(id, false); renderTratte(); }
     else confirmBox('Disattivare questa tratta?', 'Usalo se nella realtà i portali non ci sono. Puoi riattivarla quando vuoi.', () => { setDisabled(id, true); renderTratte(); });
   });
@@ -382,7 +389,7 @@ function confirmBox(title, text, onOk) {
 }
 const SCHEMA = [
   ['Voce e audio', [
-    ['voice', 'Avvisi vocali', [[true, 'Sì'], [false, 'No']]],
+    ['audio', 'Avvisi', [['voce', 'Voce'], ['bip', 'Bip'], ['nulla', 'Nessuno']]],
     ['volume', 'Volume della voce', [[0.5, 'Basso'], [1, 'Normale'], [1.6, 'Alto'], [2.4, 'Massimo']]],
     ['tapSound', 'Al tocco di PORTALE', [['voce', 'Voce'], ['bip', 'Bip']]],
   ]],
@@ -403,6 +410,7 @@ const SCHEMA = [
   ]],
 ];
 const HELP = {
+  audio: 'Si cambia anche durante la guida con il pulsante in alto.',
   targetExact: 'Tolleranza di legge: la media può arrivare al limite + 5%. Limite esatto: più prudente.',
   speedoPct: 'Solo la velocità mostrata, per farla coincidere col cruscotto. La media non cambia.',
   testMode: 'Mostra PORTALE e le misure con i tocchi, per verificare la media.',
@@ -429,6 +437,7 @@ function openPanel(id) { if (id === 'impostazioni') renderSettings(); ['tratte',
 $('go').onclick = () => start(0);
 $('stop').onclick = () => confirmBox('Fermare il rilevamento?', 'La tratta in corso viene chiusa.', stop);
 $('tap').onclick = tap;
+$('audioBtn').onclick = () => { const order = ['voce', 'bip', 'nulla']; setSetting('audio', order[(order.indexOf(settings.audio) + 1) % 3]); };
 $('undo').onclick = undoTap;
 $('missing').onclick = () => {
   const p = portalToCheck; if (!p) return;
