@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>TutorAlert · Prova Tesla</title>
+<title>TutorAlert · Prova Tesla 2</title>
 <style>
   :root { --bg:#000; --card:#151515; --fg:#eee; --dim:#9a9a9a; --ok:#43a047; --warn:#ffb300; --bad:#e53935; --acc:#42a5f5; }
   * { box-sizing:border-box; }
@@ -26,8 +26,8 @@
 </head>
 <body>
 <main>
-  <h1>TutorAlert · Prova per la Tesla</h1>
-  <p class="lead">Premi <b>Avvia prova</b>, guida qualche km, poi prova a mettere la mappa a schermo intero per 1–2 minuti e torna qui. Alla fine fai una <b>foto a questa schermata</b> e mandamela.</p>
+  <h1>TutorAlert · Prova per la Tesla (2)</h1>
+  <p class="lead">Premi <b>Avvia prova</b>, guida qualche km, poi lascia il browser aperto per qualche minuto e, solo alla fine, metti la mappa a schermo intero per 1 minuto e torna qui. Alla fine fai una <b>foto a questa schermata</b> e mandamela.</p>
 
   <section>
     <h2>1 · GPS</h2>
@@ -43,14 +43,13 @@
   </section>
 
   <section>
-    <h2>2 · Voce e audio</h2>
-    <div class="row"><span>Sintesi vocale</span><span id="ttsOk">--</span></div>
-    <div class="row"><span>Voci italiane</span><span id="ttsVoices">--</span></div>
-    <div class="row"><span>Frasi pronunciate</span><span id="spoken">0</span></div>
-    <div class="row"><span>Suono (bip)</span><span id="beepOk">--</span></div>
-    <button class="alt" onclick="say('Tutor tra cinquecento metri. Limite centotrenta.')">Prova voce</button>
-    <button class="alt" onclick="beep()">Prova bip</button>
-    <div style="color:var(--dim);margin-top:8px">Durante la prova la pagina parla da sola ogni 60 s: così sappiamo se la voce funziona anche con la mappa a schermo intero.</div>
+    <h2>2 · Voce registrata</h2>
+    <div class="row"><span>Frasi caricate</span><span id="clips">--</span></div>
+    <div class="row"><span>Frasi riprodotte</span><span id="played">0</span></div>
+    <div class="row"><span>Audio</span><span id="beepOk">--</span></div>
+    <button class="alt" onclick="play(['frase'])">Prova voce</button>
+    <button class="alt" onclick="play(['media','126'])">Prova numeri</button>
+    <div style="color:var(--dim);margin-top:8px">Durante la prova ogni 60 s dice «Controllo voce. Media …». Dimmi se la voce è chiara e se le parole attaccate («Media» + numero) suonano naturali.</div>
   </section>
 
   <section>
@@ -59,6 +58,7 @@
     <div class="row"><span>Tempo nascosta (totale)</span><span id="hidT">0 s</span></div>
     <div class="row"><span>Pausa più lunga del timer</span><span id="tGap">--</span></div>
     <div class="row"><span>GPS ricevuto mentre nascosta</span><span id="gpsHidden">0</span></div>
+    <div class="row"><span>Blocchi oltre 3 s</span><span id="freezes">0</span></div>
     <div class="row"><span>Durata prova</span><span id="dur">0:00</span></div>
     <div class="row"><span>Browser</span><span id="ua" style="font-size:14px;text-align:right"></span></div>
   </section>
@@ -74,7 +74,7 @@
 const $ = id => document.getElementById(id);
 const fmt = (v, d = 1) => v.toLocaleString('it-IT', { minimumFractionDigits: d, maximumFractionDigits: d });
 let watch = null, t0 = 0, last = null, n = 0, dtSum = 0, dtMax = 0, accSum = 0, dup = 0, dist = 0, withSpeed = 0, withHeading = 0;
-let hidden = 0, hiddenSince = null, hiddenMs = 0, gpsHidden = 0, lastTick = 0, tickGap = 0, spoken = 0, sayTimer = null, tick = null, beepWorked = null;
+let freezes = 0, hidden = 0, hiddenSince = null, hiddenMs = 0, gpsHidden = 0, lastTick = 0, tickGap = 0, spoken = 0, sayTimer = null, tick = null, beepWorked = null;
 
 function log(s) { const l = $('log'); l.textContent = new Date().toLocaleTimeString('it-IT') + '  ' + s + '\n' + l.textContent; }
 $('ua').textContent = navigator.userAgent;
@@ -87,7 +87,8 @@ function hav(a, b) {
 }
 
 function onPos(p) {
-  const c = p.coords, t = p.timestamp || Date.now();
+  // L'orario delle posizioni Tesla salta: si usa l'orologio della pagina.
+  const c = p.coords, t = performance.now();
   n++;
   if (document.hidden) gpsHidden++;
   if (last) {
@@ -115,25 +116,36 @@ function onPos(p) {
 
 function onErr(e) { $('gpsState').textContent = 'errore: ' + e.message; $('gpsState').className = 'bad'; log('GPS errore ' + e.code + ' ' + e.message); verdict(); }
 
-function voicesIt() { return (window.speechSynthesis?.getVoices() || []).filter(v => v.lang && v.lang.toLowerCase().startsWith('it')); }
-function checkTts() {
-  const ok = 'speechSynthesis' in window;
-  $('ttsOk').textContent = ok ? 'presente' : 'assente';
-  $('ttsOk').className = ok ? 'ok' : 'bad';
-  const v = voicesIt();
-  $('ttsVoices').textContent = ok ? (v.length ? v.map(x => x.name).join(', ') : 'nessuna') : '--';
+const CLIPS = ['frase', 'inizio', 'media', 'controllo', '124', '126', '131'];
+const buffers = {};
+let played = 0;
+async function loadClips() {
+  ac = ac || new (window.AudioContext || window.webkitAudioContext)();
+  let ok = 0;
+  await Promise.all(CLIPS.map(async k => {
+    try {
+      const r = await fetch('audio/' + k + '.mp3');
+      buffers[k] = await ac.decodeAudioData(await r.arrayBuffer());
+      ok++;
+    } catch (e) { log('clip ' + k + ' errore ' + e); }
+  }));
+  $('clips').textContent = ok + ' / ' + CLIPS.length;
+  $('clips').className = ok === CLIPS.length ? 'ok' : 'bad';
 }
-if ('speechSynthesis' in window) speechSynthesis.onvoiceschanged = checkTts;
-checkTts();
-
-function say(text) {
-  if (!('speechSynthesis' in window)) { log('voce assente'); return; }
-  const u = new SpeechSynthesisUtterance(text);
-  u.lang = 'it-IT';
-  const v = voicesIt()[0]; if (v) u.voice = v;
-  u.onstart = () => { spoken++; $('spoken').textContent = spoken + (document.hidden ? ' (anche da nascosta)' : ''); verdict(); };
-  u.onerror = e => log('voce errore: ' + e.error);
-  speechSynthesis.speak(u);
+/** Riproduce le frasi una dopo l'altra, senza pause (come farà l'app con «Media» + numero). */
+function play(keys) {
+  if (!ac) return;
+  ac.resume();
+  let at = ac.currentTime + 0.05;
+  keys.forEach(k => {
+    const b = buffers[k]; if (!b) return;
+    const src = ac.createBufferSource();
+    src.buffer = b; src.connect(ac.destination); src.start(at);
+    at += b.duration + 0.04;
+  });
+  played++;
+  $('played').textContent = played;
+  verdict();
 }
 
 let ac = null;
@@ -163,20 +175,23 @@ function start() {
   if (watch != null) return;
   t0 = Date.now(); lastTick = t0;
   beep();
-  say('Prova avviata');
+  loadClips().then(() => play(['inizio']));
   if (!('geolocation' in navigator)) { onErr({ code: 0, message: 'geolocalizzazione non disponibile' }); }
   else watch = navigator.geolocation.watchPosition(onPos, onErr, { enableHighAccuracy: true, maximumAge: 0, timeout: 30000 });
   $('gpsState').textContent = 'in attesa del permesso…';
   tick = setInterval(() => {
     const now = Date.now();
-    tickGap = Math.max(tickGap, (now - lastTick) / 1000); lastTick = now;
+    const gap = (now - lastTick) / 1000;
+    if (gap > 3) { freezes++; $('freezes').textContent = freezes; log(`blocco di ${fmt(gap, 1)} s (pagina ${document.hidden ? 'nascosta' : 'visibile'})`); }
+    tickGap = Math.max(tickGap, gap); lastTick = now;
     $('tGap').textContent = fmt(tickGap, 1) + ' s';
     $('gpsHidden').textContent = gpsHidden;
     const s = Math.round((now - t0) / 1000);
     $('dur').textContent = Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0');
-    if (last && now - last.t > 5000) { $('gpsState').textContent = 'nessuna posizione da ' + Math.round((now - last.t) / 1000) + ' s'; $('gpsState').className = 'warn'; }
+    if (last && performance.now() - last.t > 5000) { $('gpsState').textContent = 'nessuna posizione da ' + Math.round((performance.now() - last.t) / 1000) + ' s'; $('gpsState').className = 'warn'; }
   }, 1000);
-  sayTimer = setInterval(() => say('Controllo voce. ' + (document.hidden ? 'Pagina nascosta.' : 'Pagina visibile.')), 60000);
+  const nums = ['124', '126', '131'];
+  sayTimer = setInterval(() => play(['controllo', 'media', nums[Math.floor(Math.random() * 3)]]), 60000);
   $('go').textContent = 'Prova in corso…';
 }
 
@@ -196,8 +211,9 @@ function verdict() {
     out.push(a <= 20 ? ['ok', `Precisione media ${fmt(a, 0)} m`] : ['warn', `Precisione media ${fmt(a, 0)} m: scarsa`]);
     if (dup > n / 3) out.push(['bad', 'Molte posizioni ripetute: il GPS si blocca']);
   }
-  if (spoken > 0) out.push(['ok', 'La voce funziona']);
-  else if (!('speechSynthesis' in window)) out.push(['warn', 'Niente sintesi vocale: userò frasi registrate']);
+  if (played > 0) out.push(['ok', `Voce registrata: ${played} frasi riprodotte (le hai sentite?)`]);
+  if (freezes > 0) out.push(['warn', `${freezes} blocchi della pagina oltre 3 s (vedi elenco sotto)`]);
+  else if (watch != null && Date.now() - t0 > 60000) out.push(['ok', 'Nessun blocco della pagina']);
   if (hidden > 0) {
     out.push(gpsHidden > 0 ? ['ok', `Con la pagina nascosta il GPS continua (${gpsHidden} posizioni)`] : ['bad', 'Con la pagina nascosta il GPS si ferma']);
     out.push(tickGap <= 3 ? ['ok', 'Con la pagina nascosta i calcoli continuano'] : ['warn', `Con la pagina nascosta i calcoli si fermano (pausa ${fmt(tickGap, 0)} s)`]);
