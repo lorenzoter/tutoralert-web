@@ -1,5 +1,5 @@
 // TutorAlert per il browser della Tesla: GPS, motore Tutor (engine.js), voce registrata, modalità prova.
-import { Geo, Section, Tracker, Prova } from './engine.js';
+import { Geo, Section, Tracker, Prova, Policy } from './engine.js';
 
 const $ = id => document.getElementById(id);
 const fmt = (v, d = 1) => v == null ? '--' : v.toLocaleString('it-IT', { minimumFractionDigits: d, maximumFractionDigits: d });
@@ -10,6 +10,19 @@ const store = {
   set(k, v) { try { localStorage.setItem('ta.' + k, JSON.stringify(v)); } catch { /* memoria piena o non disponibile */ } },
 };
 const ROUTE = [35, 36, 37, 38, 45, 46, 47, 48];
+
+// ---------- Impostazioni (per dispositivo) ----------
+const DEFAULTS = {
+  voice: true, volume: 1, tapSound: 'voce', approach: 1000, slowRepeat: true, endAverage: true,
+  targetExact: false, personalMax: null, rain: false, decimals: 1, speedoPct: 0, testMode: false,
+};
+const settings = { ...DEFAULTS, ...store.get('settings', {}) };
+function applySettings() {
+  Policy.settings = { targetExact: settings.targetExact, personalMax: settings.personalMax, rain: settings.rain };
+  if (gain) gain.gain.value = settings.volume;
+  document.body.classList.toggle('test', settings.testMode);
+}
+function setSetting(k, v) { settings[k] = v; store.set('settings', settings); applySettings(); renderSettings(); render(); }
 
 // ---------- Stato ----------
 let allSections = [], sections = [], tracker = null;
@@ -24,9 +37,12 @@ const announced = new Set();
 let lastOverSpeech = 0;
 
 // ---------- Voce registrata ----------
-let ac = null, clips = {}, clipNames = [], speakQueue = Promise.resolve();
+let ac = null, gain = null, clips = {}, clipNames = [], speakQueue = Promise.resolve();
 async function loadVoice() {
-  ac = ac || new (window.AudioContext || window.webkitAudioContext)();
+  if (!ac) {
+    ac = new (window.AudioContext || window.webkitAudioContext)();
+    gain = ac.createGain(); gain.connect(ac.destination); gain.gain.value = settings.volume;
+  }
   await ac.resume();
   if (clipNames.length) return;
   clipNames = await (await fetch('audio/index.json')).json();
@@ -36,8 +52,8 @@ async function loadVoice() {
 }
 const num = n => { n = Math.round(n); return n >= 1 && n <= 200 ? 'n' + n : null; };
 /** Pronuncia una frase fatta di pezzi registrati, in coda alle precedenti. */
-function say(keys) {
-  if (!ac) return;
+function say(keys, force = false) {
+  if (!ac || (!settings.voice && !force)) return;
   const parts = keys.filter(k => k && clips[k]);
   if (!parts.length) return;
   speakQueue = speakQueue.then(() => new Promise(done => {
@@ -45,11 +61,20 @@ function say(keys) {
     let at = ac.currentTime + 0.05;
     for (const k of parts) {
       const src = ac.createBufferSource();
-      src.buffer = clips[k]; src.connect(ac.destination); src.start(at);
+      src.buffer = clips[k]; src.connect(gain); src.start(at);
       at += clips[k].duration + 0.03;
     }
     setTimeout(done, (at - ac.currentTime) * 1000 + 150);
   }));
+}
+
+/** Bip breve (tocco di PORTALE). */
+function beep() {
+  if (!ac) return;
+  ac.resume();
+  const o = ac.createOscillator(), g = ac.createGain();
+  o.frequency.value = 990; g.gain.setValueAtTime(0.25, ac.currentTime); g.gain.exponentialRampToValueAtTime(0.001, ac.currentTime + 0.18);
+  o.connect(g); g.connect(gain); o.start(); o.stop(ac.currentTime + 0.2);
 }
 
 // ---------- Tratte ----------
@@ -136,7 +161,7 @@ function onFix(fix) {
   const u = tracker.update(fix);
   for (const e of u.events) onEvent(e, fix);
   status = u.status;
-  if (status && status.confirmed && status.level === 'OVER' && !status.suspended && fix.timeMs - lastOverSpeech >= 60000) overSpeech(status, fix.timeMs);
+  if (settings.slowRepeat && status && status.confirmed && status.level === 'OVER' && !status.suspended && fix.timeMs - lastOverSpeech >= 60000) overSpeech(status, fix.timeMs);
   next = status ? null : nextTutor(fix);
   nextPortal = findNextPortal(fix);
   portalToCheck = portalCheck.update(fix, nextPortal);
@@ -162,7 +187,7 @@ function onEvent(e, fix) {
 function onTrip(t) {
   announced.delete(t.sectionId);
   trips.push(t);
-  if (t.endReason === 'COMPLETED') say(['fine', 'media', num(t.averageKmh)]);
+  if (t.endReason === 'COMPLETED') say(settings.endAverage ? ['fine', 'media', num(t.averageKmh)] : ['fine']);
   else if (t.endReason === 'LEFT_ROUTE') say(['chiusa']);
   refreshAppAverages(t.sectionId);
 }
@@ -188,10 +213,10 @@ function nextTutor(fix) {
   }
   if (!best) return null;
   const { ts, d } = best;
-  if (d <= 1000 && !announced.has(ts.id)) {
+  if (settings.approach > 0 && d <= settings.approach && !announced.has(ts.id)) {
     announced.add(ts.id);
-    const m = Math.round(d / 100) * 100;
-    say(m >= 1000 ? ['un_km', ts.limitKmh ? 'limite' : null, num(ts.limitKmh)] : ['tutor_tra', 'n' + m, 'metri', ts.limitKmh ? 'limite' : null, num(ts.limitKmh)]);
+    const m = Math.max(100, Math.round(d / 100) * 100), lim = Policy.effectiveLimit(ts.limitKmh);
+    say(m >= 1000 ? ['un_km', lim ? 'limite' : null, num(lim)] : ['tutor_tra', 'n' + m, 'metri', lim ? 'limite' : null, num(lim)]);
   }
   return { ts, distanceM: d };
 }
@@ -243,7 +268,8 @@ function tapTime() { return simulated && lastFix ? lastFix.timeMs : Date.now(); 
 function tap() {
   if (!running) return;
   taps.push(tapTime()); pendingEval = true;
-  say(['portale']); render();
+  if (settings.tapSound === 'bip') beep(); else say(['portale'], true);
+  render();
 }
 function undoTap() { if (taps.length) { taps.pop(); say(['annullato']); render(); } }
 
@@ -278,9 +304,9 @@ function render() {
     const avg = s.averageKmh, lim = s.limitKmh;
     const col = avg == null || lim == null ? '' : avg <= lim ? 'ok' : avg <= (s.allowedKmh ?? lim) ? 'warn' : 'bad';
     $('tLabel').textContent = 'TUTOR · ' + s.section.label;
-    $('avg').textContent = fmt(avg); $('avg').className = 'avg ' + col;
+    $('avg').textContent = fmt(avg, settings.decimals); $('avg').className = 'avg ' + col;
     $('limit').textContent = lim ?? '?';
-    const spd = lastFix?.speedMps != null ? Math.round(lastFix.speedMps * 3.6) : '--';
+    const spd = shownSpeed();
     $('tLine').textContent = `ora ${spd} km/h · ${km(s.remainingMeters)} alla fine · ${dur(s.elapsedMs)}`;
     $('bar').style.width = (s.progress * 100).toFixed(1) + '%'; $('bar').className = 'fill ' + col;
     const rec = s.recommendedKmh != null ? Math.round(s.recommendedKmh) : null;
@@ -292,7 +318,7 @@ function render() {
     if (banner) { $('banner').textContent = banner[0]; $('banner').className = 'banner ' + banner[1]; }
     $('tState').textContent = (s.section.portalsMeasured ? '🟢 Portali verificati in auto · formula del Tutor' : '⚪ Portali da verificare: media prudente') + ` · ${km(s.totalMeters, 2)}`;
   } else {
-    $('speed').textContent = lastFix?.speedMps != null ? Math.round(lastFix.speedMps * 3.6) : '--';
+    $('speed').textContent = shownSpeed();
     $('nextCard').className = 'card next' + (next ? ' on' : '');
     $('nextTitle').textContent = next ? `Tutor tra ${Math.round(next.distanceM / 10) * 10} m` : running ? 'Nessun Tutor davanti entro 2 km' : '';
     $('nextSub').textContent = next ? `${next.ts.label} · ${km(next.ts.officialLength)} · limite ${next.ts.limitKmh ?? '?'}` : '';
@@ -315,6 +341,9 @@ function render() {
   $('tapCount').textContent = `${taps.length} portali segnati`;
   renderResult();
 }
+
+/** Velocità mostrata: GPS con la correzione del tachimetro scelta (solo per lo schermo, mai nei calcoli). */
+function shownSpeed() { return lastFix?.speedMps != null ? Math.round(lastFix.speedMps * 3.6 * (1 + settings.speedoPct / 100)) : '--'; }
 
 function resultHtml(r) {
   const diff = r.appAvgKmh != null ? r.appAvgKmh - r.tutorAvgKmh : null;
@@ -351,11 +380,53 @@ function confirmBox(title, text, onOk) {
   $('dlgOk').onclick = () => { $('dlg').hidden = true; onOk(); };
   $('dlgNo').onclick = () => { $('dlg').hidden = true; };
 }
-function openPanel(id) { ['tratte', 'misure'].forEach(p => $(p).hidden = p !== id); if (id === 'tratte') renderTratte(); if (id === 'misure') renderMisure(); }
+const SCHEMA = [
+  ['Voce e audio', [
+    ['voice', 'Avvisi vocali', [[true, 'Sì'], [false, 'No']]],
+    ['volume', 'Volume della voce', [[0.5, 'Basso'], [1, 'Normale'], [1.6, 'Alto'], [2.4, 'Massimo']]],
+    ['tapSound', 'Al tocco di PORTALE', [['voce', 'Voce'], ['bip', 'Bip']]],
+  ]],
+  ['Avvisi', [
+    ['approach', 'Preavviso Tutor', [[1000, '1 km'], [500, '500 m'], [0, 'Spento']]],
+    ['slowRepeat', '«Rallenta»', [[true, 'Ogni minuto'], [false, 'Una volta']]],
+    ['endAverage', 'Media a fine tratta', [[true, 'Sì'], [false, 'No']]],
+  ]],
+  ['Calcolo della media', [
+    ['targetExact', 'Obiettivo', [[false, 'Tolleranza di legge'], [true, 'Limite esatto']]],
+    ['personalMax', 'Limite personale', [[null, 'Nessuno'], [110, '110'], [100, '100'], [90, '90'], [80, '80']]],
+    ['rain', 'Pioggia (limite 110)', [[false, 'No'], [true, 'Sì']]],
+  ]],
+  ['Schermo', [
+    ['decimals', 'Decimali della media', [[1, '1'], [0, '0']]],
+    ['speedoPct', 'Correzione tachimetro', [[0, '0%'], [1, '+1%'], [2, '+2%'], [3, '+3%'], [4, '+4%']]],
+    ['testMode', 'Modalità prova (PORTALE)', [[false, 'No'], [true, 'Sì']]],
+  ]],
+];
+const HELP = {
+  targetExact: 'Tolleranza di legge: la media può arrivare al limite + 5%. Limite esatto: più prudente.',
+  speedoPct: 'Solo la velocità mostrata, per farla coincidere col cruscotto. La media non cambia.',
+  testMode: 'Mostra PORTALE e le misure con i tocchi, per verificare la media.',
+};
+function renderSettings() {
+  const el = $('settingsList'); if (!el) return;
+  el.innerHTML = SCHEMA.map(([group, rows]) => `<h3>${group}</h3>` + rows.map(([k, label, opts]) => `
+    <div class="set"><div class="setLabel">${label}${HELP[k] ? `<div class="dim">${HELP[k]}</div>` : ''}</div>
+    <div class="seg">${opts.map(([v, t], i) => `<button data-k="${k}" data-i="${i}" class="${settings[k] === v ? 'on' : ''}">${t}</button>`).join('')}</div></div>`).join('')).join('')
+    + `<h3>Database tratte</h3><div class="set"><div class="setLabel">Versione ${dataVersion}<div class="dim">Si aggiorna da solo a ogni avvio dal database su GitHub. ${allSections.filter(s => s.portalsMeasured).length} tratte con portali verificati in auto.</div></div></div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:8px"><button id="voiceTest">Prova la voce</button><button id="simBtn">Simulazione Roma → Ferentino</button></div>
+    <p class="dim" style="margin-top:20px">TutorAlert · Controlli in anticipo. Media sotto controllo.</p>`;
+  el.querySelectorAll('.seg button').forEach(b => b.onclick = () => {
+    const [, , opts] = SCHEMA.flatMap(g => g[1]).find(r => r[0] === b.dataset.k);
+    setSetting(b.dataset.k, opts[Number(b.dataset.i)][0]);
+  });
+  $('voiceTest').onclick = async () => { await loadVoice(); say(['tutor_tra', 'n500', 'metri', 'limite', 'n130'], true); };
+  $('simBtn').onclick = () => { openPanel(null); start(10); };
+}
+
+function openPanel(id) { if (id === 'impostazioni') renderSettings(); ['tratte', 'misure', 'impostazioni'].forEach(p => $(p).hidden = p !== id); if (id === 'tratte') renderTratte(); if (id === 'misure') renderMisure(); }
 
 // ---------- Pulsanti ----------
 $('go').onclick = () => start(0);
-$('sim').onclick = () => start(10);
 $('stop').onclick = () => confirmBox('Fermare il rilevamento?', 'La tratta in corso viene chiusa.', stop);
 $('tap').onclick = tap;
 $('undo').onclick = undoTap;
@@ -368,4 +439,5 @@ $('missing').onclick = () => {
 document.querySelectorAll('[data-open]').forEach(b => b.onclick = () => openPanel(b.dataset.open));
 document.querySelectorAll('[data-close]').forEach(b => b.onclick = () => openPanel(null));
 $('dlgNo').onclick = () => { $('dlg').hidden = true; };
-loadSections().then(render).catch(e => { $('startErr').textContent = 'Errore nel caricare le tratte: ' + e.message; });
+applySettings();
+loadSections().then(() => { render(); $('dbInfo').textContent = `Database tratte v${dataVersion} · ${allSections.filter(s => s.portalsMeasured).length} tratte verificate in auto`; }).catch(e => { $('startErr').textContent = 'Errore nel caricare le tratte: ' + e.message; });

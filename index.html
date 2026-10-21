@@ -4,89 +4,114 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>TutorAlert</title>
-<meta name="description" content="Avvisi Tutor e media sotto controllo sulla A1, per il browser della Tesla.">
+<meta name="description" content="Avvisi Tutor e media sotto controllo in autostrada.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230b6e3a'/%3E%3Ccircle cx='32' cy='34' r='18' fill='none' stroke='%23fff' stroke-width='6'/%3E%3Cpath d='M32 34 L44 24' stroke='%237fd6a0' stroke-width='6' stroke-linecap='round'/%3E%3C/svg%3E">
 <style>
-  :root { --bg:#000; --card:#141414; --card2:#1e1e1e; --fg:#f2f2f2; --dim:#9a9a9a; --ok:#43a047; --warn:#ffb300; --bad:#e53935; --acc:#42a5f5; --green:#7fd6a0; }
-  * { box-sizing:border-box; }
+  :root { --bg:#050505; --card:#121212; --card2:#1c1c1c; --line:#262626; --fg:#f4f4f4; --dim:#9b9b9b; --ok:#3fb950; --warn:#ffb300; --bad:#ef4444; --acc:#3b9cf0; --green:#7fd6a0; --brand:#0b6e3a; }
+  * { box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
   html, body { margin:0; background:var(--bg); color:var(--fg); font:20px/1.35 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; }
-  button { font:inherit; font-weight:700; border:0; border-radius:16px; cursor:pointer; color:#fff; background:var(--card2); min-height:64px; padding:0 22px; }
-  button:disabled { opacity:.45; cursor:default; }
+  button { font:inherit; font-weight:700; border:0; border-radius:16px; cursor:pointer; color:var(--fg); background:var(--card2); min-height:64px; padding:0 22px; }
+  button:active { transform:scale(.98); }
+  button:disabled { opacity:.4; cursor:default; transform:none; }
   [hidden] { display:none !important; }
-  .dim { color:var(--dim); font-size:16px; }
+  .dim { color:var(--dim); font-size:16px; font-weight:400; }
   .ok { color:var(--ok); } .warn { color:var(--warn); } .bad { color:var(--bad); }
+  .logo { display:flex; align-items:center; gap:12px; }
+  .mark { width:44px; height:44px; border-radius:12px; background:var(--brand); display:grid; place-items:center; flex:none; }
+  .brand { font-weight:800; font-size:24px; letter-spacing:-.3px; }
 
   /* Avvio */
-  #home { max-width:760px; margin:0 auto; padding:40px 20px; }
-  #home h1 { font-size:52px; margin:0; }
-  #home .sub { color:var(--green); font-size:24px; font-weight:600; margin:6px 0 22px; }
-  #go { width:100%; height:110px; font-size:38px; background:var(--green); color:#00391d; border-radius:60px; margin:20px 0 12px; }
+  #home { min-height:100vh; display:flex; flex-direction:column; max-width:760px; margin:0 auto; padding:28px 20px; }
+  #home .hero { flex:1; display:flex; flex-direction:column; justify-content:center; text-align:center; }
+  #home h1 { font-size:64px; margin:0; letter-spacing:-1.5px; }
+  #home .sub { color:var(--green); font-size:24px; font-weight:600; margin:6px 0 34px; }
+  #go { width:100%; height:120px; font-size:40px; background:var(--green); color:#00391d; border-radius:64px; box-shadow:0 10px 40px rgba(127,214,160,.18); }
+  .note { color:var(--dim); font-size:17px; margin-top:22px; }
+  .links { display:flex; gap:10px; justify-content:center; flex-wrap:wrap; }
+  .links button { background:transparent; border:1px solid var(--line); min-height:58px; }
+  #dbInfo { text-align:center; margin-top:14px; }
   body.running #home { display:none; }
   body:not(.running) #drive { display:none; }
 
   /* Guida */
-  #drive { padding:14px; display:grid; gap:14px; grid-template-columns:minmax(0,1.25fr) minmax(0,1fr); }
+  #drive { padding:14px; display:grid; gap:14px; grid-template-columns:1fr; max-width:980px; margin:0 auto; }
+  body.test #drive { grid-template-columns:minmax(0,1.25fr) minmax(0,1fr); max-width:none; }
   header { grid-column:1/-1; display:flex; gap:10px; align-items:center; }
-  header #gps { flex:1; color:var(--dim); font-weight:600; }
-  .card { background:var(--card); border-radius:22px; padding:18px; }
+  header .grow { flex:1; display:flex; align-items:center; gap:14px; }
+  #gps { color:var(--dim); font-weight:600; font-size:17px; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:24px; padding:20px; }
   .tLabel { font-weight:800; font-size:22px; }
   .avgRow { display:flex; align-items:center; justify-content:space-between; gap:10px; }
-  .avg { font:800 128px/1 ui-monospace,Menlo,Consolas,monospace; letter-spacing:-4px; }
-  .sign { width:118px; height:118px; flex:none; border-radius:50%; background:#fff; border:14px solid var(--bad); color:#000; display:grid; place-items:center; font:800 40px/1 system-ui,sans-serif; }
-  .bar { height:14px; background:#2a2a2a; border-radius:7px; overflow:hidden; margin:12px 0; }
-  .fill { height:100%; background:var(--ok); } .fill.warn { background:var(--warn); } .fill.bad { background:var(--bad); }
-  .banner { margin-top:10px; border-radius:16px; padding:16px; text-align:center; font-size:30px; font-weight:800; color:#000; background:var(--warn); }
+  .avg { font:800 140px/1 ui-monospace,Menlo,Consolas,monospace; letter-spacing:-5px; }
+  .sign { width:124px; height:124px; flex:none; border-radius:50%; background:#fff; border:15px solid #e53935; color:#000; display:grid; place-items:center; font:800 42px/1 system-ui,sans-serif; }
+  .bar { height:14px; background:#2a2a2a; border-radius:7px; overflow:hidden; margin:14px 0; }
+  .fill { height:100%; background:var(--ok); transition:width .4s; } .fill.warn { background:var(--warn); } .fill.bad { background:var(--bad); }
+  .banner { margin-top:10px; border-radius:18px; padding:18px; text-align:center; font-size:32px; font-weight:800; color:#000; background:var(--warn); }
   .banner.bad { background:var(--bad); color:#fff; }
-  .speed { font:800 140px/1 ui-monospace,Menlo,Consolas,monospace; }
-  .next { margin-top:14px; background:var(--card2); }
-  .next.on { background:#0b6e3a; }
-  #nextTitle { font-size:32px; font-weight:800; }
+  .speed { font:800 150px/1 ui-monospace,Menlo,Consolas,monospace; letter-spacing:-5px; }
+  .next { margin-top:16px; background:var(--card2); border:0; }
+  .next.on { background:var(--brand); }
+  #nextTitle { font-size:34px; font-weight:800; }
 
-  /* Prova */
-  .label { color:var(--green); font-weight:700; font-size:16px; letter-spacing:.5px; }
+  /* Modalità prova */
+  #prova { display:none; }
+  body.test #prova { display:block; }
+  .label { color:var(--green); font-weight:700; font-size:15px; letter-spacing:.6px; text-transform:uppercase; }
   .hint { font-size:20px; margin:8px 0 12px; } .hint.warn { color:var(--warn); font-weight:700; }
-  #tap { width:100%; height:130px; font-size:48px; font-weight:900; background:var(--acc); border-radius:24px; }
-  #missing { width:100%; margin-top:12px; color:#ff8a80; background:transparent; border:2px solid #444; }
+  #tap { width:100%; height:130px; font-size:48px; font-weight:900; background:var(--acc); color:#fff; border-radius:26px; }
+  #missing { width:100%; margin-top:12px; color:#ff8a80; background:transparent; border:2px solid #3a3a3a; }
   #missing:disabled { color:var(--dim); }
   .row2 { display:flex; justify-content:space-between; align-items:center; margin-top:10px; }
   #undo { min-height:52px; background:transparent; color:var(--green); }
-  .res { background:var(--card2); border-radius:16px; padding:14px; margin-top:12px; }
+  .res { background:var(--card2); border-radius:18px; padding:14px 16px; margin-top:12px; }
   .rTitle { font-weight:800; } .rSub { color:var(--dim); font-size:15px; margin-bottom:6px; }
   .rRow { display:flex; justify-content:space-between; font-size:20px; padding:3px 0; } .rRow b { font-size:26px; } .rRow .acc { color:var(--acc); }
   .rDiff { font-weight:800; margin-top:6px; }
 
   /* Pannelli */
-  .panel { position:fixed; inset:0; background:var(--bg); overflow:auto; padding:18px; z-index:5; }
-  .panel h2 { margin:0 0 14px; font-size:30px; display:flex; justify-content:space-between; align-items:center; }
-  .item { display:flex; justify-content:space-between; align-items:center; gap:12px; background:var(--card); border-radius:16px; padding:14px; margin-bottom:10px; }
+  .panel { position:fixed; inset:0; background:var(--bg); overflow:auto; z-index:5; }
+  .panel .in { max-width:900px; margin:0 auto; padding:20px; }
+  .panel h2 { margin:0 0 16px; font-size:32px; display:flex; justify-content:space-between; align-items:center; }
+  .panel h3 { margin:26px 0 8px; font-size:16px; text-transform:uppercase; letter-spacing:.8px; color:var(--green); }
+  .item, .set { display:flex; justify-content:space-between; align-items:center; gap:14px; background:var(--card); border:1px solid var(--line); border-radius:18px; padding:14px 16px; margin-bottom:10px; }
+  .setLabel { font-weight:600; }
+  .seg { display:flex; gap:6px; flex-wrap:wrap; justify-content:flex-end; }
+  .seg button { min-height:52px; padding:0 16px; font-size:18px; background:var(--card2); }
+  .seg button.on { background:var(--green); color:#00391d; }
   .small { min-height:56px; } .danger { color:#ff8a80; }
-  #dlg { position:fixed; inset:0; background:rgba(0,0,0,.7); display:grid; place-items:center; z-index:9; }
-  #dlg .box { background:#1f1f1f; border-radius:22px; padding:24px; max-width:620px; margin:16px; }
+  #dlg { position:fixed; inset:0; background:rgba(0,0,0,.72); display:grid; place-items:center; z-index:9; }
+  #dlg .box { background:#1b1b1b; border:1px solid var(--line); border-radius:24px; padding:26px; max-width:620px; margin:16px; }
   #dlg h3 { margin:0 0 10px; font-size:28px; }
-  #dlg .btns { display:flex; gap:12px; justify-content:flex-end; margin-top:18px; }
-  #dlgOk { background:var(--bad); }
-  @media (max-width:820px) { #drive { grid-template-columns:1fr; } .avg { font-size:96px; } .speed { font-size:110px; } }
+  #dlg .btns { display:flex; gap:12px; justify-content:flex-end; margin-top:20px; }
+  #dlgOk { background:var(--bad); color:#fff; }
+  @media (max-width:820px) { body.test #drive { grid-template-columns:1fr; } .avg { font-size:100px; } .speed { font-size:110px; } #home h1 { font-size:48px; } }
 </style>
 </head>
 <body>
+<svg width="0" height="0" style="position:absolute"><symbol id="m" viewBox="0 0 64 64"><circle cx="32" cy="34" r="18" fill="none" stroke="#fff" stroke-width="6"/><path d="M32 34 L44 24" stroke="#7fd6a0" stroke-width="6" stroke-linecap="round"/></symbol></svg>
+
 <section id="home">
-  <h1>TutorAlert</h1>
-  <div class="sub">Controlli in anticipo. Media sotto controllo.</div>
-  <p>Versione per la Tesla, autostrada A1. Tieni il browser <b>aperto sullo schermo</b>: se metti la mappa a schermo intero la Tesla ferma la pagina e gli avvisi si interrompono.</p>
-  <button id="go">▶ Avvia</button>
-  <div style="display:flex;gap:10px;flex-wrap:wrap">
-    <button data-open="tratte">Tratte</button>
-    <button data-open="misure">Misure</button>
-    <button id="sim">Simula Roma → Ferentino (10×)</button>
+  <div class="logo"><div class="mark"><svg width="30" height="30"><use href="#m"/></svg></div><span class="brand">TutorAlert</span></div>
+  <div class="hero">
+    <h1>TutorAlert</h1>
+    <div class="sub">Controlli in anticipo. Media sotto controllo.</div>
+    <button id="go">Avvia</button>
+    <div class="note">Tieni il browser aperto sullo schermo durante il viaggio: con la mappa a schermo intero la Tesla mette in pausa la pagina.</div>
   </div>
+  <div class="links">
+    <button data-open="tratte">Tratte</button>
+    <button data-open="misure" class="testOnly">Misure</button>
+    <button data-open="impostazioni">Impostazioni</button>
+  </div>
+  <div id="dbInfo" class="dim"></div>
   <p id="startErr" class="bad"></p>
 </section>
 
 <section id="drive">
   <header>
-    <span id="gps"></span>
-    <button data-open="tratte">Tratte</button>
-    <button data-open="misure">Misure</button>
-    <button id="stop">■ Ferma</button>
+    <div class="grow"><div class="mark"><svg width="30" height="30"><use href="#m"/></svg></div><span id="gps"></span></div>
+    <button data-open="impostazioni" aria-label="Impostazioni">⚙</button>
+    <button id="stop">Ferma</button>
   </header>
 
   <div>
@@ -99,34 +124,40 @@
       <div class="dim" id="tState" style="margin-top:8px"></div>
     </div>
     <div class="card" id="free">
-      <div class="avgRow"><div><div class="speed" id="speed">--</div><div class="dim">km/h GPS</div></div></div>
+      <div><div class="speed" id="speed">--</div><div class="dim">km/h</div></div>
       <div class="card next" id="nextCard"><div id="nextTitle"></div><div id="nextSub"></div></div>
     </div>
   </div>
 
-  <div class="card">
-    <div class="label">MODALITÀ PROVA · per il passeggero</div>
+  <div class="card" id="prova">
+    <div class="label">Modalità prova · per il passeggero</div>
     <div class="hint" id="hint"></div>
     <button id="tap">PORTALE</button>
     <button id="missing" disabled>Il portale non c'è</button>
     <div id="since" style="margin-top:10px"></div>
     <div class="row2"><span class="dim" id="tapCount"></span><button id="undo" hidden>Annulla ultimo</button></div>
     <div id="result"></div>
+    <button data-open="misure" style="width:100%;margin-top:12px;background:transparent;border:1px solid var(--line)">Tutte le misure</button>
   </div>
 </section>
 
-<section class="panel" id="tratte" hidden>
-  <h2>Tratte Tivoli – Ferentino <button data-close>Chiudi</button></h2>
+<section class="panel" id="tratte" hidden><div class="in">
+  <h2>Tratte <button data-close>Chiudi</button></h2>
   <div id="tratteList"></div>
-</section>
-<section class="panel" id="misure" hidden>
-  <h2>Misure con i tocchi <button data-close>Chiudi</button></h2>
+</div></section>
+<section class="panel" id="misure" hidden><div class="in">
+  <h2>Misure <button data-close>Chiudi</button></h2>
   <div id="misureList"></div>
-</section>
+</div></section>
+<section class="panel" id="impostazioni" hidden><div class="in">
+  <h2>Impostazioni <button data-close>Chiudi</button></h2>
+  <div id="settingsList"></div>
+</div></section>
 
 <div id="dlg" hidden><div class="box"><h3 id="dlgTitle"></h3><div id="dlgText"></div>
   <div class="btns"><button id="dlgNo">Annulla</button><button id="dlgOk">Conferma</button></div></div></div>
 
+<style>body:not(.test) .testOnly { display:none; }</style>
 <script type="module" src="js/app.js"></script>
 </body>
 </html>

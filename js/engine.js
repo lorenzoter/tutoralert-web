@@ -133,7 +133,12 @@ export class Section {
 
 // ---------- Regole sulla media (SpeedPolicy, tolleranza di legge) ----------
 export const Policy = {
-  effectiveLimit: l => l ?? null,
+  /** Impostazioni (come SpeedPolicy.kt): obiettivo al limite esatto, limite personale, pioggia (110). */
+  settings: { targetExact: false, personalMax: null, rain: false },
+  effectiveLimit(l) {
+    const caps = [l, Policy.settings.personalMax, Policy.settings.rain ? 110 : null].filter(v => v != null);
+    return caps.length ? Math.min(...caps) : null;
+  },
   tolerance: l => (l <= 100 ? 5 : l * 0.05),
   allowed: l => l + Policy.tolerance(l),
   margin(rel, len, v) {
@@ -141,7 +146,7 @@ export const Policy = {
     if (len <= 0) return 6;
     return clamp(v * sigma / len, min, 6);
   },
-  target(l, rel, len) { const base = Policy.allowed(l); return Math.max(1, base - Policy.margin(rel, len, base)); },
+  target(l, rel, len) { const base = Policy.settings.targetExact ? l : Policy.allowed(l); return Math.max(1, base - Policy.margin(rel, len, base)); },
 };
 
 // ---------- TutorTracker ----------
@@ -278,7 +283,7 @@ export class Tracker {
     }
   }
 
-  confirm(a, events) { if (a.confirmed) return; a.confirmed = true; events.push({ type: 'started', section: a.ts, limitKmh: a.ts.limitKmh, timeMs: a.startedAt }); }
+  confirm(a, events) { if (a.confirmed) return; a.confirmed = true; events.push({ type: 'started', section: a.ts, limitKmh: Policy.effectiveLimit(a.ts.limitKmh), timeMs: a.startedAt }); }
   timeoutFor(ts) { return Math.max(this.config.timeoutMinMs, Math.trunc(ts.officialLength / (this.config.timeoutMinKmh / 3.6) * 1000)); }
 
   stepActive(a, fix, reliable, speedKmh, events) {
@@ -327,7 +332,7 @@ export class Tracker {
     const C = this.config, ts = a.ts, total = ts.measureLength;
     const done = clamp(ts.measured(Math.min(a.lastS + extraTrackM, ts.track.length - 1)), 0, total);
     const elapsedMs = Math.max(nowMs - a.startedAt, 1), elapsedS = elapsedMs / 1000;
-    const limit = ts.limitKmh;
+    const limit = Policy.effectiveLimit(ts.limitKmh);
     const avg = done >= C.minMetersForAverage && elapsedS >= 1 ? done / elapsedS * 3.6 : null;
     const remaining = total - done;
     let projected = a.speedEma != null && a.speedEma >= 5 && !a.suspended ? total / (elapsedS + remaining / (a.speedEma / 3.6)) * 3.6 : null;
@@ -367,7 +372,7 @@ export class Tracker {
     const durS = Math.max((endMs - a.startedAt) / 1000, 1);
     return {
       sectionId: ts.id, sectionLabel: ts.label, startedAt: a.startedAt, endedAt: endMs, lengthMeters: ts.officialLength,
-      averageKmh: measuredDone / durS * 3.6, maxSpeedKmh: a.maxSpeedKmh, limitKmh: ts.limitKmh, endReason: reason,
+      averageKmh: measuredDone / durS * 3.6, maxSpeedKmh: a.maxSpeedKmh, limitKmh: Policy.effectiveLimit(ts.limitKmh), endReason: reason,
     };
   }
 }
