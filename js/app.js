@@ -13,7 +13,9 @@ const ROUTE = [35, 36, 37, 38, 45, 46, 47, 48];
 
 // ---------- Stato ----------
 let allSections = [], sections = [], tracker = null;
-let disabled = new Set(store.get('disabled', []));
+// Tratte disattivate: quelle ufficiali (database su GitHub) più le scelte fatte su questo dispositivo.
+let official = new Set(), localOff = new Set(store.get('disabled', [])), localOn = new Set(store.get('enabled', []));
+let disabled = new Set(), dataVersion = 0;
 let results = store.get('results', []);
 let running = false, simulated = false, watchId = null, simTimer = null;
 let fixes = [], taps = [], trips = [], lastFix = null, lastFedAt = 0, lastFixWall = 0;
@@ -52,17 +54,22 @@ function say(keys) {
 
 // ---------- Tratte ----------
 async function loadSections() {
-  const data = await (await fetch('data/a1_sections.json')).json();
+  // Sempre la versione più recente del database (niente copie vecchie in memoria del browser).
+  const data = await (await fetch('data/a1_sections.json?t=' + Date.now(), { cache: 'no-store' })).json();
   allSections = data.sections.map(s => new Section(s));
+  official = new Set(data.disabled || []);
+  dataVersion = data.dataVersion || 0;
   applyDisabled();
 }
 function applyDisabled() {
+  disabled = new Set([...official, ...localOff].filter(id => !localOn.has(id)));
   sections = allSections.filter(s => !disabled.has(s.id));
   tracker?.setSections(sections);
 }
 function setDisabled(id, off) {
-  if (off) disabled.add(id); else disabled.delete(id);
-  store.set('disabled', [...disabled]);
+  if (off) { localOff.add(id); localOn.delete(id); }
+  else { localOff.delete(id); if (official.has(id)) localOn.add(id); }
+  store.set('disabled', [...localOff]); store.set('enabled', [...localOn]);
   applyDisabled();
 }
 
@@ -324,7 +331,7 @@ function renderResult() { $('result').innerHTML = lastResult ? resultHtml(lastRe
 
 function renderTratte() {
   const list = allSections.filter(s => ROUTE.includes(s.id)).sort((a, b) => (a.json.direction || '').localeCompare(b.json.direction || '') || a.json.kmStart - b.json.kmStart);
-  $('tratteList').innerHTML = list.map(s => `<div class="item">
+  $('tratteList').innerHTML = `<p class="dim">Database tratte: versione ${dataVersion} (si aggiorna da solo a ogni avvio)</p>` + list.map(s => `<div class="item">
       <div><b>${s.label}</b><div class="dim">${s.json.direction ?? ''} · ${km(s.officialLength, 2)} · limite ${s.limitKmh ?? '?'}</div>
       <div class="dim">${disabled.has(s.id) ? '⛔ Disattivata' : s.portalsMeasured ? '🟢 Portali verificati in auto' : '⚪ Portali da verificare'}</div></div>
       <button class="small ${disabled.has(s.id) ? '' : 'danger'}" data-id="${s.id}">${disabled.has(s.id) ? 'Riattiva' : 'Non esiste'}</button></div>`).join('');
