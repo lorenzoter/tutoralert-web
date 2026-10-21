@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TutorAlert · Prova Tesla</title>
+<style>
+  :root { --bg:#000; --card:#151515; --fg:#eee; --dim:#9a9a9a; --ok:#43a047; --warn:#ffb300; --bad:#e53935; --acc:#42a5f5; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--fg); font:20px/1.35 system-ui,-apple-system,Segoe UI,Roboto,sans-serif; }
+  main { max-width:1100px; margin:0 auto; padding:16px; display:grid; gap:14px; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); }
+  h1 { grid-column:1/-1; margin:4px 0 0; font-size:30px; }
+  p.lead { grid-column:1/-1; margin:0; color:var(--dim); }
+  section { background:var(--card); border-radius:16px; padding:16px; }
+  h2 { margin:0 0 10px; font-size:22px; }
+  .big { font:700 56px/1 ui-monospace,Menlo,Consolas,monospace; }
+  .row { display:flex; justify-content:space-between; gap:12px; padding:4px 0; border-bottom:1px solid #222; }
+  .row span:first-child { color:var(--dim); }
+  button { font:inherit; font-weight:700; border:0; border-radius:14px; padding:18px 20px; margin:6px 6px 0 0; background:var(--acc); color:#fff; min-height:64px; cursor:pointer; }
+  button.alt { background:#2a2a2a; }
+  .ok { color:var(--ok); } .warn { color:var(--warn); } .bad { color:var(--bad); }
+  #verdict { grid-column:1/-1; font-size:24px; }
+  #verdict li { margin:6px 0; }
+  #log { grid-column:1/-1; font:14px/1.4 ui-monospace,monospace; color:var(--dim); max-height:220px; overflow:auto; white-space:pre-wrap; }
+</style>
+</head>
+<body>
+<main>
+  <h1>TutorAlert · Prova per la Tesla</h1>
+  <p class="lead">Premi <b>Avvia prova</b>, guida qualche km, poi prova a mettere la mappa a schermo intero per 1–2 minuti e torna qui. Alla fine fai una <b>foto a questa schermata</b> e mandamela.</p>
+
+  <section>
+    <h2>1 · GPS</h2>
+    <div class="big" id="spd">--</div><div style="color:var(--dim)">km/h (dal GPS)</div>
+    <div class="row"><span>Posizioni ricevute</span><span id="n">0</span></div>
+    <div class="row"><span>Intervallo medio</span><span id="dtAvg">--</span></div>
+    <div class="row"><span>Intervallo massimo</span><span id="dtMax">--</span></div>
+    <div class="row"><span>Precisione (ultima / media)</span><span id="acc">--</span></div>
+    <div class="row"><span>Velocità e direzione fornite</span><span id="spdOk">--</span></div>
+    <div class="row"><span>Posizioni ripetute (ferme)</span><span id="dup">0</span></div>
+    <div class="row"><span>Distanza percorsa</span><span id="dist">0,00 km</span></div>
+    <div class="row"><span>Stato</span><span id="gpsState">non avviato</span></div>
+  </section>
+
+  <section>
+    <h2>2 · Voce e audio</h2>
+    <div class="row"><span>Sintesi vocale</span><span id="ttsOk">--</span></div>
+    <div class="row"><span>Voci italiane</span><span id="ttsVoices">--</span></div>
+    <div class="row"><span>Frasi pronunciate</span><span id="spoken">0</span></div>
+    <div class="row"><span>Suono (bip)</span><span id="beepOk">--</span></div>
+    <button class="alt" onclick="say('Tutor tra cinquecento metri. Limite centotrenta.')">Prova voce</button>
+    <button class="alt" onclick="beep()">Prova bip</button>
+    <div style="color:var(--dim);margin-top:8px">Durante la prova la pagina parla da sola ogni 60 s: così sappiamo se la voce funziona anche con la mappa a schermo intero.</div>
+  </section>
+
+  <section>
+    <h2>3 · Pagina in secondo piano</h2>
+    <div class="row"><span>Volte nascosta</span><span id="hid">0</span></div>
+    <div class="row"><span>Tempo nascosta (totale)</span><span id="hidT">0 s</span></div>
+    <div class="row"><span>Pausa più lunga del timer</span><span id="tGap">--</span></div>
+    <div class="row"><span>GPS ricevuto mentre nascosta</span><span id="gpsHidden">0</span></div>
+    <div class="row"><span>Durata prova</span><span id="dur">0:00</span></div>
+    <div class="row"><span>Browser</span><span id="ua" style="font-size:14px;text-align:right"></span></div>
+  </section>
+
+  <section style="grid-column:1/-1">
+    <button id="go" onclick="start()">Avvia prova</button>
+    <button class="alt" onclick="stop()">Ferma</button>
+    <ul id="verdict"></ul>
+  </section>
+  <div id="log"></div>
+</main>
+<script>
+const $ = id => document.getElementById(id);
+const fmt = (v, d = 1) => v.toLocaleString('it-IT', { minimumFractionDigits: d, maximumFractionDigits: d });
+let watch = null, t0 = 0, last = null, n = 0, dtSum = 0, dtMax = 0, accSum = 0, dup = 0, dist = 0, withSpeed = 0, withHeading = 0;
+let hidden = 0, hiddenSince = null, hiddenMs = 0, gpsHidden = 0, lastTick = 0, tickGap = 0, spoken = 0, sayTimer = null, tick = null, beepWorked = null;
+
+function log(s) { const l = $('log'); l.textContent = new Date().toLocaleTimeString('it-IT') + '  ' + s + '\n' + l.textContent; }
+$('ua').textContent = navigator.userAgent;
+
+function hav(a, b) {
+  const R = 6371008.8, r = Math.PI / 180;
+  const dLat = (b.latitude - a.latitude) * r, dLon = (b.longitude - a.longitude) * r;
+  const h = Math.sin(dLat / 2) ** 2 + Math.cos(a.latitude * r) * Math.cos(b.latitude * r) * Math.sin(dLon / 2) ** 2;
+  return 2 * R * Math.asin(Math.sqrt(h));
+}
+
+function onPos(p) {
+  const c = p.coords, t = p.timestamp || Date.now();
+  n++;
+  if (document.hidden) gpsHidden++;
+  if (last) {
+    const dt = (t - last.t) / 1000;
+    if (dt > 0) { dtSum += dt; dtMax = Math.max(dtMax, dt); }
+    if (c.latitude === last.c.latitude && c.longitude === last.c.longitude) dup++;
+    else if (c.accuracy <= 50) dist += hav(last.c, c);
+  }
+  accSum += c.accuracy || 0;
+  if (c.speed != null && !isNaN(c.speed)) withSpeed++;
+  if (c.heading != null && !isNaN(c.heading)) withHeading++;
+  last = { t, c };
+  $('spd').textContent = c.speed != null && !isNaN(c.speed) ? Math.round(c.speed * 3.6) : '--';
+  $('n').textContent = n;
+  $('dtAvg').textContent = n > 1 ? fmt(dtSum / (n - 1), 2) + ' s' : '--';
+  $('dtMax').textContent = n > 1 ? fmt(dtMax, 1) + ' s' : '--';
+  $('acc').textContent = fmt(c.accuracy || 0, 0) + ' m / ' + fmt(accSum / n, 0) + ' m';
+  $('spdOk').textContent = `velocità ${Math.round(100 * withSpeed / n)}% · direzione ${Math.round(100 * withHeading / n)}%`;
+  $('dup').textContent = dup;
+  $('dist').textContent = fmt(dist / 1000, 2) + ' km';
+  $('gpsState').textContent = 'attivo';
+  $('gpsState').className = 'ok';
+  verdict();
+}
+
+function onErr(e) { $('gpsState').textContent = 'errore: ' + e.message; $('gpsState').className = 'bad'; log('GPS errore ' + e.code + ' ' + e.message); verdict(); }
+
+function voicesIt() { return (window.speechSynthesis?.getVoices() || []).filter(v => v.lang && v.lang.toLowerCase().startsWith('it')); }
+function checkTts() {
+  const ok = 'speechSynthesis' in window;
+  $('ttsOk').textContent = ok ? 'presente' : 'assente';
+  $('ttsOk').className = ok ? 'ok' : 'bad';
+  const v = voicesIt();
+  $('ttsVoices').textContent = ok ? (v.length ? v.map(x => x.name).join(', ') : 'nessuna') : '--';
+}
+if ('speechSynthesis' in window) speechSynthesis.onvoiceschanged = checkTts;
+checkTts();
+
+function say(text) {
+  if (!('speechSynthesis' in window)) { log('voce assente'); return; }
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = 'it-IT';
+  const v = voicesIt()[0]; if (v) u.voice = v;
+  u.onstart = () => { spoken++; $('spoken').textContent = spoken + (document.hidden ? ' (anche da nascosta)' : ''); verdict(); };
+  u.onerror = e => log('voce errore: ' + e.error);
+  speechSynthesis.speak(u);
+}
+
+let ac = null;
+function beep() {
+  try {
+    ac = ac || new (window.AudioContext || window.webkitAudioContext)();
+    ac.resume();
+    const o = ac.createOscillator(), g = ac.createGain();
+    o.frequency.value = 880; g.gain.value = 0.2;
+    o.connect(g); g.connect(ac.destination);
+    o.start(); o.stop(ac.currentTime + 0.25);
+    beepWorked = ac.state === 'running';
+    $('beepOk').textContent = beepWorked ? 'suona (lo hai sentito?)' : 'bloccato (' + ac.state + ')';
+    $('beepOk').className = beepWorked ? 'ok' : 'bad';
+  } catch (e) { $('beepOk').textContent = 'errore'; $('beepOk').className = 'bad'; log('audio ' + e); }
+}
+
+document.addEventListener('visibilitychange', () => {
+  if (document.hidden) { hidden++; hiddenSince = Date.now(); log('pagina nascosta'); }
+  else if (hiddenSince) { hiddenMs += Date.now() - hiddenSince; hiddenSince = null; log('pagina di nuovo visibile'); }
+  $('hid').textContent = hidden;
+  $('hidT').textContent = Math.round(hiddenMs / 1000) + ' s';
+  verdict();
+});
+
+function start() {
+  if (watch != null) return;
+  t0 = Date.now(); lastTick = t0;
+  beep();
+  say('Prova avviata');
+  if (!('geolocation' in navigator)) { onErr({ code: 0, message: 'geolocalizzazione non disponibile' }); }
+  else watch = navigator.geolocation.watchPosition(onPos, onErr, { enableHighAccuracy: true, maximumAge: 0, timeout: 30000 });
+  $('gpsState').textContent = 'in attesa del permesso…';
+  tick = setInterval(() => {
+    const now = Date.now();
+    tickGap = Math.max(tickGap, (now - lastTick) / 1000); lastTick = now;
+    $('tGap').textContent = fmt(tickGap, 1) + ' s';
+    $('gpsHidden').textContent = gpsHidden;
+    const s = Math.round((now - t0) / 1000);
+    $('dur').textContent = Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0');
+    if (last && now - last.t > 5000) { $('gpsState').textContent = 'nessuna posizione da ' + Math.round((now - last.t) / 1000) + ' s'; $('gpsState').className = 'warn'; }
+  }, 1000);
+  sayTimer = setInterval(() => say('Controllo voce. ' + (document.hidden ? 'Pagina nascosta.' : 'Pagina visibile.')), 60000);
+  $('go').textContent = 'Prova in corso…';
+}
+
+function stop() {
+  if (watch != null) navigator.geolocation.clearWatch(watch);
+  watch = null; clearInterval(tick); clearInterval(sayTimer);
+  $('go').textContent = 'Avvia prova';
+  verdict();
+}
+
+function verdict() {
+  const out = [];
+  if (n > 5) {
+    const avg = dtSum / (n - 1);
+    out.push(avg <= 1.5 && dtMax <= 5 ? ['ok', `GPS ogni ${fmt(avg, 1)} s: va bene per la media`] : ['warn', `GPS lento (ogni ${fmt(avg, 1)} s, max ${fmt(dtMax, 0)} s)`]);
+    const a = accSum / n;
+    out.push(a <= 20 ? ['ok', `Precisione media ${fmt(a, 0)} m`] : ['warn', `Precisione media ${fmt(a, 0)} m: scarsa`]);
+    if (dup > n / 3) out.push(['bad', 'Molte posizioni ripetute: il GPS si blocca']);
+  }
+  if (spoken > 0) out.push(['ok', 'La voce funziona']);
+  else if (!('speechSynthesis' in window)) out.push(['warn', 'Niente sintesi vocale: userò frasi registrate']);
+  if (hidden > 0) {
+    out.push(gpsHidden > 0 ? ['ok', `Con la pagina nascosta il GPS continua (${gpsHidden} posizioni)`] : ['bad', 'Con la pagina nascosta il GPS si ferma']);
+    out.push(tickGap <= 3 ? ['ok', 'Con la pagina nascosta i calcoli continuano'] : ['warn', `Con la pagina nascosta i calcoli si fermano (pausa ${fmt(tickGap, 0)} s)`]);
+  }
+  $('verdict').innerHTML = out.map(([c, t]) => `<li class="${c}">${c === 'ok' ? '✓' : c === 'warn' ? '⚠' : '✗'} ${t}</li>`).join('');
+}
+</script>
+</body>
+</html>
