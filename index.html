@@ -30,6 +30,9 @@
   .links { display:flex; gap:10px; justify-content:center; flex-wrap:wrap; }
   .links button { background:transparent; border:1px solid var(--line); min-height:58px; }
   #dbInfo { text-align:center; margin-top:14px; }
+  #lastJourney .lj { width:100%; margin-top:10px; background:transparent; border:1px solid var(--line); }
+  .res .label { margin-bottom:4px; }
+  .rRow .ok { color:var(--ok); } .rRow .warn { color:var(--warn); } .rRow .bad { color:var(--bad); }
   body.running #home { display:none; }
   body:not(.running) #drive { display:none; }
 
@@ -120,11 +123,13 @@
     <div class="note">Tieni il browser aperto sullo schermo durante il viaggio: con la mappa a schermo intero la Tesla mette in pausa la pagina.</div>
   </div>
   <div class="links">
+    <button data-open="viaggi">Viaggi</button>
     <button data-open="tratte">Tratte</button>
     <button data-open="misure" class="testOnly">Misure</button>
     <button data-open="impostazioni">Impostazioni</button>
   </div>
   <div id="dbInfo" class="dim"></div>
+  <div id="lastJourney" style="margin-top:18px"></div>
   <p id="startErr" class="bad"></p>
 </section>
 
@@ -176,6 +181,10 @@
 <section class="panel" id="misure" hidden><div class="in">
   <h2>Misure <button data-close>Chiudi</button></h2>
   <div id="misureList"></div>
+</div></section>
+<section class="panel" id="viaggi" hidden><div class="in">
+  <h2>Viaggi <button data-close>Chiudi</button></h2>
+  <div id="viaggiList"></div>
 </div></section>
 <section class="panel" id="impostazioni" hidden><div class="in">
   <h2>Impostazioni <button data-close>Chiudi</button></h2>

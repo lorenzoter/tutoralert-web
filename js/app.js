@@ -41,6 +41,8 @@ let allSections = [], sections = [], tracker = null;
 let official = new Set(), localOff = new Set(store.get('disabled', [])), localOn = new Set(store.get('enabled', []));
 let disabled = new Set(), dataVersion = 0;
 let results = store.get('results', []);
+// Storico delle tratte fatte (riepilogo viaggio e grafici).
+let history = store.get('trips', []), sessionId = 0;
 let running = false, simulated = false, watchId = null, simTimer = null;
 let fixes = [], taps = [], trips = [], lastFix = null, lastFedAt = 0, lastFixWall = 0;
 let status = null, next = null, nextPortal = null, portalToCheck = null, lastResult = null, gpsLostS = null;
@@ -119,7 +121,7 @@ async function start(sim) {
   tracker = new Tracker(sections);
   fixes = []; taps = []; trips = []; announced.clear(); portalCheck.reset();
   status = next = nextPortal = portalToCheck = null; lastFix = null; lastFedAt = 0;
-  simulated = !!sim; running = true;
+  simulated = !!sim; running = true; sessionId = Date.now();
   document.body.classList.add('running');
   try { await navigator.wakeLock?.request('screen'); } catch { /* non supportato */ }
   say(['avvio']);
@@ -135,6 +137,7 @@ function stop() {
   const fin = tracker?.stop(lastFix?.timeMs); if (fin) onTrip(fin.trip);
   evaluate();
   running = false; status = next = nextPortal = portalToCheck = null;
+  renderLastJourney();
   document.body.classList.remove('running');
   render();
 }
@@ -200,6 +203,9 @@ function onEvent(e, fix) {
 function onTrip(t) {
   announced.delete(t.sectionId);
   trips.push(t);
+  history.push({ sessionId, sectionId: t.sectionId, label: t.sectionLabel, startedAt: t.startedAt, endedAt: t.endedAt,
+    averageKmh: t.averageKmh, maxSpeedKmh: t.maxSpeedKmh, limitKmh: t.limitKmh, endReason: t.endReason, simulated });
+  history = history.slice(-3000); store.set('trips', history);
   if (t.endReason === 'COMPLETED') say(settings.endAverage ? ['fine', 'media', num(t.averageKmh)] : ['fine']);
   else if (t.endReason === 'LEFT_ROUTE') say(['chiusa']);
   refreshAppAverages(t.sectionId);
@@ -449,7 +455,68 @@ function renderSettings() {
   $('simBtn').onclick = () => { openPanel(null); start(10); };
 }
 
-function openPanel(id) { if (id === 'impostazioni') renderSettings(); ['tratte', 'misure', 'impostazioni'].forEach(p => $(p).hidden = p !== id); if (id === 'tratte') renderTratte(); if (id === 'misure') renderMisure(); }
+// ---------- Viaggi: riepilogo e storico ----------
+function journeys() {
+  const by = new Map();
+  for (const t of history) if (!t.simulated) { if (!by.has(t.sessionId)) by.set(t.sessionId, []); by.get(t.sessionId).push(t); }
+  return [...by.entries()].map(([id, l]) => ({ id, trips: l.sort((a, b) => a.startedAt - b.startedAt) })).sort((a, b) => b.id - a.id);
+}
+const avgCls = (v, lim) => lim == null || v <= lim ? 'ok' : v <= lim * 1.05 ? 'warn' : 'bad';
+const hm = ms => new Date(ms).toLocaleTimeString('it-IT', { hour: '2-digit', minute: '2-digit' });
+function journeyHtml(j, title) {
+  const f = j.trips[0], l = j.trips[j.trips.length - 1], done = j.trips.filter(t => t.endReason === 'COMPLETED');
+  const over = done.filter(t => t.limitKmh != null && t.averageKmh > t.limitKmh).length;
+  const d = new Date(f.startedAt).toLocaleDateString('it-IT', { weekday: 'short', day: 'numeric', month: 'short' });
+  return `<div class="res">${title ? `<div class="label">${title}</div>` : ''}
+    <div class="rTitle" style="font-size:22px">${d.charAt(0).toUpperCase() + d.slice(1)} · ${hm(f.startedAt)}–${hm(l.endedAt)}</div>
+    ${j.trips.map(t => `<div class="rRow"><span>${t.label}<div class="dim">${t.endReason === 'COMPLETED' ? `max ${Math.round(t.maxSpeedKmh)} km/h · ${dur(t.endedAt - t.startedAt)}` : 'non completata'}</div></span>
+      ${t.endReason === 'COMPLETED' ? `<b class="${avgCls(t.averageKmh, t.limitKmh)}">${fmt(t.averageKmh)}</b>` : ''}</div>`).join('')}
+    ${done.length ? `<div class="rDiff ${over ? 'warn' : 'ok'}">${done.length} ${done.length === 1 ? 'tratta' : 'tratte'} · ${over ? over + ' sopra il limite' : 'tutte entro il limite ✓'}</div>` : ''}</div>`;
+}
+const dayIdx = ms => Math.floor((ms - new Date(ms).getTimezoneOffset() * 60000) / 86400000);
+/** Grafico a punti: x giorni (dal primo dato a oggi, 7–30), y valori, linee di riferimento e fascia facoltativa. */
+function chartSvg(points, lo, hi, refs, band) {
+  const W = 600, H = 200, today = dayIdx(Date.now());
+  const span = Math.min(30, Math.max(7, today - Math.min(...points.map(p => dayIdx(p.t))) + 1));
+  const x = t => W * (1 - (today - dayIdx(t) + 0.5) / span), y = v => H * (1 - (v - lo) / (hi - lo));
+  const col = { ok: '#3fb950', warn: '#ffb300', bad: '#ef4444' };
+  return `<svg viewBox="-40 -10 ${W + 50} ${H + 40}" style="width:100%;height:auto">
+    ${band != null ? `<rect x="0" y="${y(band)}" width="${W}" height="${y(-band) - y(band)}" fill="rgba(67,160,71,.15)"/>` : ''}
+    <line x1="0" y1="${H}" x2="${W}" y2="${H}" stroke="#333" stroke-width="2"/>
+    ${refs.map(r => `<line x1="0" y1="${y(r)}" x2="${W}" y2="${y(r)}" stroke="#bdbdbd" stroke-width="2" stroke-dasharray="10 8"/>`).join('')}
+    <text x="-8" y="10" fill="#9b9b9b" font-size="16" text-anchor="end">${Math.round(hi)}</text>
+    <text x="-8" y="${H}" fill="#9b9b9b" font-size="16" text-anchor="end">${Math.round(lo)}</text>
+    <text x="0" y="${H + 26}" fill="#9b9b9b" font-size="15">${span} giorni fa</text><text x="${W}" y="${H + 26}" fill="#9b9b9b" font-size="15" text-anchor="end">oggi</text>
+    ${points.filter(p => today - dayIdx(p.t) < span).map(p => `<circle cx="${x(p.t).toFixed(1)}" cy="${y(Math.min(Math.max(p.v, lo), hi)).toFixed(1)}" r="7" fill="${col[p.c]}"/>`).join('')}
+  </svg>`;
+}
+function renderViaggi() {
+  const js = journeys();
+  if (!js.length) { $('viaggiList').innerHTML = '<p class="dim">Nessun viaggio ancora: dopo il primo Tutor qui trovi il riepilogo e lo storico.</p>'; return; }
+  const done = history.filter(t => !t.simulated && t.endReason === 'COMPLETED');
+  const lim = Math.max(...done.map(t => t.limitKmh ?? 130), 130);
+  let html = journeyHtml(js[0], 'Ultimo viaggio');
+  if (done.length) {
+    const lo = Math.floor(Math.min(...done.map(t => t.averageKmh), lim - 20) / 10) * 10, hi = Math.ceil(Math.max(...done.map(t => t.averageKmh), lim + 10) / 10) * 10;
+    html += `<div class="res"><div class="rTitle">Medie per tratta</div><div class="rSub">un punto per tratta · linea tratteggiata: limite</div>
+      ${chartSvg(done.map(t => ({ t: t.startedAt, v: t.averageKmh, c: avgCls(t.averageKmh, t.limitKmh) })), lo, hi, [lim])}</div>`;
+  }
+  const errs = results.filter(r => r.appAvgKmh != null && r.tutorAvgKmh != null).map(r => ({ t: r.startMs, v: r.appAvgKmh - r.tutorAvgKmh }));
+  if (errs.length) {
+    const m = Math.max(2, ...errs.map(e => Math.abs(e.v) + 0.5));
+    html += `<div class="res"><div class="rTitle">Precisione dell'app</div><div class="rSub">differenza app − Tutor sulle misure con i tocchi · fascia ±1 km/h</div>
+      ${chartSvg(errs.map(e => ({ ...e, c: Math.abs(e.v) <= 1 ? 'ok' : 'warn' })), -m, m, [0], 1)}</div>`;
+  }
+  if (js.length > 1) html += '<h3>Viaggi precedenti</h3>' + js.slice(1, 31).map(j => journeyHtml(j)).join('');
+  $('viaggiList').innerHTML = html;
+}
+function renderLastJourney() {
+  const j = journeys()[0];
+  $('lastJourney').innerHTML = j ? journeyHtml(j, 'Ultimo viaggio') + '<button data-open="viaggi" class="lj">Tutti i viaggi e lo storico</button>' : '';
+  $('lastJourney').querySelectorAll('[data-open]').forEach(b => b.onclick = () => openPanel('viaggi'));
+}
+
+function openPanel(id) { if (id === 'impostazioni') renderSettings(); if (id === 'viaggi') renderViaggi(); ['tratte', 'misure', 'impostazioni', 'viaggi'].forEach(p => $(p).hidden = p !== id); if (id === 'tratte') renderTratte(); if (id === 'misure') renderMisure(); }
 
 // ---------- Pulsanti ----------
 $('go').onclick = () => start(0);
@@ -467,4 +534,5 @@ document.querySelectorAll('[data-open]').forEach(b => b.onclick = () => openPane
 document.querySelectorAll('[data-close]').forEach(b => b.onclick = () => openPanel(null));
 $('dlgNo').onclick = () => { $('dlg').hidden = true; };
 applySettings();
+renderLastJourney();
 loadSections().then(() => { render(); $('dbInfo').textContent = `Database tratte v${dataVersion} · ${allSections.filter(s => s.portalsMeasured).length} tratte verificate in auto`; }).catch(e => { $('startErr').textContent = 'Errore nel caricare le tratte: ' + e.message; });
