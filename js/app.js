@@ -231,15 +231,20 @@ function nextTutor(fix) {
 function findNextPortal(fix) {
   const course = fix.bearingDeg != null && (fix.speedMps ?? 0) * 3.6 > 15 ? fix.bearingDeg : null;
   if (course == null) return null;
-  let best = null;
+  const found = [];
   for (const ts of sections) {
     if (!ts.nearBox(fix.lat, fix.lon, 1600)) continue;
     const p = ts.track.project(fix.lat, fix.lon);
     if (p.lateral > 80 || Geo.angleDiff(course, p.bearing) > 45) continue;
     for (const [d, isStart] of [[-p.s, true], [ts.track.length - p.s, false]]) {
-      if (d >= 15 && d <= 1500 && (!best || d < best.distanceM)) best = { distanceM: d, isStart, sectionId: ts.id, label: ts.label, verified: ts.portalsMeasured };
+      if (d >= 15 && d <= 1500) found.push({ distanceM: d, isStart, sectionId: ts.id, label: ts.label, verified: ts.portalsMeasured });
     }
   }
+  if (!found.length) return null;
+  const best = found.reduce((a, b) => (b.distanceM < a.distanceM ? b : a));
+  // Portale condiviso: la fine di una tratta coincide (entro 100 m) con l'inizio della successiva.
+  best.endAndStart = found.some(o => o !== best && o.isStart !== best.isStart && Math.abs(o.distanceM - best.distanceM) < 100);
+  best.kind = best.endAndStart ? 'di fine e inizio tratta' : best.isStart ? 'di inizio tratta' : 'di fine tratta';
   return best;
 }
 
@@ -331,7 +336,7 @@ function render() {
   }
   // Prova
   const np = nextPortal;
-  $('hint').textContent = np ? `Portale previsto tra circa ${Math.round(np.distanceM / 50) * 50} m` + (np.verified ? '' : ' (posizione approssimativa)')
+  $('hint').textContent = np ? `Portale ${np.kind} tra circa ${Math.round(np.distanceM / 50) * 50} m` + (np.verified ? '' : ' (posizione approssimativa)')
     : portalToCheck ? 'Superato il punto del portale previsto. Se non c\'era, premi «Il portale non c\'è».'
     : 'Tocca PORTALE ogni volta che passi sotto un portale con telecamere.';
   $('hint').className = 'hint' + (np || portalToCheck ? ' warn' : '');
