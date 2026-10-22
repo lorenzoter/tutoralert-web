@@ -14,7 +14,7 @@ const ROUTE = [35, 36, 37, 38, 45, 46, 47, 48];
 // ---------- Impostazioni (per dispositivo) ----------
 const DEFAULTS = {
   audio: 'nulla', volume: 1, tapSound: 'bip', approach: 1000, slowRepeat: false, endAverage: true,
-  targetExact: true, personalMax: null, rain: false, decimals: 1, speedoPct: 0, testMode: false,
+  targetExact: true, personalMax: null, rain: false, decimals: 1, speedoPct: 0, testMode: false, layout: 'auto',
 };
 const settings = { ...DEFAULTS, ...store.get('settings', {}) };
 if (settings.voice === false && !store.get('settings', {}).audio) settings.audio = 'nulla';
@@ -23,9 +23,16 @@ function applySettings() {
   Policy.settings = { targetExact: settings.targetExact, personalMax: settings.personalMax, rain: settings.rain };
   if (gain) gain.gain.value = settings.volume;
   document.body.classList.toggle('test', settings.testMode);
+  applyLayout();
   const ab = document.getElementById('audioBtn');
   if (ab) ab.textContent = { voce: '🔊 Voce', bip: '🔔 Bip', nulla: '🔇 Muto' }[settings.audio];
 }
+/** Una colonna se lo chiede l'utente o se il pannello del browser è stretto. */
+function applyLayout() {
+  const narrow = settings.layout === 'stretto' || (settings.layout === 'auto' && window.innerWidth < 900);
+  document.body.classList.toggle('narrow', narrow);
+}
+window.addEventListener('resize', applyLayout);
 function setSetting(k, v) { settings[k] = v; store.set('settings', settings); applySettings(); renderSettings(); render(); }
 
 // ---------- Stato ----------
@@ -318,8 +325,12 @@ function render() {
     $('avg').textContent = fmt(avg, settings.decimals); $('avg').className = 'avg ' + col;
     $('limit').textContent = lim ?? '?';
     const spd = shownSpeed();
-    $('tLine').textContent = `ora ${spd} km/h · ${km(s.remainingMeters)} alla fine · ${dur(s.elapsedMs)}`;
-    $('bar').style.width = (s.progress * 100).toFixed(1) + '%'; $('bar').className = 'fill ' + col;
+    $('tLine').textContent = `ora ${spd} km/h · in tratta da ${dur(s.elapsedMs)}`;
+    const pct = (s.progress * 100).toFixed(1) + '%';
+    $('bar').style.width = pct; $('bar').className = 'fill ' + col;
+    $('car').style.left = pct; $('car').className = 'car ' + col;
+    $('kmDone').innerHTML = `fatti <b>${km(s.doneMeters)}</b>`;
+    $('kmLeft').innerHTML = `mancano <b>${km(s.remainingMeters)}</b>`;
     const rec = s.recommendedKmh != null ? Math.round(s.recommendedKmh) : null;
     const banner = gpsLostS != null ? [`GPS perso da ${gpsLostS} s · media stimata`, 'warn']
       : s.suspended ? ['Fuori percorso', 'warn']
@@ -411,6 +422,7 @@ const SCHEMA = [
   ['Schermo', [
     ['decimals', 'Decimali della media', [[1, '1'], [0, '0']]],
     ['speedoPct', 'Correzione tachimetro', [[0, '0%'], [1, '+1%'], [2, '+2%'], [3, '+3%'], [4, '+4%']]],
+    ['layout', 'Disposizione', [['auto', 'Automatica'], ['stretto', 'Una colonna'], ['ampio', 'Due colonne']]],
     ['testMode', 'Modalità prova (PORTALE)', [[false, 'No'], [true, 'Sì']]],
   ]],
 ];
@@ -418,6 +430,7 @@ const HELP = {
   audio: 'Si cambia anche durante la guida con il pulsante in alto.',
   targetExact: 'Tolleranza di legge: la media può arrivare al limite + 5%. Limite esatto: più prudente.',
   speedoPct: 'Solo la velocità mostrata, per farla coincidere col cruscotto. La media non cambia.',
+  layout: 'Una colonna è comoda con il browser affiancato alla mappa. Automatica sceglie in base alla larghezza.',
   testMode: 'Mostra PORTALE e le misure con i tocchi, per verificare la media.',
 };
 function renderSettings() {

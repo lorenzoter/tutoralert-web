@@ -44,8 +44,23 @@
   .avgRow { display:flex; align-items:center; justify-content:space-between; gap:10px; }
   .avg { font:800 140px/1 ui-monospace,Menlo,Consolas,monospace; letter-spacing:-5px; }
   .sign { width:124px; height:124px; flex:none; border-radius:50%; background:#fff; border:15px solid #e53935; color:#000; display:grid; place-items:center; font:800 42px/1 system-ui,sans-serif; }
-  .bar { height:14px; background:#2a2a2a; border-radius:7px; overflow:hidden; margin:14px 0; }
-  .fill { height:100%; background:var(--ok); transition:width .4s; } .fill.warn { background:var(--warn); } .fill.bad { background:var(--bad); }
+  /* Barra della tratta: portale di inizio, portale di fine, posizione dell'auto */
+  .track { position:relative; height:64px; margin:16px 14px 4px; }
+  .rail { position:absolute; left:0; right:0; top:24px; height:16px; background:#2a2a2a; border-radius:8px; overflow:hidden; }
+  .fill { height:100%; width:0; background:var(--ok); transition:width .4s; } .fill.warn { background:var(--warn); } .fill.bad { background:var(--bad); }
+  .gate { position:absolute; top:0; height:64px; width:0; }
+  .gate i { position:absolute; left:-4px; top:6px; width:8px; height:52px; border-radius:4px; background:#d9d9d9; }
+  .gate i::before { content:''; position:absolute; left:-10px; top:0; width:28px; height:8px; border-radius:4px; background:#d9d9d9; }
+  .gate span { position:absolute; top:-22px; font:700 13px/1 system-ui,sans-serif; letter-spacing:.6px; color:var(--dim); white-space:nowrap; transform:translateX(-50%); }
+  .gate.s { left:0; } .gate.e { left:100%; }
+  .car { position:absolute; top:18px; width:28px; height:28px; margin-left:-14px; border-radius:50%; background:#fff; border:5px solid var(--ok); box-shadow:0 0 0 4px rgba(0,0,0,.6); transition:left .4s; left:0; }
+  .car.warn { border-color:var(--warn); } .car.bad { border-color:var(--bad); }
+  .tKm { display:flex; justify-content:space-between; font-size:18px; color:var(--dim); margin:0 0 6px; }
+  .tKm b { color:var(--fg); }
+  /* Una colonna (pannello del browser Tesla stretto o scelta dalle Impostazioni) */
+  body.narrow #drive, body.narrow.test #drive { grid-template-columns:1fr; max-width:560px; }
+  body.narrow .avg { font-size:104px; } body.narrow .speed { font-size:112px; } body.narrow .sign { width:100px; height:100px; font-size:34px; border-width:12px; }
+  body.narrow #tap { height:110px; font-size:42px; }
   .banner { margin-top:10px; border-radius:18px; padding:18px; text-align:center; font-size:32px; font-weight:800; color:#000; background:var(--warn); }
   .banner.bad { background:var(--bad); color:#fff; }
   .speed { font:800 150px/1 ui-monospace,Menlo,Consolas,monospace; letter-spacing:-5px; }
@@ -126,7 +141,13 @@
       <div class="tLabel" id="tLabel"></div>
       <div class="avgRow"><div><div class="avg" id="avg">--</div><div class="dim">media km/h</div></div><div class="sign" id="limit">130</div></div>
       <div id="tLine" style="font-size:22px;margin-top:10px"></div>
-      <div class="bar"><div class="fill" id="bar"></div></div>
+      <div class="track" id="track">
+        <div class="rail"><div class="fill" id="bar"></div></div>
+        <div class="gate s"><i></i><span>INIZIO</span></div>
+        <div class="gate e"><i></i><span>FINE</span></div>
+        <div class="car" id="car"></div>
+      </div>
+      <div class="tKm"><span id="kmDone"></span><span id="kmLeft"></span></div>
       <div class="banner" id="banner" hidden></div>
       <div class="dim" id="tState" style="margin-top:8px"></div>
     </div>
