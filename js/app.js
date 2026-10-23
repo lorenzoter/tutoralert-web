@@ -14,7 +14,7 @@ const ROUTE = [35, 36, 37, 38, 45, 46, 47, 48];
 // ---------- Impostazioni (per dispositivo) ----------
 const DEFAULTS = {
   audio: 'nulla', volume: 1, tapSound: 'bip', approach: 1000, slowRepeat: false, endAverage: true,
-  targetExact: true, personalMax: null, rain: false, decimals: 1, speedoPct: 0, testMode: false, layout: 'auto',
+  targetExact: true, personalMax: null, rain: false, decimals: 1, speedoPct: 0, testMode: false, layout: 'auto', portalChime: true,
 };
 const settings = { ...DEFAULTS, ...store.get('settings', {}) };
 if (settings.voice === false && !store.get('settings', {}).audio) settings.audio = 'nulla';
@@ -81,6 +81,17 @@ function say(keys, force = false, urgent = false) {
     }
     setTimeout(done, (at - ac.currentTime) * 1000 + 150);
   }));
+}
+
+/** Segnale sotto il portale: due toni brevi, sempre (anche con gli avvisi su Nessuno). */
+function chime() {
+  if (!ac) return;
+  ac.resume();
+  [[880, 0], [1320, 0.16]].forEach(([f, dt]) => {
+    const o = ac.createOscillator(), g = ac.createGain(), t0 = ac.currentTime + dt;
+    o.frequency.value = f; g.gain.setValueAtTime(0.3, t0); g.gain.exponentialRampToValueAtTime(0.001, t0 + 0.22);
+    o.connect(g); g.connect(gain); o.start(t0); o.stop(t0 + 0.25);
+  });
 }
 
 /** Bip breve (tocco di PORTALE). */
@@ -181,6 +192,7 @@ function onFix(fix) {
   next = status ? null : nextTutor(fix);
   nextPortal = findNextPortal(fix);
   portalToCheck = portalCheck.update(fix, nextPortal);
+  if (portalCheck.justPassed && settings.portalChime) chime();
   if (portalToCheck && disabled.has(portalToCheck.sectionId)) portalToCheck = null;
   if (pendingEval && fix.timeMs > (taps[taps.length - 1] ?? 0)) evaluate();
   render();
@@ -263,10 +275,13 @@ function findNextPortal(fix) {
 
 /** "Il portale non c'è" è attivo solo nel primo km dopo il punto previsto. */
 const portalCheck = {
-  portal: null, remaining: 0, prev: null,
-  reset() { this.portal = null; this.prev = null; },
+  portal: null, remaining: 0, prev: null, justPassed: null,
+  reset() { this.portal = null; this.prev = null; this.justPassed = null; },
   update(fix, ahead) {
+    this.justPassed = null;
+    const before = this.remaining;
     if ((fix.accuracyM ?? 0) <= 50) { if (this.prev) this.remaining -= Geo.dist(this.prev.lat, this.prev.lon, fix.lat, fix.lon); this.prev = fix; }
+    if (this.portal && before > 0 && this.remaining <= 0) this.justPassed = this.portal;
     const passed = this.portal && this.remaining <= 0 && this.remaining > -1000;
     if (ahead && !passed) { this.portal = ahead; this.remaining = ahead.distanceM; }
     if (this.portal && this.remaining <= -1000) this.portal = null;
@@ -413,6 +428,7 @@ const SCHEMA = [
   ['Voce e audio', [
     ['audio', 'Avvisi', [['voce', 'Voce'], ['bip', 'Bip'], ['nulla', 'Nessuno']]],
     ['volume', 'Volume della voce', [[0.5, 'Basso'], [1, 'Normale'], [1.6, 'Alto'], [2.4, 'Massimo']]],
+    ['portalChime', 'Segnale sotto ogni portale', [[true, 'Sempre'], [false, 'No']]],
     ['tapSound', 'Al tocco di PORTALE', [['voce', 'Voce'], ['bip', 'Bip']]],
   ]],
   ['Avvisi', [
@@ -433,6 +449,7 @@ const SCHEMA = [
   ]],
 ];
 const HELP = {
+  portalChime: 'Due toni brevi quando passi sotto un portale Tutor (inizio o fine), anche con gli avvisi su Nessuno.',
   audio: 'Si cambia anche durante la guida con il pulsante in alto.',
   targetExact: 'Tolleranza di legge: la media può arrivare al limite + 5%. Limite esatto: più prudente.',
   speedoPct: 'Solo la velocità mostrata, per farla coincidere col cruscotto. La media non cambia.',
