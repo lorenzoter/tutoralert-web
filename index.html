@@ -85,6 +85,7 @@
   .rTitle { font-weight:800; } .rSub { color:var(--dim); font-size:15px; margin-bottom:6px; }
   .rRow { display:flex; justify-content:space-between; font-size:20px; padding:3px 0; } .rRow b { font-size:26px; } .rRow .acc { color:var(--acc); }
   .rDiff { font-weight:800; margin-top:6px; }
+  .segBox { margin-top:10px; } .segLine { font-size:19px; font-weight:600; padding:4px 6px; } .segLine.ok { color:var(--ok); } .segLine.bad { color:var(--bad); }
 
   /* Pannelli */
   .panel { position:fixed; inset:0; background:var(--bg); overflow:auto; z-index:5; }
@@ -160,6 +161,7 @@
       <div><div class="speed" id="speed">--</div><div class="dim">km/h</div></div>
       <div class="card next" id="nextCard"><div id="nextTitle"></div><div id="nextSub"></div></div>
     </div>
+    <div class="segBox"><div class="banner bad" id="segBanner" hidden>Media tra i portali alta: rallenta</div><div id="segLine" class="segLine"></div></div>
   </div>
 
   <div class="card" id="prova">

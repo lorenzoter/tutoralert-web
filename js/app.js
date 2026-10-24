@@ -14,7 +14,7 @@ const ROUTE = [35, 36, 37, 38, 45, 46, 47, 48];
 // ---------- Impostazioni (per dispositivo) ----------
 const DEFAULTS = {
   audio: 'nulla', volume: 1, tapSound: 'bip', approach: 1000, slowRepeat: false, endAverage: true,
-  targetExact: true, personalMax: null, rain: false, decimals: 1, speedoPct: 0, testMode: false, layout: 'auto', portalChime: true,
+  targetExact: true, personalMax: null, rain: false, decimals: 1, speedoPct: 0, testMode: false, layout: 'auto', portalChime: true, segmentCheck: true,
 };
 const settings = { ...DEFAULTS, ...store.get('settings', {}) };
 if (settings.voice === false && !store.get('settings', {}).audio) settings.audio = 'nulla';
@@ -130,7 +130,7 @@ async function start(sim) {
   try { await loadVoice(); } catch { /* senza voce si va avanti */ }
   if (!allSections.length) await loadSections();
   tracker = new Tracker(sections);
-  fixes = []; taps = []; trips = []; announced.clear(); portalCheck.reset();
+  fixes = []; taps = []; trips = []; announced.clear(); portalCheck.reset(); allPortalCheck.reset(); segment.reset(); seg = null;
   status = next = nextPortal = portalToCheck = null; lastFix = null; lastFedAt = 0;
   simulated = !!sim; running = true; sessionId = Date.now();
   document.body.classList.add('running');
@@ -192,6 +192,10 @@ function onFix(fix) {
   next = status ? null : nextTutor(fix);
   nextPortal = findNextPortal(fix);
   portalToCheck = portalCheck.update(fix, nextPortal);
+  allPortalCheck.update(fix, findNextPortal(fix, allSections));
+  const pa = allPortalCheck.justPassed;
+  seg = settings.segmentCheck ? segment.update(fix, pa, pa ? Policy.effectiveLimit(allSections.find(x => x.id === pa.sectionId)?.limitKmh) : null) : null;
+  if (seg?.justOver) say(['segmento'], false, true);
   if (portalCheck.justPassed && settings.portalChime) chime();
   if (portalToCheck && disabled.has(portalToCheck.sectionId)) portalToCheck = null;
   if (pendingEval && fix.timeMs > (taps[taps.length - 1] ?? 0)) evaluate();
@@ -253,11 +257,11 @@ function nextTutor(fix) {
 }
 
 /** Prossimo portale (inizio o fine) davanti entro 1,5 km. */
-function findNextPortal(fix) {
+function findNextPortal(fix, list = sections) {
   const course = fix.bearingDeg != null && (fix.speedMps ?? 0) * 3.6 > 15 ? fix.bearingDeg : null;
   if (course == null) return null;
   const found = [];
-  for (const ts of sections) {
+  for (const ts of list) {
     if (!ts.nearBox(fix.lat, fix.lon, 1600)) continue;
     const p = ts.track.project(fix.lat, fix.lon);
     if (p.lateral > 80 || Geo.angleDiff(course, p.bearing) > 45) continue;
@@ -274,7 +278,7 @@ function findNextPortal(fix) {
 }
 
 /** "Il portale non c'è" è attivo solo nel primo km dopo il punto previsto. */
-const portalCheck = {
+function makePortalCheck() { return {
   portal: null, remaining: 0, prev: null, justPassed: null,
   reset() { this.portal = null; this.prev = null; this.justPassed = null; },
   update(fix, ahead) {
@@ -287,7 +291,34 @@ const portalCheck = {
     if (this.portal && this.remaining <= -1000) this.portal = null;
     return this.portal && this.remaining <= 0 ? this.portal : null;
   },
+}; }
+const portalCheck = makePortalCheck();
+/** Tutti i portali, anche delle tratte spente: per il controllo della media tra ogni portale. */
+const allPortalCheck = makePortalCheck();
+
+/**
+ * Massima sicurezza: ogni portale conta come fine del pezzo precedente e inizio del successivo.
+ * Se la media resta sotto il limite tra ogni coppia di portali consecutivi, resta sotto anche tra qualsiasi
+ * coppia di portali. Distanza GPS +1,5% (le lunghezze ufficiali sono fino all'1% più lunghe).
+ */
+const segment = {
+  startT: null, startOdo: 0, odo: 0, prev: null, limit: null, alerted: false,
+  reset() { this.startT = null; this.prev = null; this.odo = 0; this.alerted = false; },
+  update(fix, passed, limit) {
+    if ((fix.accuracyM ?? 0) <= 50) { if (this.prev) this.odo += Geo.dist(this.prev.lat, this.prev.lon, fix.lat, fix.lon); this.prev = fix; }
+    if (passed) { this.startT = fix.timeMs; this.startOdo = this.odo; this.limit = limit; this.alerted = false; }
+    if (this.startT == null) return null;
+    const dist = this.odo - this.startOdo, el = fix.timeMs - this.startT;
+    if (dist > 45000 || el > 3600000) { this.startT = null; return null; }
+    const avg = el >= 3000 && dist >= 200 ? dist * 1.015 / (el / 1000) * 3.6 : null;
+    const over = avg != null && this.limit != null && avg > this.limit;
+    let justOver = false;
+    if (over && !this.alerted) { this.alerted = true; justOver = true; }
+    if (this.alerted && avg != null && this.limit != null && avg < this.limit - 1) this.alerted = false;
+    return { avgKmh: avg, limitKmh: this.limit, distanceM: dist, over, justOver };
+  },
 };
+let seg = null;
 
 // GPS perso (galleria): ogni secondo la media continua con una stima.
 setInterval(() => {
@@ -366,6 +397,10 @@ function render() {
     $('nextTitle').textContent = next ? `Tutor tra ${Math.round(next.distanceM / 10) * 10} m` : running ? 'Nessun Tutor davanti entro 2 km' : '';
     $('nextSub').textContent = next ? `${next.ts.label} · ${km(next.ts.officialLength)} · limite ${next.ts.limitKmh ?? '?'}` : '';
   }
+  // Controllo tra ogni portale
+  $('segBanner').hidden = !(seg && seg.over);
+  $('segLine').textContent = seg ? `Dall'ultimo portale: ${seg.avgKmh != null ? fmt(seg.avgKmh, settings.decimals) + ' km/h' : 'calcolo…'} · ${km(seg.distanceM)}${seg.limitKmh ? ' · limite ' + seg.limitKmh : ''}` : '';
+  $('segLine').className = 'segLine ' + (!seg || seg.avgKmh == null ? '' : seg.over ? 'bad' : 'ok');
   // Prova
   const np = nextPortal;
   $('hint').textContent = np ? `Portale ${np.kind} tra circa ${Math.round(np.distanceM / 50) * 50} m` + (np.verified ? '' : ' (posizione approssimativa)')
@@ -437,6 +472,7 @@ const SCHEMA = [
     ['endAverage', 'Media a fine tratta', [[true, 'Sì'], [false, 'No']]],
   ]],
   ['Calcolo della media', [
+    ['segmentCheck', 'Media tra ogni portale', [[true, 'Sì'], [false, 'No']]],
     ['targetExact', 'Obiettivo', [[false, 'Tolleranza di legge'], [true, 'Limite esatto']]],
     ['personalMax', 'Limite personale', [[null, 'Nessuno'], [110, '110'], [100, '100'], [90, '90'], [80, '80']]],
     ['rain', 'Pioggia (limite 110)', [[false, 'No'], [true, 'Sì']]],
@@ -451,6 +487,7 @@ const SCHEMA = [
 const HELP = {
   portalChime: 'Due toni brevi quando passi sotto un portale Tutor (inizio o fine), anche con gli avvisi su Nessuno.',
   audio: 'Si cambia anche durante la guida con il pulsante in alto.',
+  segmentCheck: 'Massima sicurezza: ogni portale conta come fine e inizio. Se la media resta sotto il limite tra ogni coppia di portali, resta sotto anche su qualunque tratta. Si va un po\' più piano.',
   targetExact: 'Tolleranza di legge: la media può arrivare al limite + 5%. Limite esatto: più prudente.',
   speedoPct: 'Solo la velocità mostrata, per farla coincidere col cruscotto. La media non cambia.',
   layout: 'Una colonna è comoda con il browser affiancato alla mappa. Automatica sceglie in base alla larghezza.',
