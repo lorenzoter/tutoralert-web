@@ -1,6 +1,6 @@
 {
  "version": 2,
- "dataVersion": 202610211608,
+ "dataVersion": 202610241250,
  "disabled": [
   45
  ],
@@ -758,12 +758,12 @@
     "lon": 11.211915
    },
    "end": {
-    "lat": 43.89472,
-    "lon": 11.18973
+    "lat": 43.896105,
+    "lon": 11.191685
    },
-   "geometry": "u_gkGoylcAjm@mq@lGoFnKgG|MaEhLaAxLJbOzBfGrBxHvDvO`MpaAh}@p{ArwAdHtHjHnKzGzJ",
+   "geometry": "u_gkGoylcAjm@mq@lGoFnKgG|MaEhLaAxLJbOzBfGrBxHvDvO`MpaAh}@p{ArwAdHtHjHnK",
    "startSource": "stima",
-   "endSource": "sicve",
+   "endSource": "stima",
    "estimatedStart": {
     "lat": 43.950185,
     "lon": 11.211915
@@ -950,12 +950,12 @@
     "lon": 12.602587
    },
    "end": {
-    "lat": 42.26314,
-    "lon": 12.5526
+    "lat": 42.267006,
+    "lon": 12.55083
    },
-   "geometry": "ygm`Gem|kAmJ|@uoAyJcNl@}UhG{CTaEc@}NcDuIEgFvAgI~EyDvAyQvDoDpCiKvLeGbC_K~B_D~A}NbR}DbCkFz@ew@JiEx@qFbEsWl\\eVnRkTnRaE~FeCpFsA|EwIvf@uWxgAuDnIeErDmDxAy_@zM",
+   "geometry": "ygm`Gem|kAmJ|@uoAyJcNl@}UhG{CTaEc@}NcDuIEgFvAgI~EyDvAyQvDoDpCiKvLeGbC_K~B_D~A}NbR}DbCkFz@ew@JiEx@qFbEsWl\\eVnRkTnRaE~FeCpFsA|EwIvf@uWxgAuDnIeErDmDxA_x@xX",
    "startSource": "stima",
-   "endSource": "sicve",
+   "endSource": "stima",
    "estimatedStart": {
     "lat": 42.179972,
     "lon": 12.602587
@@ -978,15 +978,15 @@
    "variableLimit": false,
    "reliability": "HIGH",
    "start": {
-    "lat": 43.34193,
-    "lon": 11.76342
+    "lat": 43.345438,
+    "lon": 11.763706
    },
    "end": {
     "lat": 43.22321,
     "lon": 11.79931
    },
-   "geometry": "afpgGepxfAb_CvJ|Sr@rMB|_DaOzKuAtvBe_@xGJ`Er@fVbIxDXxDQjaAqXnFwBbF_Dfx@m}@vKmOlN}UfEsFj}@sv@",
-   "startSource": "sicve",
+   "geometry": "_|pgGerxfA`uCvL|Sr@rMB|_DaOzKuAtvBe_@xGJ`Er@fVbIxDXxDQjaAqXnFwBbF_Dfx@m}@vKmOlN}UfEsFj}@sv@",
+   "startSource": "stima",
    "endSource": "sicve",
    "estimatedStart": {
     "lat": 43.345438,
@@ -1074,15 +1074,15 @@
    "variableLimit": false,
    "reliability": "MEDIUM",
    "start": {
-    "lat": 42.28641,
-    "lon": 12.50862
+    "lat": 42.28782,
+    "lon": 12.504094
    },
    "end": {
     "lat": 42.197136,
     "lon": 12.603752
    },
-   "geometry": "eabaG}ajkAtTueA`DiLlkAuaDzDiGzC}BncAk^~EsDxAuBpB{EzBkIpTe_AtJii@vBcGtF_JvT_SzTcQrJ{K~LkPpFuD~E{@lv@SbDa@jGiDjPmRxQ}FxC{AbNmOfC}AfPyC`OoHxF{AjIJ|NbDzD^xCWlU_G",
-   "startSource": "sicve",
+   "geometry": "{ibaGqeikAj]abB`DiLlkAuaDzDiGzC}BncAk^~EsDxAuBpB{EzBkIpTe_AtJii@vBcGtF_JvT_SzTcQrJ{K~LkPpFuD~E{@lv@SbDa@jGiDjPmRxQ}FxC{AbNmOfC}AfPyC`OoHxF{AjIJ|NbDzD^xCWlU_G",
+   "startSource": "stima",
    "endSource": "stima",
    "estimatedStart": {
     "lat": 42.28782,
@@ -1426,15 +1426,15 @@
    "variableLimit": false,
    "reliability": "MEDIUM",
    "start": {
-    "lat": 41.90809,
-    "lon": 12.75033
+    "lat": 41.910387,
+    "lon": 12.749289
    },
    "end": {
     "lat": 41.831134,
     "lon": 12.800598
    },
-   "geometry": "qdx~FmhylAv_A}WhNcFnHsDfKuGzc@k[lKaFzJqC~i@cHpJwC`EuBnKwHbDmDh`@uk@~KcMvK_Jhg@_[~QyNd\\w[rGgFhNmIn[cOvf@_R",
-   "startSource": "sicve",
+   "geometry": "}rx~FabylAjMkEv_A}WhNcFnHsDfKuGzc@k[lKaFzJqC~i@cHpJwC`EuBnKwHbDmDh`@uk@~KcMvK_Jhg@_[~QyNd\\w[rGgFhNmIn[cOvf@_R",
+   "startSource": "stima",
    "endSource": "stima",
    "estimatedStart": {
     "lat": 41.910387,
@@ -1891,6 +1891,4646 @@
    "estimatedEnd": {
     "lat": 44.080495,
     "lon": 11.233879
+   }
+  },
+  {
+   "id": 60,
+   "road": "A4",
+   "direction": "dir. Est",
+   "from": "Trezzo",
+   "to": "Dalmine",
+   "kmStart": 154.85,
+   "kmEnd": 166.633,
+   "lengthM": 11783.0,
+   "limit": 130,
+   "variableLimit": false,
+   "reliability": "MEDIUM",
+   "start": {
+    "lat": 45.59008,
+    "lon": 9.47373
+   },
+   "end": {
+    "lat": 45.63689,
+    "lon": 9.60787
+   },
+   "geometry": "{hguG{iyx@AGmZenCuEyXov@weDcs@kxCoM}k@ml@ecCeJk[unAonC",
+   "startSource": "sicve",
+   "endSource": "sicve",
+   "estimatedStart": {
+    "lat": 45.590074,
+    "lon": 9.473779
+   },
+   "estimatedEnd": {
+    "lat": 45.637087,
+    "lon": 9.608245
+   }
+  },
+  {
+   "id": 61,
+   "road": "A4",
+   "direction": "dir. Est",
+   "from": "Dalmine",
+   "to": "Bergamo",
+   "kmStart": 166.633,
+   "kmEnd": 171.3,
+   "lengthM": 4667.0,
+   "limit": 130,
+   "variableLimit": false,
+   "reliability": "MEDIUM",
+   "start": {
+    "lat": 45.63689,
+    "lon": 9.60787
+   },
+   "end": {
+    "lat": 45.66298,
+    "lon": 9.65489
+   },
+   "geometry": "ompuGgpsy@i@iAy`DobH",
+   "startSource": "sicve",
+   "endSource": "sicve",
+   "estimatedStart": {
+    "lat": 45.637087,
+    "lon": 9.608245
+   },
+   "estimatedEnd": {
+    "lat": 45.663186,
+    "lon": 9.655266
+   }
+  },
+  {
+   "id": 62,
+   "road": "A4",
+   "direction": "dir. Est",
+   "from": "Bergamo",
+   "to": "Seriate",
+   "kmStart": 171.3,
+   "kmEnd": 178.45,
+   "lengthM": 7150.0,
+   "limit": 130,
+   "variableLimit": false,
+   "reliability": "MEDIUM",
+   "start": {
+    "lat": 45.66298,
+    "lon": 9.65489
+   },
+   "end": {
+    "lat": 45.6567,
+    "lon": 9.74099
+   },
+   "geometry": "spuuGav|y@i@kA_d@_bAoBsI_@kFA{FhqAyyL",
+   "startSource": "sicve",
+   "endSource": "sicve",
+   "estimatedStart": {
+    "lat": 45.663186,
+    "lon": 9.655266
+   },
+   "estimatedEnd": {
+    "lat": 45.656424,
+    "lon": 9.742329
+   }
+  },
+  {
+   "id": 63,
+   "road": "A4",
+   "direction": "dir. Est",
+   "from": "Seriate",
+   "to": "Grumello",
+   "kmStart": 178.45,
+   "kmEnd": 187.01,
+   "lengthM": 8560.0,
+   "limit": 130,
+   "variableLimit": false,
+   "reliability": "MEDIUM",
+   "start": {
+    "lat": 45.6567,
+    "lon": 9.74099
+   },
+   "end": {
+    "lat": 45.63497,
+    "lon": 9.84619
+   },
+   "geometry": "cituGapmz@n@oGj]qmDtfBqyM",
+   "startSource": "sicve",
+   "endSource": "sicve",
+   "estimatedStart": {
+    "lat": 45.656424,
+    "lon": 9.742329
+   },
+   "estimatedEnd": {
+    "lat": 45.634547,
+    "lon": 9.848107
+   }
+  },
+  {
+   "id": 64,
+   "road": "A4",
+   "direction": "dir. Est",
+   "from": "Grumello",
+   "to": "Ponte Oglio",
+   "kmStart": 187.01,
+   "kmEnd": 190.45,
+   "lengthM": 3440.0,
+   "limit": 130,
+   "variableLimit": false,
+   "reliability": "MEDIUM",
+   "start": {
+    "lat": 45.63497,
+    "lon": 9.84619
+   },
+   "end": {
+    "lat": 45.6257,
+    "lon": 9.88837
+   },
+   "geometry": "qapuGuab{@rA_Knv@qzF",
+   "startSource": "sicve",
+   "endSource": "sicve",
+   "estimatedStart": {
+    "lat": 45.634547,
+    "lon": 9.848107
+   },
+   "estimatedEnd": {
+    "lat": 45.625218,
+    "lon": 9.890409
+   }
+  },
+  {
+   "id": 65,
+   "road": "A4",
+   "direction": "dir. Est",
+   "from": "Ponte Oglio",
+   "to": "Palazzolo",
+   "kmStart": 190.45,
+   "kmEnd": 192.4,
+   "lengthM": 1950.0,
+   "limit": 130,
+   "variableLimit": false,
+   "reliability": "MEDIUM",
+   "start": {
+    "lat": 45.6257,
+    "lon": 9.88837
+   },
+   "end": {
+    "lat": 45.62049,
+    "lon": 9.91197
+   },
+   "geometry": "qgnuGgij{@|AyKlR{sAhIyp@",
+   "startSource": "sicve",
+   "endSource": "sicve",
+   "estimatedStart": {
+    "lat": 45.625218,
+    "lon": 9.890409
+   },
+   "estimatedEnd": {
+    "lat": 45.619988,
+    "lon": 9.914216
+   }
+  },
+  {
+   "id": 66,
+   "road": "A4",
+   "direction": "dir. Est",
+   "from": "Palazzolo",
+   "to": "Rovato",
+   "kmStart": 192.4,
+   "kmEnd": 200.69,
+   "lengthM": 8290.0,
+   "limit": 130,
+   "variableLimit": false,
+   "reliability": "MEDIUM",
+   "start": {
+    "lat": 45.62049,
+    "lon": 9.91197
+   },
+   "end": {
+    "lat": 45.57857,
+    "lon": 9.99876
+   },
+   "geometry": "_gmuGy|n{@`BaMtEm]~B_MlGyUlGiPxpEclJrG_TbDsPrFcg@",
+   "startSource": "sicve",
+   "endSource": "sicve",
+   "estimatedStart": {
+    "lat": 45.619988,
+    "lon": 9.914216
+   },
+   "estimatedEnd": {
+    "lat": 45.578167,
+    "lon": 10.001001
+   }
+  },
+  {
+   "id": 67,
+   "road": "A4",
+   "direction": "dir. Est",
+   "from": "Rovato",
+   "to": "Ospitaletto",
+   "kmStart": 200.69,
+   "kmEnd": 205.55,
+   "lengthM": 4860.0,
+   "limit": 130,
+   "variableLimit": false,
+   "reliability": "MEDIUM",
+   "start": {
+    "lat": 45.57857,
+    "lon": 9.99876
+   },
+   "end": {
+    "lat": 45.5673,
+    "lon": 10.05918
+   },
+   "geometry": "caeuGi{_|@pA}LjOmwAzG}i@vi@ggF",
+   "startSource": "sicve",
+   "endSource": "sicve",
+   "estimatedStart": {
+    "lat": 45.578167,
+    "lon": 10.001001
+   },
+   "estimatedEnd": {
+    "lat": 45.566919,
+    "lon": 10.061213
+   }
+  },
+  {
+   "id": 68,
+   "road": "A4",
+   "direction": "dir. Ovest",
+   "from": "Capriate",
+   "to": "Cavenago",
+   "kmStart": 161.49,
+   "kmEnd": 151.5,
+   "lengthM": 9990.0,
+   "limit": 130,
+   "variableLimit": false,
+   "reliability": "LOW",
+   "start": {
+    "lat": 45.61296,
+    "lon": 9.55206
+   },
+   "end": {
+    "lat": 45.58243,
+    "lon": 9.43297
+   },
+   "geometry": "exkuGgshy@BNns@pxCzt@f`DvCzNvA`JvHlt@tv@n_HpJ~z@",
+   "startSource": "sicve",
+   "endSource": "sicve",
+   "estimatedStart": {
+    "lat": 45.616064,
+    "lon": 9.561493
+   },
+   "estimatedEnd": {
+    "lat": 45.584281,
+    "lon": 9.442568
+   }
+  },
+  {
+   "id": 69,
+   "road": "A4",
+   "direction": "dir. Ovest",
+   "from": "Dalmine",
+   "to": "Capriate",
+   "kmStart": 168.9,
+   "kmEnd": 161.49,
+   "lengthM": 7410.0,
+   "limit": 130,
+   "variableLimit": false,
+   "reliability": "MEDIUM",
+   "start": {
+    "lat": 45.64953,
+    "lon": 9.63021
+   },
+   "end": {
+    "lat": 45.61296,
+    "lon": 9.55206
+   },
+   "geometry": "s|ruGw{wy@v}Ct|GvD~KnD`Nff@trBzRpy@",
+   "startSource": "sicve",
+   "endSource": "sicve",
+   "estimatedStart": {
+    "lat": 45.654399,
+    "lon": 9.63894
+   },
+   "estimatedEnd": {
+    "lat": 45.616064,
+    "lon": 9.561493
+   }
+  },
+  {
+   "id": 70,
+   "road": "A4",
+   "direction": "dir. Ovest",
+   "from": "Seriate",
+   "to": "Bergamo",
+   "kmStart": 180,
+   "kmEnd": 174.3,
+   "lengthM": 5700.0,
+   "limit": 130,
+   "variableLimit": false,
+   "reliability": "LOW",
+   "start": {
+    "lat": 45.6531,
+    "lon": 9.7624
+   },
+   "end": {
+    "lat": 45.66626,
+    "lon": 9.69042
+   },
+   "geometry": "assuGavqz@oOt`Bsu@fdH_J~y@",
+   "startSource": "sicve",
+   "endSource": "sicve",
+   "estimatedStart": {
+    "lat": 45.651653,
+    "lon": 9.770491
+   },
+   "estimatedEnd": {
+    "lat": 45.664505,
+    "lon": 9.699857
+   }
+  },
+  {
+   "id": 71,
+   "road": "A4",
+   "direction": "dir. Ovest",
+   "from": "Grumello",
+   "to": "Seriate",
+   "kmStart": 189,
+   "kmEnd": 180,
+   "lengthM": 9000,
+   "limit": 130,
+   "variableLimit": false,
+   "reliability": "MEDIUM",
+   "start": {
+    "lat": 45.627831,
+    "lon": 9.879388
+   },
+   "end": {
+    "lat": 45.651653,
+    "lon": 9.770491
+   },
+   "geometry": "}tnuGeqh{@{sCrgT",
+   "startSource": "stima",
+   "endSource": "stima",
+   "estimatedStart": {
+    "lat": 45.627831,
+    "lon": 9.879388
+   },
+   "estimatedEnd": {
+    "lat": 45.651653,
+    "lon": 9.770491
+   }
+  },
+  {
+   "id": 72,
+   "road": "A4",
+   "direction": "dir. Ovest",
+   "from": "Ponte Oglio",
+   "to": "Grumello",
+   "kmStart": 192.4,
+   "kmEnd": 189,
+   "lengthM": 3400.0,
+   "limit": 130,
+   "variableLimit": false,
+   "reliability": "MEDIUM",
+   "start": {
+    "lat": 45.6206,
+    "lon": 9.91214
+   },
+   "end": {
+    "lat": 45.62992,
+    "lon": 9.86982
+   },
+   "geometry": "ugmuG{}n{@qN~hAu\\taCqLpz@",
+   "startSource": "sicve",
+   "endSource": "sicve",
+   "estimatedStart": {
+    "lat": 45.618662,
+    "lon": 9.920534
+   },
+   "estimatedEnd": {
+    "lat": 45.627831,
+    "lon": 9.879388
+   }
+  },
+  {
+   "id": 73,
+   "road": "A4",
+   "direction": "dir. Ovest",
+   "from": "Palazzolo",
+   "to": "Ponte Oglio",
+   "kmStart": 193.9,
+   "kmEnd": 192.4,
+   "lengthM": 1500.0,
+   "limit": 130,
+   "variableLimit": false,
+   "reliability": "MEDIUM",
+   "start": {
+    "lat": 45.611118,
+    "lon": 9.935781
+   },
+   "end": {
+    "lat": 45.618662,
+    "lon": 9.920534
+   },
+   "geometry": "olkuGsqs{@g`@`z@{DdL_G`V",
+   "startSource": "stima",
+   "endSource": "stima",
+   "estimatedStart": {
+    "lat": 45.611118,
+    "lon": 9.935781
+   },
+   "estimatedEnd": {
+    "lat": 45.618662,
+    "lon": 9.920534
+   }
+  },
+  {
+   "id": 74,
+   "road": "A4",
+   "direction": "dir. Ovest",
+   "from": "Rovato",
+   "to": "Palazzolo",
+   "kmStart": 202.3,
+   "kmEnd": 193.9,
+   "lengthM": 8400.0,
+   "limit": 130,
+   "variableLimit": false,
+   "reliability": "MEDIUM",
+   "start": {
+    "lat": 45.57493,
+    "lon": 10.01885
+   },
+   "end": {
+    "lat": 45.61475,
+    "lon": 9.92952
+   },
+   "geometry": "ojduG{xc|@mBnPqXhiCoCvQeGtU}I`TklD|kHsUff@",
+   "startSource": "sicve",
+   "endSource": "sicve",
+   "estimatedStart": {
+    "lat": 45.573463,
+    "lon": 10.026445
+   },
+   "estimatedEnd": {
+    "lat": 45.611118,
+    "lon": 9.935781
+   }
+  },
+  {
+   "id": 75,
+   "road": "A4",
+   "direction": "dir. Ovest",
+   "from": "Ospitaletto",
+   "to": "Rovato",
+   "kmStart": 206.97,
+   "kmEnd": 202.3,
+   "lengthM": 4670.0,
+   "limit": 130,
+   "variableLimit": false,
+   "reliability": "MEDIUM",
+   "start": {
+    "lat": 45.56425,
+    "lon": 10.07644
+   },
+   "end": {
+    "lat": 45.57493,
+    "lon": 10.01885
+   },
+   "geometry": "mgbuGu`o|@ux@jwHyGrn@",
+   "startSource": "sicve",
+   "endSource": "sicve",
+   "estimatedStart": {
+    "lat": 45.562748,
+    "lon": 10.084421
+   },
+   "estimatedEnd": {
+    "lat": 45.573463,
+    "lon": 10.026445
+   }
+  },
+  {
+   "id": 76,
+   "road": "A7",
+   "direction": "dir. Nord",
+   "from": "Ronco Scrivia",
+   "to": "Isola del Cantone",
+   "kmStart": 109.33,
+   "kmEnd": 104.8,
+   "lengthM": 4530.0,
+   "limit": 110,
+   "variableLimit": false,
+   "reliability": "LOW",
+   "start": {
+    "lat": 44.579087,
+    "lon": 8.942798
+   },
+   "end": {
+    "lat": 44.61318,
+    "lon": 8.956484
+   },
+   "geometry": "izaoGosqu@yb@jDuDE}CaAug@cf@kB_G{@iLm@iD_BeD{CyBcE_AyCCiNbJyGlGeBh@oBBiD_AiBoBcIqUaBoCaC{AqDc@ee@xB",
+   "startSource": "stima",
+   "endSource": "stima",
+   "estimatedStart": {
+    "lat": 44.579087,
+    "lon": 8.942798
+   },
+   "estimatedEnd": {
+    "lat": 44.61318,
+    "lon": 8.956484
+   }
+  },
+  {
+   "id": 77,
+   "road": "A7",
+   "direction": "dir. Nord",
+   "from": "Busalla",
+   "to": "Ronco Scrivia",
+   "kmStart": 114.14,
+   "kmEnd": 109.33,
+   "lengthM": 4810.0,
+   "limit": 110,
+   "variableLimit": false,
+   "reliability": "LOW",
+   "start": {
+    "lat": 44.542435,
+    "lon": 8.940852
+   },
+   "end": {
+    "lat": 44.579087,
+    "lon": 8.942798
+   },
+   "geometry": "euznGigqu@_`@gXwDW_K`AycBs^iC{@wLaJeDs@yD|@y[`WyBlE{AvIu@rB}BvDkFjD",
+   "startSource": "stima",
+   "endSource": "stima",
+   "estimatedStart": {
+    "lat": 44.542435,
+    "lon": 8.940852
+   },
+   "estimatedEnd": {
+    "lat": 44.579087,
+    "lon": 8.942798
+   }
+  },
+  {
+   "id": 78,
+   "road": "A7",
+   "direction": "dir. Sud",
+   "from": "Busalla",
+   "to": "Bolzaneto",
+   "kmStart": 112.78,
+   "kmEnd": 125.07,
+   "lengthM": 12290.0,
+   "limit": 80,
+   "variableLimit": false,
+   "reliability": "MEDIUM",
+   "start": {
+    "lat": 44.55963,
+    "lon": 8.94674
+   },
+   "end": {
+    "lat": 44.47398,
+    "lon": 8.91059
+   },
+   "geometry": "u`~nGelru@rw@~L~C?`FaAjBJnChCpDr@tA|@tB`BnCxDxCr@pEzDlHhDhAOzAiAr@yCeAeH}C}HIgBZwBfAwAdAYfIp@dBfAbApKpAvA`C^jMlG~\\dJhFt@lAdArAjDjA|@xA?jGyAxFrD|FMtClBjCl@`GgA~Ez@z@v@j@`BErFf@zBbAr@~Cl@vBRrAk@tBkHzBqBnGaCrCLtBhBhB`H?bBaAtDGbBx@xUj@pBz]hOdFp@rF~HpAlDTxG|B`D`CJhAcApAmCzB[vDpFp@fH~@dB~BX`CyAbAKbLjErI{@~CiEdHqC`BRfDtCzDBtGlArAc@~FiFvAFlChBtC|@fFyBnDz@`Eg@jDjCtFvAbAx@dAzD`ChF~ArMpFtHtCbArMrE",
+   "startSource": "sicve",
+   "endSource": "sicve",
+   "estimatedStart": {
+    "lat": 44.560261,
+    "lon": 8.946907
+   },
+   "estimatedEnd": {
+    "lat": 44.476225,
+    "lon": 8.912059
+   }
+  },
+  {
+   "id": 79,
+   "road": "A8",
+   "direction": "dir. Nord",
+   "from": "Castellanza",
+   "to": "Busto Arsizio",
+   "kmStart": 17,
+   "kmEnd": 20.8,
+   "lengthM": 3800.0,
+   "limit": 130,
+   "variableLimit": false,
+   "reliability": "HIGH",
+   "start": {
+    "lat": 45.60565,
+    "lon": 8.93918
+   },
+   "end": {
+    "lat": 45.62333,
+    "lon": 8.89711
+   },
+   "geometry": "gjjuGy|pu@Yz@slBbdG",
+   "startSource": "sicve",
+   "endSource": "sicve",
+   "estimatedStart": {
+    "lat": 45.605771,
+    "lon": 8.938874
+   },
+   "estimatedEnd": {
+    "lat": 45.623357,
+    "lon": 8.896983
+   }
+  },
+  {
+   "id": 80,
+   "road": "A8",
+   "direction": "dir. Sud",
+   "from": "Castellanza",
+   "to": "Origgio Ovest",
+   "kmStart": 20.4,
+   "kmEnd": 12.15,
+   "lengthM": 8250.0,
+   "limit": 130,
+   "variableLimit": false,
+   "reliability": "HIGH",
+   "start": {
+    "lat": 45.62133,
+    "lon": 8.90158
+   },
+   "end": {
+    "lat": 45.58351,
+    "lon": 8.99154
+   },
+   "geometry": "elmuGyqiu@fkFiqP",
+   "startSource": "sicve",
+   "endSource": "sicve",
+   "estimatedStart": {
+    "lat": 45.621417,
+    "lon": 8.901308
+   },
+   "estimatedEnd": {
+    "lat": 45.583236,
+    "lon": 8.992175
+   }
+  },
+  {
+   "id": 81,
+   "road": "A8",
+   "direction": "dir. Sud",
+   "from": "Busto Arsizio",
+   "to": "Castellanza",
+   "kmStart": 25.6,
+   "kmEnd": 20.4,
+   "lengthM": 5200.0,
+   "limit": 130,
+   "variableLimit": false,
+   "reliability": "HIGH",
+   "start": {
+    "lat": 45.64517,
+    "lon": 8.84479
+   },
+   "end": {
+    "lat": 45.62133,
+    "lon": 8.90158
+   },
+   "geometry": "garuG{n~t@jsCi`JTs@",
+   "startSource": "sicve",
+   "endSource": "sicve",
+   "estimatedStart": {
+    "lat": 45.645491,
+    "lon": 8.843984
+   },
+   "estimatedEnd": {
+    "lat": 45.621417,
+    "lon": 8.901308
+   }
+  },
+  {
+   "id": 82,
+   "road": "A9",
+   "direction": "dir. Nord",
+   "from": "Turate",
+   "to": "All. A9-A36",
+   "kmStart": 18.1,
+   "kmEnd": 20.15,
+   "lengthM": 2050.0,
+   "limit": 130,
+   "variableLimit": false,
+   "reliability": "MEDIUM",
+   "start": {
+    "lat": 45.641326,
+    "lon": 9.014467
+   },
+   "end": {
+    "lat": 45.659842,
+    "lon": 9.015444
+   },
+   "geometry": "iiquGms_v@urBaE",
+   "startSource": "stima",
+   "endSource": "stima",
+   "estimatedStart": {
+    "lat": 45.641326,
+    "lon": 9.014467
+   },
+   "estimatedEnd": {
+    "lat": 45.659842,
+    "lon": 9.015444
+   }
+  },
+  {
+   "id": 83,
+   "road": "A9",
+   "direction": "dir. Nord",
+   "from": "Lomazzo Sud",
+   "to": "Lomazzo Nord",
+   "kmStart": 22.95,
+   "kmEnd": 24.85,
+   "lengthM": 1900.0,
+   "limit": 130,
+   "variableLimit": false,
+   "reliability": "MEDIUM",
+   "start": {
+    "lat": 45.685006,
+    "lon": 9.01677
+   },
+   "end": {
+    "lat": 45.701932,
+    "lon": 9.020718
+   },
+   "geometry": "izyuGya`v@}YoAymAeU",
+   "startSource": "stima",
+   "endSource": "stima",
+   "estimatedStart": {
+    "lat": 45.685006,
+    "lon": 9.01677
+   },
+   "estimatedEnd": {
+    "lat": 45.701932,
+    "lon": 9.020718
+   }
+  },
+  {
+   "id": 84,
+   "road": "A9",
+   "direction": "dir. Nord",
+   "from": "Lomazzo Nord",
+   "to": "Fino Mornasco",
+   "kmStart": 24.85,
+   "kmEnd": 28.6,
+   "lengthM": 3750.0,
+   "limit": 130,
+   "variableLimit": false,
+   "reliability": "MEDIUM",
+   "start": {
+    "lat": 45.701932,
+    "lon": 9.020718
+   },
+   "end": {
+    "lat": 45.73535,
+    "lon": 9.030423
+   },
+   "geometry": "ad}uGoz`v@{oEs{@",
+   "startSource": "stima",
+   "endSource": "stima",
+   "estimatedStart": {
+    "lat": 45.701932,
+    "lon": 9.020718
+   },
+   "estimatedEnd": {
+    "lat": 45.73535,
+    "lon": 9.030423
+   }
+  },
+  {
+   "id": 85,
+   "road": "A9",
+   "direction": "dir. Sud",
+   "from": "Turate",
+   "to": "Saronno",
+   "kmStart": 20.45,
+   "kmEnd": 17.65,
+   "lengthM": 2800.0,
+   "limit": 130,
+   "variableLimit": false,
+   "reliability": "MEDIUM",
+   "start": {
+    "lat": 45.666848,
+    "lon": 9.01565
+   },
+   "end": {
+    "lat": 45.641598,
+    "lon": 9.01431
+   },
+   "geometry": "yhvuGyz_v@x|CjG",
+   "startSource": "stima",
+   "endSource": "stima",
+   "estimatedStart": {
+    "lat": 45.666848,
+    "lon": 9.01565
+   },
+   "estimatedEnd": {
+    "lat": 45.641598,
+    "lon": 9.01431
+   }
+  },
+  {
+   "id": 86,
+   "road": "A9",
+   "direction": "dir. Sud",
+   "from": "Lomazzo Nord",
+   "to": "Lomazzo Sud",
+   "kmStart": 26.7,
+   "kmEnd": 23.95,
+   "lengthM": 2750.0,
+   "limit": 130,
+   "variableLimit": false,
+   "reliability": "MEDIUM",
+   "start": {
+    "lat": 45.722498,
+    "lon": 9.026484
+   },
+   "end": {
+    "lat": 45.698129,
+    "lon": 9.019473
+   },
+   "geometry": "sdavGo~av@hwCxj@",
+   "startSource": "stima",
+   "endSource": "stima",
+   "estimatedStart": {
+    "lat": 45.722498,
+    "lon": 9.026484
+   },
+   "estimatedEnd": {
+    "lat": 45.698129,
+    "lon": 9.019473
+   }
+  },
+  {
+   "id": 87,
+   "road": "A10",
+   "direction": "dir. Ovest",
+   "from": "Celle Ligure",
+   "to": "Albisola",
+   "kmStart": 31.59,
+   "kmEnd": 36.05,
+   "lengthM": 4460.0,
+   "limit": 110,
+   "variableLimit": false,
+   "reliability": "MEDIUM",
+   "start": {
+    "lat": 44.35094,
+    "lon": 8.558009
+   },
+   "end": {
+    "lat": 44.334865,
+    "lon": 8.509898
+   },
+   "geometry": "khumGqnfs@fE|FtBrMf@|IrAdm@~A|HpBfExBlCda@b^bFtH|CfGfFfPpBfM|Ezn@~Irw@f@hN",
+   "startSource": "stima",
+   "endSource": "stima",
+   "estimatedStart": {
+    "lat": 44.35094,
+    "lon": 8.558009
+   },
+   "estimatedEnd": {
+    "lat": 44.334865,
+    "lon": 8.509898
+   }
+  },
+  {
+   "id": 88,
+   "road": "A10",
+   "direction": "dir. Est",
+   "from": "Albisola",
+   "to": "Celle Ligure",
+   "kmStart": 38.7,
+   "kmEnd": 33.89,
+   "lengthM": 4810.0,
+   "limit": 110,
+   "variableLimit": false,
+   "reliability": "LOW",
+   "start": {
+    "lat": 44.322339,
+    "lon": 8.485192
+   },
+   "end": {
+    "lat": 44.338245,
+    "lon": 8.534667
+   },
+   "geometry": "suomGmgxr@aFkXqDiJed@sm@wDeDsJaFwBmB{BoDsAgEw@aJj@u^EgGsIwaAXwGd@cDnFkSPeHcBaO_ByEwMmM",
+   "startSource": "stima",
+   "endSource": "stima",
+   "estimatedStart": {
+    "lat": 44.322339,
+    "lon": 8.485192
+   },
+   "estimatedEnd": {
+    "lat": 44.338245,
+    "lon": 8.534667
+   }
+  },
+  {
+   "id": 89,
+   "road": "A13",
+   "direction": "dir. Nord",
+   "from": "Arcoveggio",
+   "to": "Bologna Interporto",
+   "kmStart": 1.47,
+   "kmEnd": 6.5,
+   "lengthM": 5030.0,
+   "limit": 130,
+   "variableLimit": false,
+   "reliability": "MEDIUM",
+   "start": {
+    "lat": 44.53844,
+    "lon": 11.3655
+   },
+   "end": {
+    "lat": 44.57931,
+    "lon": 11.3923
+   },
+   "geometry": "g|ynGkyjdA}qFi~CoKeG",
+   "startSource": "sicve",
+   "endSource": "sicve",
+   "estimatedStart": {
+    "lat": 44.536978,
+    "lon": 11.364541
+   },
+   "estimatedEnd": {
+    "lat": 44.577311,
+    "lon": 11.390989
+   }
+  },
+  {
+   "id": 90,
+   "road": "A13",
+   "direction": "dir. Nord",
+   "from": "Bologna Interporto",
+   "to": "Altedo",
+   "kmStart": 6.5,
+   "kmEnd": 19.8,
+   "lengthM": 13300.0,
+   "limit": 130,
+   "variableLimit": false,
+   "reliability": "MEDIUM",
+   "start": {
+    "lat": 44.57931,
+    "lon": 11.3923
+   },
+   "end": {
+    "lat": 44.68217,
+    "lon": 11.47531
+   },
+   "geometry": "u{aoG{`pdAiiDynBasAwq@{fC_vBg}DexD{LyKk_@iYaOaL",
+   "startSource": "sicve",
+   "endSource": "sicve",
+   "estimatedStart": {
+    "lat": 44.577311,
+    "lon": 11.390989
+   },
+   "estimatedEnd": {
+    "lat": 44.679589,
+    "lon": 11.47324
+   }
+  },
+  {
+   "id": 91,
+   "road": "A13",
+   "direction": "dir. Nord",
+   "from": "Altedo",
+   "to": "Ferrara Sud",
+   "kmStart": 19.8,
+   "kmEnd": 32.3,
+   "lengthM": 12500.0,
+   "limit": 130,
+   "variableLimit": false,
+   "reliability": "MEDIUM",
+   "start": {
+    "lat": 44.68217,
+    "lon": 11.47531
+   },
+   "end": {
+    "lat": 44.78219,
+    "lon": 11.55021
+   },
+   "geometry": "q~uoGwg`eAi`KuuHqJiG{lEoeCkUsM",
+   "startSource": "sicve",
+   "endSource": "sicve",
+   "estimatedStart": {
+    "lat": 44.679589,
+    "lon": 11.47324
+   },
+   "estimatedEnd": {
+    "lat": 44.778608,
+    "lon": 11.547879
+   }
+  },
+  {
+   "id": 92,
+   "road": "A13",
+   "direction": "dir. Nord",
+   "from": "Ferrara Sud",
+   "to": "Ferrara Nord",
+   "kmStart": 32.3,
+   "kmEnd": 40.3,
+   "lengthM": 8000,
+   "limit": 130,
+   "variableLimit": false,
+   "reliability": "MEDIUM",
+   "start": {
+    "lat": 44.78219,
+    "lon": 11.55021
+   },
+   "end": {
+    "lat": 44.85249,
+    "lon": 11.56792
+   },
+   "geometry": "uoipGy{neAgFwCoEkB_IcBanDkPaPkBohE}eA_UwF",
+   "startSource": "sicve",
+   "endSource": "sicve",
+   "estimatedStart": {
+    "lat": 44.778608,
+    "lon": 11.547879
+   },
+   "estimatedEnd": {
+    "lat": 44.848972,
+    "lon": 11.566682
+   }
+  },
+  {
+   "id": 93,
+   "road": "A13",
+   "direction": "dir. Nord",
+   "from": "Ferrara Nord",
+   "to": "Occhiobello",
+   "kmStart": 40.3,
+   "kmEnd": 45.6,
+   "lengthM": 5300.0,
+   "limit": 130,
+   "variableLimit": false,
+   "reliability": "LOW",
+   "start": {
+    "lat": 44.85249,
+    "lon": 11.56792
+   },
+   "end": {
+    "lat": 44.90017,
+    "lon": 11.57024
+   },
+   "geometry": "agwpGojreAcWmGsT{CmcFc@yVC",
+   "startSource": "sicve",
+   "endSource": "sicve",
+   "estimatedStart": {
+    "lat": 44.848972,
+    "lon": 11.566682
+   },
+   "estimatedEnd": {
+    "lat": 44.896362,
+    "lon": 11.570235
+   }
+  },
+  {
+   "id": 94,
+   "road": "A13",
+   "direction": "dir. Nord",
+   "from": "Occhiobello",
+   "to": "Rovigo Sud",
+   "kmStart": 45.6,
+   "kmEnd": 61.7,
+   "lengthM": 16100.0,
+   "limit": 130,
+   "variableLimit": false,
+   "reliability": "LOW",
+   "start": {
+    "lat": 44.90017,
+    "lon": 11.57024
+   },
+   "end": {
+    "lat": 45.01499,
+    "lon": 11.68711
+   },
+   "geometry": "aq`qG_yreA}\\A{H]oDo@eHuCoF}DwDeEmi@cv@gHoLqbDqgHuIsOwDgEgFwDaiAio@od@sXgzGodFkOgL",
+   "startSource": "sicve",
+   "endSource": "sicve",
+   "estimatedStart": {
+    "lat": 44.896362,
+    "lon": 11.570235
+   },
+   "estimatedEnd": {
+    "lat": 45.012414,
+    "lon": 11.684889
+   }
+  },
+  {
+   "id": 95,
+   "road": "A13",
+   "direction": "dir. Nord",
+   "from": "Rovigo Sud",
+   "to": "Rovigo",
+   "kmStart": 61.7,
+   "kmEnd": 68.9,
+   "lengthM": 7200.0,
+   "limit": 130,
+   "variableLimit": false,
+   "reliability": "MEDIUM",
+   "start": {
+    "lat": 45.01499,
+    "lon": 11.68711
+   },
+   "end": {
+    "lat": 45.07099,
+    "lon": 11.73321
+   },
+   "geometry": "s~vqGqsifAoEsDgsAgnAepF_|DcQeM",
+   "startSource": "sicve",
+   "endSource": "sicve",
+   "estimatedStart": {
+    "lat": 45.012414,
+    "lon": 11.684889
+   },
+   "estimatedEnd": {
+    "lat": 45.068091,
+    "lon": 11.730946
+   }
+  },
+  {
+   "id": 96,
+   "road": "A13",
+   "direction": "dir. Nord",
+   "from": "Rovigo",
+   "to": "Boara",
+   "kmStart": 68.9,
+   "kmEnd": 74.1,
+   "lengthM": 5200.0,
+   "limit": 130,
+   "variableLimit": false,
+   "reliability": "MEDIUM",
+   "start": {
+    "lat": 45.068091,
+    "lon": 11.730946
+   },
+   "end": {
+    "lat": 45.109044,
+    "lon": 11.760071
+   },
+   "geometry": "qjarGmerfA{uBo{A_OgIcsAwo@aJuF{XyU",
+   "startSource": "stima",
+   "endSource": "stima",
+   "estimatedStart": {
+    "lat": 45.068091,
+    "lon": 11.730946
+   },
+   "estimatedEnd": {
+    "lat": 45.109044,
+    "lon": 11.760071
+   }
+  },
+  {
+   "id": 97,
+   "road": "A13",
+   "direction": "dir. Nord",
+   "from": "Boara",
+   "to": "Monselice",
+   "kmStart": 74.1,
+   "kmEnd": 86.4,
+   "lengthM": 12300.0,
+   "limit": 130,
+   "variableLimit": false,
+   "reliability": "MEDIUM",
+   "start": {
+    "lat": 45.11138,
+    "lon": 11.76218
+   },
+   "end": {
+    "lat": 45.22079,
+    "lon": 11.77471
+   },
+   "geometry": "cyirGshxfA}u@qp@wJuHmDkByJcCmx@aKep@sAedGiGeWj@gcAnGkN^_aBNgYB",
+   "startSource": "sicve",
+   "endSource": "sicve",
+   "estimatedStart": {
+    "lat": 45.109044,
+    "lon": 11.760071
+   },
+   "estimatedEnd": {
+    "lat": 45.216592,
+    "lon": 11.77472
+   }
+  },
+  {
+   "id": 98,
+   "road": "A13",
+   "direction": "dir. Nord",
+   "from": "Monselice",
+   "to": "Terme Euganee",
+   "kmStart": 86.4,
+   "kmEnd": 92.8,
+   "lengthM": 6400.0,
+   "limit": 130,
+   "variableLimit": false,
+   "reliability": "LOW",
+   "start": {
+    "lat": 45.22079,
+    "lon": 11.77471
+   },
+   "end": {
+    "lat": 45.276,
+    "lon": 11.78814
+   },
+   "geometry": "}d_sG}vzfAuuDPmLg@oHsAkQqG}oAai@gSqKeTcL",
+   "startSource": "sicve",
+   "endSource": "sicve",
+   "estimatedStart": {
+    "lat": 45.216592,
+    "lon": 11.77472
+   },
+   "estimatedEnd": {
+    "lat": 45.27282,
+    "lon": 11.785348
+   }
+  },
+  {
+   "id": 99,
+   "road": "A13",
+   "direction": "dir. Nord",
+   "from": "Terme Euganee",
+   "to": "Padova Sud",
+   "kmStart": 92.8,
+   "kmEnd": 99.4,
+   "lengthM": 6600.0,
+   "limit": 130,
+   "variableLimit": false,
+   "reliability": "MEDIUM",
+   "start": {
+    "lat": 45.276,
+    "lon": 11.78814
+   },
+   "end": {
+    "lat": 45.32559,
+    "lon": 11.83328
+   },
+   "geometry": "_~isG{j}fAeuAmoAw{@chA_^ib@iIyGwJiGeyAi|@cSuL",
+   "startSource": "sicve",
+   "endSource": "sicve",
+   "estimatedStart": {
+    "lat": 45.27282,
+    "lon": 11.785348
+   },
+   "estimatedEnd": {
+    "lat": 45.322431,
+    "lon": 11.830911
+   }
+  },
+  {
+   "id": 100,
+   "road": "A13",
+   "direction": "dir. Sud",
+   "from": "Bologna Interporto",
+   "to": "Arcoveggio",
+   "kmStart": 9.4,
+   "kmEnd": 1.4,
+   "lengthM": 8000,
+   "limit": 130,
+   "variableLimit": false,
+   "reliability": "MEDIUM",
+   "start": {
+    "lat": 44.60292,
+    "lon": 11.4077
+   },
+   "end": {
+    "lat": 44.5383,
+    "lon": 11.36526
+   },
+   "geometry": "iofoG}`sdAzeKn_G`LpG",
+   "startSource": "sicve",
+   "endSource": "sicve",
+   "estimatedStart": {
+    "lat": 44.605171,
+    "lon": 11.409143
+   },
+   "estimatedEnd": {
+    "lat": 44.540391,
+    "lon": 11.366631
+   }
+  },
+  {
+   "id": 101,
+   "road": "A13",
+   "direction": "dir. Sud",
+   "from": "Altedo",
+   "to": "Bologna Interporto",
+   "kmStart": 21.1,
+   "kmEnd": 9.4,
+   "lengthM": 11700.0,
+   "limit": 130,
+   "variableLimit": false,
+   "reliability": "MEDIUM",
+   "start": {
+    "lat": 44.69248,
+    "lon": 11.48347
+   },
+   "end": {
+    "lat": 44.60292,
+    "lon": 11.4077
+   },
+   "geometry": "a_xoGmzaeAdsBt|AtaEl|DzcCjtBbKlHzxAju@dMpG",
+   "startSource": "sicve",
+   "endSource": "sicve",
+   "estimatedStart": {
+    "lat": 44.695017,
+    "lon": 11.485475
+   },
+   "estimatedEnd": {
+    "lat": 44.605171,
+    "lon": 11.409143
+   }
+  },
+  {
+   "id": 102,
+   "road": "A13",
+   "direction": "dir. Sud",
+   "from": "Ferrara Sud",
+   "to": "Altedo",
+   "kmStart": 34.6,
+   "kmEnd": 21.1,
+   "lengthM": 13500.0,
+   "limit": 130,
+   "variableLimit": false,
+   "reliability": "MEDIUM",
+   "start": {
+    "lat": 44.80248,
+    "lon": 11.55352
+   },
+   "end": {
+    "lat": 44.69248,
+    "lon": 11.48347
+   },
+   "geometry": "onmpGqpoeAjfBjIzHbBnIdElwDjwB~x@`f@lpHfuFxNvK",
+   "startSource": "sicve",
+   "endSource": "sicve",
+   "estimatedStart": {
+    "lat": 44.804351,
+    "lon": 11.553721
+   },
+   "estimatedEnd": {
+    "lat": 44.695017,
+    "lon": 11.485475
+   }
+  },
+  {
+   "id": 103,
+   "road": "A13",
+   "direction": "dir. Sud",
+   "from": "Ferrara Nord",
+   "to": "Ferrara Sud",
+   "kmStart": 42.4,
+   "kmEnd": 34.6,
+   "lengthM": 7800.0,
+   "limit": 130,
+   "variableLimit": false,
+   "reliability": "MEDIUM",
+   "start": {
+    "lat": 44.8703,
+    "lon": 11.56995
+   },
+   "end": {
+    "lat": 44.80248,
+    "lon": 11.55352
+   },
+   "geometry": "kvzpGawreAl`ALfM`A~}FnxAdPnBh{@xDtJb@",
+   "startSource": "sicve",
+   "endSource": "sicve",
+   "estimatedStart": {
+    "lat": 44.87281,
+    "lon": 11.569954
+   },
+   "estimatedEnd": {
+    "lat": 44.804351,
+    "lon": 11.553721
+   }
+  },
+  {
+   "id": 104,
+   "road": "A13",
+   "direction": "dir. Sud",
+   "from": "Rovigo Sud",
+   "to": "Occhiobello",
+   "kmStart": 64.38,
+   "kmEnd": 50.3,
+   "lengthM": 14080.0,
+   "limit": 130,
+   "variableLimit": false,
+   "reliability": "MEDIUM",
+   "start": {
+    "lat": 45.03488,
+    "lon": 11.70482
+   },
+   "end": {
+    "lat": 44.93104,
+    "lon": 11.60524
+   },
+   "geometry": "a{zqG_bmfAj`@lYz`BtzAjcHxkF~MzIp_Bf~@bFpDtDfErIpOjpA~rCdHtO",
+   "startSource": "sicve",
+   "endSource": "sicve",
+   "estimatedStart": {
+    "lat": 45.03652,
+    "lon": 11.706089
+   },
+   "estimatedEnd": {
+    "lat": 44.932489,
+    "lon": 11.607926
+   }
+  },
+  {
+   "id": 105,
+   "road": "A13",
+   "direction": "dir. Sud",
+   "from": "Rovigo",
+   "to": "Rovigo Sud",
+   "kmStart": 71,
+   "kmEnd": 64.38,
+   "lengthM": 6620.0,
+   "limit": 130,
+   "variableLimit": false,
+   "reliability": "MEDIUM",
+   "start": {
+    "lat": 45.08716,
+    "lon": 11.74565
+   },
+   "end": {
+    "lat": 45.03488,
+    "lon": 11.70482
+   },
+   "geometry": "{aerG{`ufAlDvBlu@di@v_GzgEfI~F",
+   "startSource": "sicve",
+   "endSource": "sicve",
+   "estimatedStart": {
+    "lat": 45.088715,
+    "lon": 11.746615
+   },
+   "estimatedEnd": {
+    "lat": 45.03652,
+    "lon": 11.706089
+   }
+  },
+  {
+   "id": 106,
+   "road": "A13",
+   "direction": "dir. Sud",
+   "from": "Terme Euganee",
+   "to": "Monselice",
+   "kmStart": 96.2,
+   "kmEnd": 89.1,
+   "lengthM": 7100.0,
+   "limit": 130,
+   "variableLimit": false,
+   "reliability": "MEDIUM",
+   "start": {
+    "lat": 45.30046,
+    "lon": 11.81359
+   },
+   "end": {
+    "lat": 45.2443,
+    "lon": 11.7745
+   },
+   "geometry": "{vnsG}ibgAlaAhnAnmArhA|XfV`UzLhbBnq@rOvBnXDrOB",
+   "startSource": "sicve",
+   "endSource": "sicve",
+   "estimatedStart": {
+    "lat": 45.302372,
+    "lon": 11.815872
+   },
+   "estimatedEnd": {
+    "lat": 45.246964,
+    "lon": 11.774475
+   }
+  },
+  {
+   "id": 107,
+   "road": "A13",
+   "direction": "dir. Sud",
+   "from": "Padova Zona Industriale",
+   "to": "Padova Sud",
+   "kmStart": 114.2,
+   "kmEnd": 101.9,
+   "lengthM": 12300.0,
+   "limit": 130,
+   "variableLimit": false,
+   "reliability": "LOW",
+   "start": {
+    "lat": 45.40057,
+    "lon": 11.96176
+   },
+   "end": {
+    "lat": 45.33916,
+    "lon": 11.85452
+   },
+   "geometry": "qhbtG_h_hAzgAp]zoDbiAhHtEzFlGhQtXrDvH|CrKrAjHnh@x_DvAdL~d@t}FjAdVPlOXrW",
+   "startSource": "sicve",
+   "endSource": "sicve",
+   "estimatedStart": {
+    "lat": 45.388914,
+    "lon": 11.956872
+   },
+   "estimatedEnd": {
+    "lat": 45.339185,
+    "lon": 11.858468
+   }
+  },
+  {
+   "id": 108,
+   "road": "A11",
+   "direction": "dir. Ovest",
+   "from": "Prato Est",
+   "to": "Prato Ovest",
+   "kmStart": 7.25,
+   "kmEnd": 15.9,
+   "lengthM": 8650.0,
+   "limit": 130,
+   "variableLimit": false,
+   "reliability": "HIGH",
+   "start": {
+    "lat": 43.844497,
+    "lon": 11.133606
+   },
+   "end": {
+    "lat": 43.87343,
+    "lon": 11.03812
+   },
+   "geometry": "ckrjGap}bAko@jjAuCfJ{Ine@m@tEc@lMWhkCYhZkBfYkElYuLzb@giAhhDcIxP_DdF",
+   "startSource": "stima",
+   "endSource": "sicve",
+   "estimatedStart": {
+    "lat": 43.844497,
+    "lon": 11.133606
+   },
+   "estimatedEnd": {
+    "lat": 43.873673,
+    "lon": 11.037804
+   }
+  },
+  {
+   "id": 109,
+   "road": "A11",
+   "direction": "dir. Ovest",
+   "from": "Prato Ovest",
+   "to": "Pistoia",
+   "kmStart": 15.9,
+   "kmEnd": 26.1,
+   "lengthM": 10200.0,
+   "limit": 130,
+   "variableLimit": false,
+   "reliability": "HIGH",
+   "start": {
+    "lat": 43.87343,
+    "lon": 11.03812
+   },
+   "end": {
+    "lat": 43.91284,
+    "lon": 10.9273
+   },
+   "geometry": "{_xjGc{jbAq@z@aJzKkz@ht@uHrLeCxFgCtIkBtJiOjhAuxBdpKiB`OkJ|wAC`@",
+   "startSource": "sicve",
+   "endSource": "sicve",
+   "estimatedStart": {
+    "lat": 43.873673,
+    "lon": 11.037804
+   },
+   "estimatedEnd": {
+    "lat": 43.912809,
+    "lon": 10.927469
+   }
+  },
+  {
+   "id": 110,
+   "road": "A11",
+   "direction": "dir. Est",
+   "from": "Prato Ovest",
+   "to": "Prato Est",
+   "kmStart": 18.3,
+   "kmEnd": 9.55,
+   "lengthM": 8750.0,
+   "limit": 130,
+   "variableLimit": false,
+   "reliability": "HIGH",
+   "start": {
+    "lat": 43.88874,
+    "lon": 11.01815
+   },
+   "end": {
+    "lat": 43.855014,
+    "lon": 11.109782
+   },
+   "geometry": "s_{jGm~fbA`C{PxBkJxDaK|EqIjHeIdv@_p@~JgMvGuLhDkIxb@epAll@kgB|BoInE{UhBoO~@{Lt@eUZyvC",
+   "startSource": "sicve",
+   "endSource": "stima",
+   "estimatedStart": {
+    "lat": 43.88882,
+    "lon": 11.017785
+   },
+   "estimatedEnd": {
+    "lat": 43.855014,
+    "lon": 11.109782
+   }
+  },
+  {
+   "id": 111,
+   "road": "A11",
+   "direction": "dir. Est",
+   "from": "Pistoia",
+   "to": "Prato Ovest",
+   "kmStart": 28.45,
+   "kmEnd": 18.3,
+   "lengthM": 10150.0,
+   "limit": 130,
+   "variableLimit": false,
+   "reliability": "HIGH",
+   "start": {
+    "lat": 43.914119,
+    "lon": 10.898588
+   },
+   "end": {
+    "lat": 43.88874,
+    "lon": 11.01815
+   },
+   "geometry": "g~_kGesoaAqCsw@H}RxXchEzyByuKtLo{@NgA",
+   "startSource": "stima",
+   "endSource": "sicve",
+   "estimatedStart": {
+    "lat": 43.914119,
+    "lon": 10.898588
+   },
+   "estimatedEnd": {
+    "lat": 43.88882,
+    "lon": 11.017785
+   }
+  },
+  {
+   "id": 112,
+   "road": "A11",
+   "direction": "dir. Est",
+   "from": "Montecatini",
+   "to": "Pistoia",
+   "kmStart": 40.5,
+   "kmEnd": 28.45,
+   "lengthM": 12050.0,
+   "limit": 130,
+   "variableLimit": false,
+   "reliability": "HIGH",
+   "start": {
+    "lat": 43.873517,
+    "lon": 10.774145
+   },
+   "end": {
+    "lat": 43.914119,
+    "lon": 10.898588
+   },
+   "geometry": "o`xjGkiw`A}Q{{@_AgJxCm_Cc@}GcBuGyByD{jA}mAyJcPoBuBgEkBcOy@eYcE_Cy@oDkCgCeEg\\aaAeAmG[mGp@ah@u@kQiAcHwAkFoO}_@wB{MiQu~E",
+   "startSource": "stima",
+   "endSource": "stima",
+   "estimatedStart": {
+    "lat": 43.873517,
+    "lon": 10.774145
+   },
+   "estimatedEnd": {
+    "lat": 43.914119,
+    "lon": 10.898588
+   }
+  },
+  {
+   "id": 113,
+   "road": "A14",
+   "direction": "dir. Nord",
+   "from": "All. Ramo Casalecchio",
+   "to": "Borgo Panigale",
+   "kmStart": 8.4,
+   "kmEnd": 5.5,
+   "lengthM": 2900.0,
+   "limit": 130,
+   "variableLimit": true,
+   "reliability": "MEDIUM",
+   "start": {
+    "lat": 44.483545,
+    "lon": 11.413199
+   },
+   "end": {
+    "lat": 44.479213,
+    "lon": 11.448631
+   },
+   "geometry": "eeonGoctdAhMcj@pBaPZmLNolBlAeQlDcS",
+   "startSource": "stima",
+   "endSource": "stima",
+   "estimatedStart": {
+    "lat": 44.483545,
+    "lon": 11.413199
+   },
+   "estimatedEnd": {
+    "lat": 44.479213,
+    "lon": 11.448631
+   }
+  },
+  {
+   "id": 114,
+   "road": "A14",
+   "direction": "dir. Nord",
+   "from": "Castel San Pietro",
+   "to": "San Lazzaro",
+   "kmStart": 39.4,
+   "kmEnd": 23,
+   "lengthM": 16400.0,
+   "limit": 130,
+   "variableLimit": false,
+   "reliability": "MEDIUM",
+   "start": {
+    "lat": 44.417549,
+    "lon": 11.625285
+   },
+   "end": {
+    "lat": 44.480528,
+    "lon": 11.443333
+   },
+   "geometry": "uhbnGaq}eA}]|o@qIzUqZb}A}`AbhEqIjXcfA|uC{FfRyEfWab@dxCib@p{BkCxKwd@|zAiGxU_d@vxB_BhLm@~H",
+   "startSource": "stima",
+   "endSource": "stima",
+   "estimatedStart": {
+    "lat": 44.417549,
+    "lon": 11.625285
+   },
+   "estimatedEnd": {
+    "lat": 44.480528,
+    "lon": 11.443333
+   }
+  },
+  {
+   "id": 115,
+   "road": "A14",
+   "direction": "dir. Nord",
+   "from": "Imola",
+   "to": "Castel San Pietro",
+   "kmStart": 51.3,
+   "kmEnd": 39.4,
+   "lengthM": 11900.0,
+   "limit": 130,
+   "variableLimit": false,
+   "reliability": "MEDIUM",
+   "start": {
+    "lat": 44.37595,
+    "lon": 11.75563
+   },
+   "end": {
+    "lat": 44.41957,
+    "lon": 11.62217
+   },
+   "geometry": "wdzmGu_wfAqeB|}Gs]n|@snAhuEgDhSeBfP{TppDiAjHmAfEeCjG{FvKiKzR",
+   "startSource": "sicve",
+   "endSource": "sicve",
+   "estimatedStart": {
+    "lat": 44.374229,
+    "lon": 11.760456
+   },
+   "estimatedEnd": {
+    "lat": 44.417549,
+    "lon": 11.625285
+   }
+  },
+  {
+   "id": 116,
+   "road": "A14",
+   "direction": "dir. Nord",
+   "from": "All. Ravenna Nord",
+   "to": "Imola",
+   "kmStart": 55.3,
+   "kmEnd": 51.3,
+   "lengthM": 4000,
+   "limit": 130,
+   "variableLimit": false,
+   "reliability": "MEDIUM",
+   "start": {
+    "lat": 44.35895,
+    "lon": 11.79975
+   },
+   "end": {
+    "lat": 44.37595,
+    "lon": 11.75563
+   },
+   "geometry": "qzvmGos_gAkOds@yDpMch@fyAa_@rwA{I`]",
+   "startSource": "sicve",
+   "endSource": "sicve",
+   "estimatedStart": {
+    "lat": 44.35755,
+    "lon": 11.804286
+   },
+   "estimatedEnd": {
+    "lat": 44.374229,
+    "lon": 11.760456
+   }
+  },
+  {
+   "id": 117,
+   "road": "A14",
+   "direction": "dir. Nord",
+   "from": "Faenza",
+   "to": "All. Ravenna Sud",
+   "kmStart": 65.4,
+   "kmEnd": 58.9,
+   "lengthM": 6500.0,
+   "limit": 130,
+   "variableLimit": false,
+   "reliability": "MEDIUM",
+   "start": {
+    "lat": 44.32025,
+    "lon": 11.91405
+   },
+   "end": {
+    "lat": 44.34517,
+    "lon": 11.84156
+   },
+   "geometry": "shomG{}ugA{iB`lGyCdP_KdvAu@zFmB|JcP~d@yHxT",
+   "startSource": "sicve",
+   "endSource": "sicve",
+   "estimatedStart": {
+    "lat": 44.319131,
+    "lon": 11.916912
+   },
+   "estimatedEnd": {
+    "lat": 44.343606,
+    "lon": 11.84506
+   }
+  },
+  {
+   "id": 118,
+   "road": "A14",
+   "direction": "dir. Nord",
+   "from": "Forlì",
+   "to": "Faenza",
+   "kmStart": 82.6,
+   "kmEnd": 65.4,
+   "lengthM": 17200.0,
+   "limit": 130,
+   "variableLimit": false,
+   "reliability": "MEDIUM",
+   "start": {
+    "lat": 44.24831,
+    "lon": 12.10403
+   },
+   "end": {
+    "lat": 44.32025,
+    "lon": 11.91405
+   },
+   "geometry": "cgamGga{hAqUfkAom@hyBaPtaAkFbTiv@poCiGxOu_@zu@{IzV{DbRcKvx@yDhScm@fnBej@hwBcn@rxB_e@pnBmFtLiUha@wLb`@iFrP",
+   "startSource": "sicve",
+   "endSource": "sicve",
+   "estimatedStart": {
+    "lat": 44.247226,
+    "lon": 12.10778
+   },
+   "estimatedEnd": {
+    "lat": 44.319131,
+    "lon": 11.916912
+   }
+  },
+  {
+   "id": 119,
+   "road": "A14",
+   "direction": "dir. Nord",
+   "from": "Cesena Nord",
+   "to": "Forlì",
+   "kmStart": 94.6,
+   "kmEnd": 82.6,
+   "lengthM": 12000,
+   "limit": 130,
+   "variableLimit": false,
+   "reliability": "MEDIUM",
+   "start": {
+    "lat": 44.19213,
+    "lon": 12.2325
+   },
+   "end": {
+    "lat": 44.24831,
+    "lon": 12.10403
+   },
+   "geometry": "_hvlGidtiAqe@`|Aa}@z~CeGzNy|@tbBkKhTy_@blAqDrQuGve@yAhHsBxG_fA~tB_CxGoBjHe\\`dBwElV",
+   "startSource": "sicve",
+   "endSource": "sicve",
+   "estimatedStart": {
+    "lat": 44.191355,
+    "lon": 12.234467
+   },
+   "estimatedEnd": {
+    "lat": 44.247226,
+    "lon": 12.10778
+   }
+  },
+  {
+   "id": 120,
+   "road": "A14",
+   "direction": "dir. Nord",
+   "from": "Valle del Rubicone",
+   "to": "Cesena",
+   "kmStart": 112.25,
+   "kmEnd": 101,
+   "lengthM": 11250.0,
+   "limit": 130,
+   "variableLimit": false,
+   "reliability": "LOW",
+   "start": {
+    "lat": 44.11272,
+    "lon": 12.4189
+   },
+   "end": {
+    "lat": 44.16346,
+    "lon": 12.29953
+   },
+   "geometry": "owflGeqxjAcHxMiDbKgC`LqWtqBgBvJwElPcIjR}u@bqAoKzY_cA~|E{If`@}BbHqCbHuHlNiq@r_A{HhM}FxMkK|\\wGfT",
+   "startSource": "sicve",
+   "endSource": "sicve",
+   "estimatedStart": {
+    "lat": 44.111803,
+    "lon": 12.420412
+   },
+   "estimatedEnd": {
+    "lat": 44.162055,
+    "lon": 12.302933
+   }
+  },
+  {
+   "id": 121,
+   "road": "A14",
+   "direction": "dir. Sud",
+   "from": "Bologna Fiera",
+   "to": "All. San Lazzaro",
+   "kmStart": 16.4,
+   "kmEnd": 21.8,
+   "lengthM": 5400.0,
+   "limit": 110,
+   "variableLimit": true,
+   "reliability": "MEDIUM",
+   "start": {
+    "lat": 44.51487,
+    "lon": 11.37704
+   },
+   "end": {
+    "lat": 44.48114,
+    "lon": 11.42054
+   },
+   "geometry": "yhunGgamdAbA_ApZ}ShHoBhUkA`IwCrdA}{@pFwFdGaKzD_Ljl@{fC|AwG",
+   "startSource": "sicve",
+   "endSource": "sicve",
+   "estimatedStart": {
+    "lat": 44.516462,
+    "lon": 11.375498
+   },
+   "estimatedEnd": {
+    "lat": 44.481572,
+    "lon": 11.419107
+   }
+  },
+  {
+   "id": 122,
+   "road": "A14",
+   "direction": "dir. Sud",
+   "from": "Castel San Pietro",
+   "to": "Imola",
+   "kmStart": 35.9,
+   "kmEnd": 49,
+   "lengthM": 13100.0,
+   "limit": 130,
+   "variableLimit": false,
+   "reliability": "MEDIUM",
+   "start": {
+    "lat": 44.43358,
+    "lon": 11.58304
+   },
+   "end": {
+    "lat": 44.38468,
+    "lon": 11.73075
+   },
+   "geometry": "amenGciueAv^c`BjVipAnEqQ~FuOvc@{x@lGePvAcI|@sInTanDxC_U|AuH`mAaqEpBuGn[cx@je@oiBvGiW",
+   "startSource": "sicve",
+   "endSource": "sicve",
+   "estimatedStart": {
+    "lat": 44.434887,
+    "lon": 11.579145
+   },
+   "estimatedEnd": {
+    "lat": 44.386054,
+    "lon": 11.726836
+   }
+  },
+  {
+   "id": 123,
+   "road": "A14",
+   "direction": "dir. Sud",
+   "from": "Faenza",
+   "to": "Forlì",
+   "kmStart": 63,
+   "kmEnd": 80.3,
+   "lengthM": 17300.0,
+   "limit": 130,
+   "variableLimit": false,
+   "reliability": "MEDIUM",
+   "start": {
+    "lat": 44.3304,
+    "lon": 11.88806
+   },
+   "end": {
+    "lat": 44.25713,
+    "lon": 12.07789
+   },
+   "geometry": "}gqmGi{pgAtoAyjEbCeHjUka@tFeMfe@eoBzv@opC|]yvApp@{vBlDgRvIis@lFcXrFoP`b@mz@jJ}Vty@uyCzPmcAxF}T`EaP",
+   "startSource": "sicve",
+   "endSource": "sicve",
+   "estimatedStart": {
+    "lat": 44.331605,
+    "lon": 11.885
+   },
+   "estimatedEnd": {
+    "lat": 44.258139,
+    "lon": 12.075175
+   }
+  },
+  {
+   "id": 124,
+   "road": "A14",
+   "direction": "dir. Sud",
+   "from": "Cesena",
+   "to": "Valle del Rubicone",
+   "kmStart": 98.2,
+   "kmEnd": 109.12,
+   "lengthM": 10920.0,
+   "limit": 130,
+   "variableLimit": false,
+   "reliability": "MEDIUM",
+   "start": {
+    "lat": 44.17599,
+    "lon": 12.26945
+   },
+   "end": {
+    "lat": 44.12416,
+    "lon": 12.38417
+   },
+   "geometry": "ccslGgk{iAfG_O~GuSvrA_jEbFaL`IyMdq@o_AtHqNrGcQdD{MthAkoFhKoYh]ql@zN{V",
+   "startSource": "sicve",
+   "endSource": "sicve",
+   "estimatedStart": {
+    "lat": 44.177202,
+    "lon": 12.26721
+   },
+   "estimatedEnd": {
+    "lat": 44.12671,
+    "lon": 12.380367
+   }
+  },
+  {
+   "id": 125,
+   "road": "A14",
+   "direction": "dir. Sud",
+   "from": "Valle del Rubicone",
+   "to": "Rimini Nord",
+   "kmStart": 109.12,
+   "kmEnd": 115.8,
+   "lengthM": 6680.0,
+   "limit": 130,
+   "variableLimit": false,
+   "reliability": "MEDIUM",
+   "start": {
+    "lat": 44.12416,
+    "lon": 12.38417
+   },
+   "end": {
+    "lat": 44.09272,
+    "lon": 12.45332
+   },
+   "geometry": "e_ilGgxqjAzJ_QbFwLjCcJzDyQbBoL~S{bBdEkQtEqL~[wk@nIgQlYgy@pLuYtH_PrY}e@nMgT",
+   "startSource": "sicve",
+   "endSource": "sicve",
+   "estimatedStart": {
+    "lat": 44.12671,
+    "lon": 12.380367
+   },
+   "estimatedEnd": {
+    "lat": 44.095057,
+    "lon": 12.449942
+   }
+  },
+  {
+   "id": 126,
+   "road": "A14",
+   "direction": "dir. Sud",
+   "from": "Rimini Sud",
+   "to": "Riccione",
+   "kmStart": 126.15,
+   "kmEnd": 134.5,
+   "lengthM": 8350.0,
+   "limit": 130,
+   "variableLimit": false,
+   "reliability": "MEDIUM",
+   "start": {
+    "lat": 44.044481,
+    "lon": 12.553299
+   },
+   "end": {
+    "lat": 43.991407,
+    "lon": 12.625434
+   },
+   "geometry": "_mykGcyrkAnCqM`EsKj]qr@`OmW`w@m~@~EaFbKgHvXsOzO_LzEwEzlAu}AvG_KzEsJnw@epB",
+   "startSource": "stima",
+   "endSource": "stima",
+   "estimatedStart": {
+    "lat": 44.044481,
+    "lon": 12.553299
+   },
+   "estimatedEnd": {
+    "lat": 43.991407,
+    "lon": 12.625434
+   }
+  },
+  {
+   "id": 127,
+   "road": "A14",
+   "direction": "dir. Sud",
+   "from": "Riccione",
+   "to": "Cattolica",
+   "kmStart": 134.5,
+   "kmEnd": 142.7,
+   "lengthM": 8200.0,
+   "limit": 130,
+   "variableLimit": false,
+   "reliability": "MEDIUM",
+   "start": {
+    "lat": 43.991407,
+    "lon": 12.625434
+   },
+   "end": {
+    "lat": 43.954023,
+    "lon": 12.711492
+   },
+   "geometry": "iaokG}{`lAjx@wnCzYq_AjCmFnGqInXwWfD{EvCmGdCeKt@_GfHaeAtCaSvEaNr`AirBbEsOvAeM",
+   "startSource": "stima",
+   "endSource": "stima",
+   "estimatedStart": {
+    "lat": 43.991407,
+    "lon": 12.625434
+   },
+   "estimatedEnd": {
+    "lat": 43.954023,
+    "lon": 12.711492
+   }
+  },
+  {
+   "id": 128,
+   "road": "A14",
+   "direction": "dir. Nord",
+   "from": "Riccione",
+   "to": "Rimini Sud",
+   "kmStart": 137.55,
+   "kmEnd": 128.5,
+   "lengthM": 9050.0,
+   "limit": 130,
+   "variableLimit": false,
+   "reliability": "LOW",
+   "start": {
+    "lat": 43.974512,
+    "lon": 12.663125
+   },
+   "end": {
+    "lat": 44.026861,
+    "lon": 12.57967
+   },
+   "geometry": "uwkkGoghlAsLhLeE~FcCtFcXf}@wp@x}B{F|Pyq@feBmLdVsgAbyA_M`OmN~Kkd@bXyOxN",
+   "startSource": "stima",
+   "endSource": "stima",
+   "estimatedStart": {
+    "lat": 43.974512,
+    "lon": 12.663125
+   },
+   "estimatedEnd": {
+    "lat": 44.026861,
+    "lon": 12.57967
+   }
+  },
+  {
+   "id": 129,
+   "road": "A14",
+   "direction": "dir. Nord",
+   "from": "Cattolica",
+   "to": "Riccione",
+   "kmStart": 145.95,
+   "kmEnd": 137.55,
+   "lengthM": 8400.0,
+   "limit": 130,
+   "variableLimit": false,
+   "reliability": "LOW",
+   "start": {
+    "lat": 43.951603,
+    "lon": 12.75773
+   },
+   "end": {
+    "lat": 43.974512,
+    "lon": 12.663125
+   },
+   "geometry": "ohgkGyvzlA}Fdj@O~QtAhQ~F`Y|@vGl@zHD`Pc@vH}L|bA}Dh`AyAbOuAtGyDzKsbA~uBkC|JiAvH{GnbAgBbPu@hD_FbNmEtFcN|M",
+   "startSource": "stima",
+   "endSource": "stima",
+   "estimatedStart": {
+    "lat": 43.951603,
+    "lon": 12.75773
+   },
+   "estimatedEnd": {
+    "lat": 43.974512,
+    "lon": 12.663125
+   }
+  },
+  {
+   "id": 130,
+   "road": "A14",
+   "direction": "dir. Nord",
+   "from": "Pesaro",
+   "to": "Cattolica",
+   "kmStart": 157.7,
+   "kmEnd": 145.95,
+   "lengthM": 11750.0,
+   "limit": 130,
+   "variableLimit": false,
+   "reliability": "LOW",
+   "start": {
+    "lat": 43.898037,
+    "lon": 12.870174
+   },
+   "end": {
+    "lat": 43.951603,
+    "lon": 12.75773
+   },
+   "geometry": "wy|jGqupmAuDnR_BlRd@fwCIjHo@pIgApHiB`IuHxO_c@dk@gFdFum@jc@gS~KqFdEoIhJeDpF{GnPiEfRiEr[}DjRkEzMmHlOkCdEqLvMs_Abs@}FrFyFxHcIdPuCbJ_ChKiBdMaL~bA",
+   "startSource": "stima",
+   "endSource": "stima",
+   "estimatedStart": {
+    "lat": 43.898037,
+    "lon": 12.870174
+   },
+   "estimatedEnd": {
+    "lat": 43.951603,
+    "lon": 12.75773
+   }
+  },
+  {
+   "id": 131,
+   "road": "A14",
+   "direction": "dir. Nord",
+   "from": "Giulianova",
+   "to": "Val Vibrata",
+   "kmStart": 336,
+   "kmEnd": 329.5,
+   "lengthM": 6500.0,
+   "limit": 130,
+   "variableLimit": false,
+   "reliability": "MEDIUM",
+   "start": {
+    "lat": 42.69744,
+    "lon": 13.91998
+   },
+   "end": {
+    "lat": 42.74996,
+    "lon": 13.93416
+   },
+   "geometry": "oircG{u}sAyBvBkGfGcIbDciAdVuGf@yHk@kHgCoF_E}p@ky@wI{IyJeHe{@sg@uIqCuKq@{g@jD",
+   "startSource": "sicve",
+   "endSource": "sicve",
+   "estimatedStart": {
+    "lat": 42.69797,
+    "lon": 13.91922
+   },
+   "estimatedEnd": {
+    "lat": 42.750951,
+    "lon": 13.93407
+   }
+  },
+  {
+   "id": 132,
+   "road": "A14",
+   "direction": "dir. Nord",
+   "from": "Pescara Ovest",
+   "to": "All. A14-A25",
+   "kmStart": 383.7,
+   "kmEnd": 378.3,
+   "lengthM": 5400.0,
+   "limit": 130,
+   "variableLimit": false,
+   "reliability": "LOW",
+   "start": {
+    "lat": 42.40384,
+    "lon": 14.20425
+   },
+   "end": {
+    "lat": 42.40624,
+    "lon": 14.14974
+   },
+   "geometry": "e_yaGcguuAdExCnBrCjB|EzMhi@bAbIjCh^`AhG~CfJbJrOvBbFpB`K\\xJa@jIyArHmPbb@yBrIuIrfAeBfJoCxFoEnEwDbBcOrDyBh@",
+   "startSource": "sicve",
+   "endSource": "sicve",
+   "estimatedStart": {
+    "lat": 42.404576,
+    "lon": 14.204737
+   },
+   "estimatedEnd": {
+    "lat": 42.405628,
+    "lon": 14.149938
+   }
+  },
+  {
+   "id": 133,
+   "road": "A14",
+   "direction": "dir. Nord",
+   "from": "Ortona",
+   "to": "Pescara Sud",
+   "kmStart": 405.45,
+   "kmEnd": 394.55,
+   "lengthM": 10900.0,
+   "limit": 130,
+   "variableLimit": false,
+   "reliability": "MEDIUM",
+   "start": {
+    "lat": 42.32096,
+    "lon": 14.3976
+   },
+   "end": {
+    "lat": 42.37747,
+    "lon": 14.29755
+   },
+   "geometry": "s{haGqb{vAaRjb@ic@jbAeDxIwg@fpBcAzCeCnEmE`EsCjAoZbFoKhDe|@vc@wDzC}C|E{AfE_ApFqTrqBaBbJoBtFuBvD}Yn_@qMbS_CtEqApEiFb[{ZhhA",
+   "startSource": "sicve",
+   "endSource": "sicve",
+   "estimatedStart": {
+    "lat": 42.324433,
+    "lon": 14.392347
+   },
+   "estimatedEnd": {
+    "lat": 42.378625,
+    "lon": 14.294954
+   }
+  },
+  {
+   "id": 134,
+   "road": "A14",
+   "direction": "dir. Nord",
+   "from": "San Severo",
+   "to": "Poggio Imperiale",
+   "kmStart": 529.55,
+   "kmEnd": 508.03,
+   "lengthM": 21520.0,
+   "limit": 130,
+   "variableLimit": false,
+   "reliability": "MEDIUM",
+   "start": {
+    "lat": 41.68208,
+    "lon": 15.41383
+   },
+   "end": {
+    "lat": 41.84955,
+    "lon": 15.32637
+   },
+   "geometry": "}_l}Fgoa}AyyA|s@qGtBiHj@cKcAm}Dq~@oHw@iFDeHz@u{EhoAoEhC_EnDyCzDkCfFskAlgDoCrGgEjFoGpDogAbWmJbDoNbJg[j]iH~EkGdCiKrA}a@~AmLhCgOrGkJnGyHjHwlB~xBaQ`S",
+   "startSource": "sicve",
+   "endSource": "sicve",
+   "estimatedStart": {
+    "lat": 41.681339,
+    "lon": 15.414225
+   },
+   "estimatedEnd": {
+    "lat": 41.846671,
+    "lon": 15.329596
+   }
+  },
+  {
+   "id": 135,
+   "road": "A14",
+   "direction": "dir. Nord",
+   "from": "Foggia",
+   "to": "San Severo",
+   "kmStart": 555.7,
+   "kmEnd": 529.55,
+   "lengthM": 26150.0,
+   "limit": 130,
+   "variableLimit": false,
+   "reliability": "LOW",
+   "start": {
+    "lat": 41.48958,
+    "lon": 15.58256
+   },
+   "end": {
+    "lat": 41.68208,
+    "lon": 15.41383
+   },
+   "geometry": "{lf|F_nb~Ak{B|jCa_@ba@iF|EusDlvC}HlEiQdGc~DpdAkG|B_GvD_FbF_F|HwuC`uFgHpJwDrDiHdF_iDx~AwHxEuFlEcPfRkbBx_CkG|GyGvFqKtGq~Avv@qCtA",
+   "startSource": "sicve",
+   "endSource": "sicve",
+   "estimatedStart": {
+    "lat": 41.487512,
+    "lon": 15.584889
+   },
+   "estimatedEnd": {
+    "lat": 41.681339,
+    "lon": 15.414225
+   }
+  },
+  {
+   "id": 136,
+   "road": "A14",
+   "direction": "dir. Nord",
+   "from": "Foggia Zona Industriale",
+   "to": "Foggia",
+   "kmStart": 566.978,
+   "kmEnd": 555.7,
+   "lengthM": 11278.0,
+   "limit": 130,
+   "variableLimit": false,
+   "reliability": "LOW",
+   "start": {
+    "lat": 41.41318,
+    "lon": 15.66743
+   },
+   "end": {
+    "lat": 41.48958,
+    "lon": 15.58256
+   },
+   "geometry": "iow{Fe`s~A_aD|`BwFdEaF`FoInLwZ`n@iJfTufA`vBwIpKuCbFyHjSgGlLadC`uC}KpM",
+   "startSource": "sicve",
+   "endSource": "sicve",
+   "estimatedStart": {
+    "lat": 41.410567,
+    "lon": 15.668964
+   },
+   "estimatedEnd": {
+    "lat": 41.487512,
+    "lon": 15.584889
+   }
+  },
+  {
+   "id": 137,
+   "road": "A14",
+   "direction": "dir. Nord",
+   "from": "Cerignola Est",
+   "to": "Foggia Zona Industriale",
+   "kmStart": 590.8,
+   "kmEnd": 566.978,
+   "lengthM": 23822.0,
+   "limit": 130,
+   "variableLimit": false,
+   "reliability": "LOW",
+   "start": {
+    "lat": 41.31565,
+    "lon": 15.91359
+   },
+   "end": {
+    "lat": 41.41318,
+    "lon": 15.66743
+   },
+   "geometry": "}md{Facc`BqD`Hi\\rn@uElN}CnMq|A~|I}ElQePz`@o`B|vDcEzLcE`Pmp@zqCkI|WeFpLyqAdnCiGvQ_BbHcb@fvCoIte@sD~\\si@jwDyA~GwE`MqFfIoDhD{CvBuc@bUgOxH",
+   "startSource": "sicve",
+   "endSource": "sicve",
+   "estimatedStart": {
+    "lat": 41.316562,
+    "lon": 15.912161
+   },
+   "estimatedEnd": {
+    "lat": 41.410567,
+    "lon": 15.668964
+   }
+  },
+  {
+   "id": 138,
+   "road": "A14",
+   "direction": "dir. Nord",
+   "from": "All. A16-A14 Nord",
+   "to": "Cerignola Est",
+   "kmStart": 599.51,
+   "kmEnd": 590.8,
+   "lengthM": 8710.0,
+   "limit": 130,
+   "variableLimit": false,
+   "reliability": "MEDIUM",
+   "start": {
+    "lat": 41.26534,
+    "lon": 15.98952
+   },
+   "end": {
+    "lat": 41.31565,
+    "lon": 15.91359
+   },
+   "geometry": "sszzFs}q`BoVlgBqCxJcErI}EpGgjC`hCoSxUkJvO_eBpaD",
+   "startSource": "sicve",
+   "endSource": "sicve",
+   "estimatedStart": {
+    "lat": 41.265314,
+    "lon": 15.989857
+   },
+   "estimatedEnd": {
+    "lat": 41.316562,
+    "lon": 15.912161
+   }
+  },
+  {
+   "id": 139,
+   "road": "A14",
+   "direction": "dir. Sud",
+   "from": "Pescara Sud",
+   "to": "Ortona",
+   "kmStart": 390.07,
+   "kmEnd": 402.3,
+   "lengthM": 12230.0,
+   "limit": 130,
+   "variableLimit": false,
+   "reliability": "LOW",
+   "start": {
+    "lat": 42.414029,
+    "lon": 14.261711
+   },
+   "end": {
+    "lat": 42.342166,
+    "lon": 14.357955
+   },
+   "geometry": "u~zaGun`vAdDiEte@gd@|HeL|CwH`a@mrAtBuEnCiD~EyCdF}@z|@X`Gg@nEcBpDoCpRcVzDcH~DoL~[qkAdEqW|AaG|OqWt[ya@vEmKnBeKvT}rBbAeF~AcEhCyDlDqCh|@}c@`JwCnPqC",
+   "startSource": "stima",
+   "endSource": "stima",
+   "estimatedStart": {
+    "lat": 42.414029,
+    "lon": 14.261711
+   },
+   "estimatedEnd": {
+    "lat": 42.342166,
+    "lon": 14.357955
+   }
+  },
+  {
+   "id": 140,
+   "road": "A14",
+   "direction": "dir. Sud",
+   "from": "Val di Sangro",
+   "to": "Vasto Nord",
+   "kmStart": 417.15,
+   "kmEnd": 434.43,
+   "lengthM": 17280.0,
+   "limit": 130,
+   "variableLimit": false,
+   "reliability": "MEDIUM",
+   "start": {
+    "lat": 42.244974,
+    "lon": 14.460477
+   },
+   "end": {
+    "lat": 42.173074,
+    "lon": 14.610094
+   },
+   "geometry": "a~y`G_igwAnBeHfQa|@nCcHxDeFjE_DnFyAdEWtWPvI{AhIwDjmDkxC`G{GvCiGfCuKp@yIG}JgA_KiC_Jg_@s{@wAoFk@cF@wJfCuWf@qNsAs_BvAaLfh@uiBpBaKhJspA^qNBaVl@aHzAeG~BqErp@g{@pDyDbEoCvD}Aps@yPxDkC~CmF",
+   "startSource": "stima",
+   "endSource": "stima",
+   "estimatedStart": {
+    "lat": 42.244974,
+    "lon": 14.460477
+   },
+   "estimatedEnd": {
+    "lat": 42.173074,
+    "lon": 14.610094
+   }
+  },
+  {
+   "id": 141,
+   "road": "A14",
+   "direction": "dir. Sud",
+   "from": "Poggio Imperiale",
+   "to": "San Severo",
+   "kmStart": 502.78,
+   "kmEnd": 525.785,
+   "lengthM": 23005.0,
+   "limit": 130,
+   "variableLimit": false,
+   "reliability": "LOW",
+   "start": {
+    "lat": 41.88357,
+    "lon": 15.28299
+   },
+   "end": {
+    "lat": 41.71414,
+    "lon": 15.40902
+   },
+   "geometry": "iks~Fu}g|A`[i}@rD}GhrHstIrHkHrPkKvHuCjLkC~a@yAfKoApGeCvH_FrVgYdHeGrIcFdJaDrgAgW~DiBlD}CrBoCnCyG~iAqdDvEoJpFeGtGaEpHwBdsEekAjF{@rFMnHn@ddAdVth@~L",
+   "startSource": "sicve",
+   "endSource": "sicve",
+   "estimatedStart": {
+    "lat": 41.886949,
+    "lon": 15.27551
+   },
+   "estimatedEnd": {
+    "lat": 41.720821,
+    "lon": 15.411232
+   }
+  },
+  {
+   "id": 142,
+   "road": "A14",
+   "direction": "dir. Sud",
+   "from": "San Severo",
+   "to": "Foggia",
+   "kmStart": 525.785,
+   "kmEnd": 551.69,
+   "lengthM": 25905.0,
+   "limit": 130,
+   "variableLimit": false,
+   "reliability": "LOW",
+   "start": {
+    "lat": 41.71414,
+    "lon": 15.40902
+   },
+   "end": {
+    "lat": 41.51734,
+    "lon": 15.55214
+   },
+   "geometry": "khr}Fiq`}AvsAf[~E`@vHe@vGwBbgEguBdKgIjG{GliBghCfLsLpF_ExKiGrbD}zApHgFvGwGnEqGhuCauF|E{HzEaF~FuDjG_C`~DqdAnIcCvJ_E|NsJ|kC_vB|RyO",
+   "startSource": "sicve",
+   "endSource": "sicve",
+   "estimatedStart": {
+    "lat": 41.720821,
+    "lon": 15.411232
+   },
+   "estimatedEnd": {
+    "lat": 41.520519,
+    "lon": 15.549439
+   }
+  },
+  {
+   "id": 143,
+   "road": "A14",
+   "direction": "dir. Sud",
+   "from": "Foggia",
+   "to": "Foggia Zona Industriale",
+   "kmStart": 551.69,
+   "kmEnd": 562.65,
+   "lengthM": 10960.0,
+   "limit": 130,
+   "variableLimit": false,
+   "reliability": "MEDIUM",
+   "start": {
+    "lat": 41.51734,
+    "lon": 15.55214
+   },
+   "end": {
+    "lat": 41.44634,
+    "lon": 15.64168
+   },
+   "geometry": "gzk|Fuo|}AfIqGnTgTjkHqpInG}JbFmObIcR|{@_fBxW}h@",
+   "startSource": "sicve",
+   "endSource": "sicve",
+   "estimatedStart": {
+    "lat": 41.520519,
+    "lon": 15.549439
+   },
+   "estimatedEnd": {
+    "lat": 41.450315,
+    "lon": 15.634976
+   }
+  },
+  {
+   "id": 144,
+   "road": "A14",
+   "direction": "dir. Sud",
+   "from": "Foggia Zona Industriale",
+   "to": "Cerignola Est",
+   "kmStart": 562.65,
+   "kmEnd": 580.225,
+   "lengthM": 17575.0,
+   "limit": 130,
+   "variableLimit": false,
+   "reliability": "MEDIUM",
+   "start": {
+    "lat": 41.44634,
+    "lon": 15.64168
+   },
+   "end": {
+    "lat": 41.35888,
+    "lon": 15.80239
+   },
+   "geometry": "s~}{Fo_n~AbTsb@`EoG|IwJpF_EvuEeaCtI{GzFkIfB{DzBkGvA{Gni@swDpF{YjGyh@db@ivCtAaHfGwQ`rAcnC|EqLlI_Xhf@yrBpL_g@",
+   "startSource": "sicve",
+   "endSource": "sicve",
+   "estimatedStart": {
+    "lat": 41.450315,
+    "lon": 15.634976
+   },
+   "estimatedEnd": {
+    "lat": 41.36102731421672,
+    "lon": 15.795981994944238
+   }
+  },
+  {
+   "id": 145,
+   "road": "A14",
+   "direction": "dir. Sud",
+   "from": "Cerignola Est",
+   "to": "All. A16-A14 Nord",
+   "kmStart": 580.225,
+   "kmEnd": 599.5,
+   "lengthM": 19275.0,
+   "limit": 130,
+   "variableLimit": false,
+   "reliability": "MEDIUM",
+   "start": {
+    "lat": 41.35888,
+    "lon": 15.80239
+   },
+   "end": {
+    "lat": 41.26521,
+    "lon": 15.98963
+   },
+   "geometry": "{{l{F{km_BxAeGbEwL`mBeoEfGwQ|D}PzxA_qIvBeKpDwLxFcNxhA_uBfeAamBfS{UbjC}gC`FwG`EoIpCaKlO}fArFi`@",
+   "startSource": "sicve",
+   "endSource": "sicve",
+   "estimatedStart": {
+    "lat": 41.36102731421672,
+    "lon": 15.795981994944238
+   },
+   "estimatedEnd": {
+    "lat": 41.266419,
+    "lon": 15.984298
+   }
+  },
+  {
+   "id": 146,
+   "road": "A14",
+   "direction": "dir. Sud",
+   "from": "All. A16-A14 Sud",
+   "to": "Canosa",
+   "kmStart": 603.79,
+   "kmEnd": 608.79,
+   "lengthM": 5000,
+   "limit": 130,
+   "variableLimit": false,
+   "reliability": "MEDIUM",
+   "start": {
+    "lat": 41.2456,
+    "lon": 16.0308
+   },
+   "end": {
+    "lat": 41.24512,
+    "lon": 16.0874
+   },
+   "geometry": "axvzFo_z`BdW_{Bp@aJJyHe@aMyAeKuZqoAcD}Oy@sOPgMt@_IpD}QnFmX",
+   "startSource": "sicve",
+   "endSource": "sicve",
+   "estimatedStart": {
+    "lat": 41.246539,
+    "lon": 16.026055
+   },
+   "estimatedEnd": {
+    "lat": 41.246357,
+    "lon": 16.083353
+   }
+  },
+  {
+   "id": 147,
+   "road": "A14",
+   "direction": "dir. Sud",
+   "from": "Canosa",
+   "to": "Andria-Barletta",
+   "kmStart": 608.79,
+   "kmEnd": 619.4,
+   "lengthM": 10610.0,
+   "limit": 130,
+   "variableLimit": false,
+   "reliability": "MEDIUM",
+   "start": {
+    "lat": 41.24512,
+    "lon": 16.0874
+   },
+   "end": {
+    "lat": 41.25128,
+    "lon": 16.20767
+   },
+   "geometry": "euvzFkaeaBlu@ivDnC_Vn@kN@kQeAuU{B{Q{sAq`HiBwLsBoTm@{QBkjB?{Q",
+   "startSource": "sicve",
+   "endSource": "sicve",
+   "estimatedStart": {
+    "lat": 41.246357,
+    "lon": 16.083353
+   },
+   "estimatedEnd": {
+    "lat": 41.251342,
+    "lon": 16.204648
+   }
+  },
+  {
+   "id": 148,
+   "road": "A14",
+   "direction": "dir. Nord",
+   "from": "Canosa",
+   "to": "All. A16-A14 Sud",
+   "kmStart": 611.1,
+   "kmEnd": 605.05,
+   "lengthM": 6050.0,
+   "limit": 130,
+   "variableLimit": false,
+   "reliability": "MEDIUM",
+   "start": {
+    "lat": 41.23748,
+    "lon": 16.11359
+   },
+   "end": {
+    "lat": 41.2429,
+    "lon": 16.04518
+   },
+   "geometry": "ieuzF_ejaBi{@~iEiAjI_@jGHfQvAzMv]xxApB|M`@lKIfIcEv`@cApJ",
+   "startSource": "sicve",
+   "endSource": "sicve",
+   "estimatedStart": {
+    "lat": 41.237087,
+    "lon": 16.114948
+   },
+   "estimatedEnd": {
+    "lat": 41.242552,
+    "lon": 16.047029
+   }
+  },
+  {
+   "id": 149,
+   "road": "A14",
+   "direction": "dir. Nord",
+   "from": "Andria-Barletta",
+   "to": "Canosa",
+   "kmStart": 628.8,
+   "kmEnd": 611.1,
+   "lengthM": 17700.0,
+   "limit": 130,
+   "variableLimit": false,
+   "reliability": "MEDIUM",
+   "start": {
+    "lat": 41.25119,
+    "lon": 16.31397
+   },
+   "end": {
+    "lat": 41.23748,
+    "lon": 16.11359
+   },
+   "geometry": "c{wzFiiqbBmDdcAiBrYeFfc@st@dpFy@hLHnKv@`IvCpLbt@v`BzDrMnBzMr@rRi@xrEt@n\\zAzPzBlOftAnbHnA|ItAhSTjLEhLaBnXgEvWeArG",
+   "startSource": "sicve",
+   "endSource": "sicve",
+   "estimatedStart": {
+    "lat": 41.251181,
+    "lon": 16.314499
+   },
+   "estimatedEnd": {
+    "lat": 41.237087,
+    "lon": 16.114948
+   }
+  },
+  {
+   "id": 150,
+   "road": "A14",
+   "direction": "dir. Nord",
+   "from": "Bitonto",
+   "to": "Molfetta",
+   "kmStart": 663.97,
+   "kmEnd": 654,
+   "lengthM": 9970.0,
+   "limit": 130,
+   "variableLimit": false,
+   "reliability": "MEDIUM",
+   "start": {
+    "lat": 41.13718,
+    "lon": 16.70079
+   },
+   "end": {
+    "lat": 41.17251,
+    "lon": 16.5919
+   },
+   "geometry": "erazFyz|dBghElkQ}G~_@}Gzm@iA~J",
+   "startSource": "sicve",
+   "endSource": "sicve",
+   "estimatedStart": {
+    "lat": 41.136023,
+    "lon": 16.704063
+   },
+   "estimatedEnd": {
+    "lat": 41.17221,
+    "lon": 16.59384
+   }
+  },
+  {
+   "id": 151,
+   "road": "A14",
+   "direction": "dir. Nord",
+   "from": "Bari Nord",
+   "to": "Bitonto",
+   "kmStart": 671,
+   "kmEnd": 663.97,
+   "lengthM": 7030.0,
+   "limit": 130,
+   "variableLimit": false,
+   "reliability": "LOW",
+   "start": {
+    "lat": 41.09716,
+    "lon": 16.7643
+   },
+   "end": {
+    "lat": 41.13718,
+    "lon": 16.70079
+   },
+   "geometry": "kxyyF}gieBwWpfAsDxLwFzMsJpO{cDreEaFpIkFtLwDpL}FhV_FpS",
+   "startSource": "sicve",
+   "endSource": "sicve",
+   "estimatedStart": {
+    "lat": 41.096093,
+    "lon": 16.767453
+   },
+   "estimatedEnd": {
+    "lat": 41.136023,
+    "lon": 16.704063
+   }
+  },
+  {
+   "id": 152,
+   "road": "A14",
+   "direction": "dir. Nord",
+   "from": "Bari Sud",
+   "to": "Bari Nord",
+   "kmStart": 681.135,
+   "kmEnd": 671,
+   "lengthM": 10135.0,
+   "limit": 130,
+   "variableLimit": false,
+   "reliability": "MEDIUM",
+   "start": {
+    "lat": 41.03798,
+    "lon": 16.84119
+   },
+   "end": {
+    "lat": 41.09716,
+    "lon": 16.7643
+   },
+   "geometry": "mfnyF_hxeBgHy@uTWg|@|G{L~C{IjEgHhFmxBnlB_CjC}CpEi[hl@sFjNkDxLmDjSaYdtBqPdw@eOtm@yErR",
+   "startSource": "sicve",
+   "endSource": "sicve",
+   "estimatedStart": {
+    "lat": 41.034187,
+    "lon": 16.84038
+   },
+   "estimatedEnd": {
+    "lat": 41.096093,
+    "lon": 16.767453
+   }
+  },
+  {
+   "id": 153,
+   "road": "A14",
+   "direction": "dir. Sud",
+   "from": "Andria-Barletta",
+   "to": "Trani",
+   "kmStart": 619.4,
+   "kmEnd": 637.05,
+   "lengthM": 17650.0,
+   "limit": 130,
+   "variableLimit": false,
+   "reliability": "MEDIUM",
+   "start": {
+    "lat": 41.25128,
+    "lon": 16.20767
+   },
+   "end": {
+    "lat": 41.22281,
+    "lon": 16.4031
+   },
+   "geometry": "w{wzF}p|aBVg|AW}NiAqLuAyHeCqI{u@kdBsA}EqAgI_@gIPuKfv@{xFzE}a@bBqWrPysEt@_L`BsMrFgVzlAaxD|bAybDhEgN",
+   "startSource": "sicve",
+   "endSource": "sicve",
+   "estimatedStart": {
+    "lat": 41.251342,
+    "lon": 16.204648
+   },
+   "estimatedEnd": {
+    "lat": 41.223904,
+    "lon": 16.400718
+   }
+  },
+  {
+   "id": 154,
+   "road": "A14",
+   "direction": "dir. Sud",
+   "from": "Trani",
+   "to": "Molfetta",
+   "kmStart": 637.05,
+   "kmEnd": 642.5,
+   "lengthM": 5450.0,
+   "limit": 130,
+   "variableLimit": false,
+   "reliability": "MEDIUM",
+   "start": {
+    "lat": 41.22281,
+    "lon": 16.4031
+   },
+   "end": {
+    "lat": 41.19931,
+    "lon": 16.4597
+   },
+   "geometry": "ajrzFwvbcBvmCsuInCyI",
+   "startSource": "sicve",
+   "endSource": "sicve",
+   "estimatedStart": {
+    "lat": 41.223904,
+    "lon": 16.400718
+   },
+   "estimatedEnd": {
+    "lat": 41.200051,
+    "lon": 16.457979
+   }
+  },
+  {
+   "id": 155,
+   "road": "A14",
+   "direction": "dir. Sud",
+   "from": "Molfetta",
+   "to": "Bitonto",
+   "kmStart": 642.5,
+   "kmEnd": 663.965,
+   "lengthM": 21465.0,
+   "limit": 130,
+   "variableLimit": false,
+   "reliability": "MEDIUM",
+   "start": {
+    "lat": 41.19931,
+    "lon": 16.4597
+   },
+   "end": {
+    "lat": 41.137884,
+    "lon": 16.69838
+   },
+   "geometry": "{vmzFgxmcBjPki@`EeR~CeTtsCcxWrDoWnEmTzaEyxP",
+   "startSource": "sicve",
+   "endSource": "stima",
+   "estimatedStart": {
+    "lat": 41.200051,
+    "lon": 16.457979
+   },
+   "estimatedEnd": {
+    "lat": 41.137884,
+    "lon": 16.69838
+   }
+  },
+  {
+   "id": 156,
+   "road": "A14",
+   "direction": "dir. Sud",
+   "from": "Bitonto",
+   "to": "Bari Nord",
+   "kmStart": 663.965,
+   "kmEnd": 668.2,
+   "lengthM": 4235.0,
+   "limit": 130,
+   "variableLimit": false,
+   "reliability": "MEDIUM",
+   "start": {
+    "lat": 41.137884,
+    "lon": 16.69838
+   },
+   "end": {
+    "lat": 41.113105,
+    "lon": 16.735838
+   },
+   "geometry": "wvazF{k|dBbSmy@`GaQzFkLfHsKplBsbC",
+   "startSource": "stima",
+   "endSource": "stima",
+   "estimatedStart": {
+    "lat": 41.137884,
+    "lon": 16.69838
+   },
+   "estimatedEnd": {
+    "lat": 41.113105,
+    "lon": 16.735838
+   }
+  },
+  {
+   "id": 157,
+   "road": "A16",
+   "direction": "dir. Est",
+   "from": "Monteforte",
+   "to": "Avellino Ovest",
+   "kmStart": 36.05,
+   "kmEnd": 40,
+   "lengthM": 3950.0,
+   "limit": 80,
+   "variableLimit": false,
+   "reliability": "MEDIUM",
+   "start": {
+    "lat": 40.900783,
+    "lon": 14.707167
+   },
+   "end": {
+    "lat": 40.90902,
+    "lon": 14.74239
+   },
+   "geometry": "{lsxFynwxAfF_\\jAcCbP}TxFwRRoGiDo^{AqFiLmOgKsa@cPo[_F{EsPuF{IwC",
+   "startSource": "stima",
+   "endSource": "sicve",
+   "estimatedStart": {
+    "lat": 40.900783,
+    "lon": 14.707167
+   },
+   "estimatedEnd": {
+    "lat": 40.907275,
+    "lon": 14.741828
+   }
+  },
+  {
+   "id": 158,
+   "road": "A16",
+   "direction": "dir. Ovest",
+   "from": "Monteforte",
+   "to": "Baiano",
+   "kmStart": 36.05,
+   "kmEnd": 27.65,
+   "lengthM": 8400.0,
+   "limit": 80,
+   "variableLimit": false,
+   "reliability": "MEDIUM",
+   "start": {
+    "lat": 40.90052,
+    "lon": 14.70838
+   },
+   "end": {
+    "lat": 40.93549,
+    "lon": 14.63011
+   },
+   "geometry": "eksxFivwxAyAfG}DbKuV`h@mIvd@sQbf@oBhIyGni@CvElAnHzJdPxArEX|HqA|GkC`E{[xZeOlT}E|EmVzMcb@tMyD|BgDfDkJ|LkBzEsH|^uAdReHp`A",
+   "startSource": "sicve",
+   "endSource": "sicve",
+   "estimatedStart": {
+    "lat": 40.897672,
+    "lon": 14.714597
+   },
+   "estimatedEnd": {
+    "lat": 40.934372,
+    "lon": 14.640687
+   }
+  },
+  {
+   "id": 159,
+   "road": "A23",
+   "direction": "dir. Nord",
+   "from": "Udine Nord",
+   "to": "Gemona",
+   "kmStart": 25.2,
+   "kmEnd": 43,
+   "lengthM": 17800.0,
+   "limit": 130,
+   "variableLimit": false,
+   "reliability": "MEDIUM",
+   "start": {
+    "lat": 46.10692,
+    "lon": 13.20276
+   },
+   "end": {
+    "lat": 46.23287,
+    "lon": 13.09611
+   },
+   "geometry": "gglxGetqoAwA_@ua@mKiKsAcLWkWbBqMdB_KrE}GfGoDbFaEtIgp@rmBwGlNyGlJsK`KiHjEkeAbb@mP`JkN|J_OzMyUdZcNzU}|@beB}JfTaLfZyl@liB}GrQkFfK{IfNuIvJkHtGsv@zo@sNdHkJtBeMj@ml@u@eYiCo]}Fa[iF",
+   "startSource": "sicve",
+   "endSource": "sicve",
+   "estimatedStart": {
+    "lat": 46.107361,
+    "lon": 13.202913
+   },
+   "estimatedEnd": {
+    "lat": 46.228382,
+    "lon": 13.094913
+   }
+  },
+  {
+   "id": 160,
+   "road": "A23",
+   "direction": "dir. Nord",
+   "from": "Gemona",
+   "to": "Carnia",
+   "kmStart": 43,
+   "kmEnd": 54.37,
+   "lengthM": 11370.0,
+   "limit": 130,
+   "variableLimit": false,
+   "reliability": "MEDIUM",
+   "start": {
+    "lat": 46.23287,
+    "lon": 13.09611
+   },
+   "end": {
+    "lat": 46.32306,
+    "lon": 13.06117
+   },
+   "geometry": "mzdyGsy|nAsaCoa@mKc@{M~AcFfBuGvDqH`HaFhH{{AdhDkFjIgHvGsGfDkKtBwFF{OiAcGTsjBj_@yLhB{Rh@}`@iC{a@mC",
+   "startSource": "sicve",
+   "endSource": "sicve",
+   "estimatedStart": {
+    "lat": 46.228382,
+    "lon": 13.094913
+   },
+   "estimatedEnd": {
+    "lat": 46.317493,
+    "lon": 13.060371
+   }
+  },
+  {
+   "id": 161,
+   "road": "A23",
+   "direction": "dir. Sud",
+   "from": "Gemona",
+   "to": "Udine Nord",
+   "kmStart": 47.2,
+   "kmEnd": 30.65,
+   "lengthM": 16550.0,
+   "limit": 130,
+   "variableLimit": false,
+   "reliability": "MEDIUM",
+   "start": {
+    "lat": 46.26706,
+    "lon": 13.09002
+   },
+   "end": {
+    "lat": 46.14526,
+    "lon": 13.17277
+   },
+   "geometry": "apkyGqs{nAdVyh@pHiKxGyFjGgDtGqBdI{@pF?zFh@dkDnl@b_@bFzU~@hh@LvNeCrMeG|`A{x@dM{NxIqNpK_Wxn@ymB`M_\\tNiZfx@i}AfPsXlJ_MpJoKxKyJ|JkHnT_Mpl@qUvFyB",
+   "startSource": "sicve",
+   "endSource": "sicve",
+   "estimatedStart": {
+    "lat": 46.267198,
+    "lon": 13.089729
+   },
+   "estimatedEnd": {
+    "lat": 46.146493,
+    "lon": 13.17213
+   }
+  },
+  {
+   "id": 162,
+   "road": "A26",
+   "direction": "dir. Nord",
+   "from": "Ovada",
+   "to": "Predosa",
+   "kmStart": 28.95,
+   "kmEnd": 44.49,
+   "lengthM": 15540.0,
+   "limit": 130,
+   "variableLimit": false,
+   "reliability": "MEDIUM",
+   "start": {
+    "lat": 44.62086,
+    "lon": 8.657
+   },
+   "end": {
+    "lat": 44.75359,
+    "lon": 8.64626
+   },
+   "geometry": "m_joG_yys@cFcBiXmB{G{AuEgCsSwQiEuBsE{@qE@iDf@}h@tMkHSyYkFkFKuGnAqOtG{HlAgh@|B}b@oEiKEqH~@uU|FoIf@sKgBa`Aac@}IoCqF{@ylAyKwPAan@tDsJKcYkBiI?mKrA_K~Csc@`TmItFmGhGwFxH_EnH{HrQeE`HkGbHiEdDoGdDqT~H{VpFqPpD",
+   "startSource": "sicve",
+   "endSource": "sicve",
+   "estimatedStart": {
+    "lat": 44.618682,
+    "lon": 8.655992
+   },
+   "estimatedEnd": {
+    "lat": 44.750723,
+    "lon": 8.646752
+   }
+  },
+  {
+   "id": 163,
+   "road": "A26",
+   "direction": "dir. Sud",
+   "from": "Predosa",
+   "to": "Ovada",
+   "kmStart": 43,
+   "kmEnd": 31.75,
+   "lengthM": 11250.0,
+   "limit": 130,
+   "variableLimit": false,
+   "reliability": "MEDIUM",
+   "start": {
+    "lat": 44.74105,
+    "lon": 8.65101
+   },
+   "end": {
+    "lat": 44.6451,
+    "lon": 8.6607
+   },
+   "geometry": "snapG}sxs@BAtGmHfEcHxHoQ`EuHnFoHjGgGhIqFre@eUbIcCrHaAvKKvSxA`PZdJU|]mC`QU|Ox@r`AfJ|MvCpaAvc@xJzBdJMbZcHfFi@|JFh\\vDdKXfg@yCjHeBxM_G`Es@zFHfHnA~I~A",
+   "startSource": "sicve",
+   "endSource": "sicve",
+   "estimatedStart": {
+    "lat": 44.742437,
+    "lon": 8.649951
+   },
+   "estimatedEnd": {
+    "lat": 44.646856,
+    "lon": 8.661176
+   }
+  },
+  {
+   "id": 164,
+   "road": "A27",
+   "direction": "dir. Nord",
+   "from": "Treviso Sud",
+   "to": "Treviso Nord",
+   "kmStart": 10.1,
+   "kmEnd": 21.5,
+   "lengthM": 11400.0,
+   "limit": 130,
+   "variableLimit": false,
+   "reliability": "MEDIUM",
+   "start": {
+    "lat": 45.615817,
+    "lon": 12.300011
+   },
+   "end": {
+    "lat": 45.711348,
+    "lon": 12.291023
+   },
+   "geometry": "{iluGajajAct@yRcGeC_JuFuZg[yKoIkNgIwc@uScK_B{g@Dsx@mE{K|AyJzE_EfD{j@tn@kG|EsLpGaj@fUqGnBuHn@c`@?wN|BsHvCqhApl@}MlDuOr@",
+   "startSource": "stima",
+   "endSource": "stima",
+   "estimatedStart": {
+    "lat": 45.615817,
+    "lon": 12.300011
+   },
+   "estimatedEnd": {
+    "lat": 45.711348,
+    "lon": 12.291023
+   }
+  },
+  {
+   "id": 165,
+   "road": "A27",
+   "direction": "dir. Nord",
+   "from": "Treviso Nord",
+   "to": "All. Superstrada Pedemontana Veneta",
+   "kmStart": 21.5,
+   "kmEnd": 24,
+   "lengthM": 2500.0,
+   "limit": 130,
+   "variableLimit": false,
+   "reliability": "MEDIUM",
+   "start": {
+    "lat": 45.711348,
+    "lon": 12.291023
+   },
+   "end": {
+    "lat": 45.73288,
+    "lon": 12.283273
+   },
+   "geometry": "}~~uG{q_jA{WVyMbBsNpFaa@tUmHfD}N~DyR`B",
+   "startSource": "stima",
+   "endSource": "stima",
+   "estimatedStart": {
+    "lat": 45.711348,
+    "lon": 12.291023
+   },
+   "estimatedEnd": {
+    "lat": 45.73288,
+    "lon": 12.283273
+   }
+  },
+  {
+   "id": 166,
+   "road": "A27",
+   "direction": "dir. Nord",
+   "from": "Vittorio Veneto Nord",
+   "to": "Fadalto",
+   "kmStart": 58.2,
+   "kmEnd": 62.3,
+   "lengthM": 4100.0,
+   "limit": 130,
+   "variableLimit": false,
+   "reliability": "MEDIUM",
+   "start": {
+    "lat": 46.010747,
+    "lon": 12.277806
+   },
+   "end": {
+    "lat": 46.03952,
+    "lon": 12.31119
+   },
+   "geometry": "enywGi_}iAoF}DeIeJ}[yi@wLaOoKsJsR_O}DcEyF}KuR{i@aE_H{DeEwHsFe_@gS",
+   "startSource": "stima",
+   "endSource": "stima",
+   "estimatedStart": {
+    "lat": 46.010747,
+    "lon": 12.277806
+   },
+   "estimatedEnd": {
+    "lat": 46.03952,
+    "lon": 12.31119
+   }
+  },
+  {
+   "id": 167,
+   "road": "A27",
+   "direction": "dir. Sud",
+   "from": "Treviso Sud",
+   "to": "All. A4-A27",
+   "kmStart": 16.025,
+   "kmEnd": 10.2,
+   "lengthM": 5825.0,
+   "limit": 130,
+   "variableLimit": false,
+   "reliability": "LOW",
+   "start": {
+    "lat": 45.669734,
+    "lon": 12.309611
+   },
+   "end": {
+    "lat": 45.62092,
+    "lon": 12.301675
+   },
+   "geometry": "yzvuGafcjAlb@me@~GaEdHsBlLe@fs@hEtj@DpJzBtj@pXdQlM~Zh[|IxFjGhChTbG",
+   "startSource": "stima",
+   "endSource": "stima",
+   "estimatedStart": {
+    "lat": 45.669734,
+    "lon": 12.309611
+   },
+   "estimatedEnd": {
+    "lat": 45.62092,
+    "lon": 12.301675
+   }
+  },
+  {
+   "id": 168,
+   "road": "A27",
+   "direction": "dir. Sud",
+   "from": "Treviso Nord",
+   "to": "Treviso Sud",
+   "kmStart": 24.45,
+   "kmEnd": 16.025,
+   "lengthM": 8425.0,
+   "limit": 130,
+   "variableLimit": false,
+   "reliability": "LOW",
+   "start": {
+    "lat": 45.742418,
+    "lon": 12.281805
+   },
+   "end": {
+    "lat": 45.669734,
+    "lon": 12.309611
+   },
+   "geometry": "caevGix}iAxPiBlq@oDtJeAjQkFzj@m[vKyDbM}Afb@i@pN{BdI_D~cA_j@|GqCxNiCvb@EbFc@pFwA`u@o[jMmJrJcK",
+   "startSource": "stima",
+   "endSource": "stima",
+   "estimatedStart": {
+    "lat": 45.742418,
+    "lon": 12.281805
+   },
+   "estimatedEnd": {
+    "lat": 45.669734,
+    "lon": 12.309611
+   }
+  },
+  {
+   "id": 169,
+   "road": "A30",
+   "direction": "dir. Nord",
+   "from": "Nola",
+   "to": "All. A30-A1",
+   "kmStart": 19.28,
+   "kmEnd": 1.3,
+   "lengthM": 17980.0,
+   "limit": 130,
+   "variableLimit": false,
+   "reliability": "MEDIUM",
+   "start": {
+    "lat": 40.93412,
+    "lon": 14.4951
+   },
+   "end": {
+    "lat": 41.03315,
+    "lon": 14.33705
+   },
+   "geometry": "e}yxFianwA{[hSiIjGiKvKeJjNeDzGiy@diBoJzNqTnUgJpNaUbe@iFbNys@jhCcF|O}BpFmJxPo]fi@iFjGeEpDiG|D}GxCgqArZwG|BoGjDwGfFkFvFsFfIuHhQcE~P}AzLgHf|@qDzTgF`TaFdOcHfP_}@dbBsHjP}EzMaE|NcIrb@eGv[",
+   "startSource": "sicve",
+   "endSource": "sicve",
+   "estimatedStart": {
+    "lat": 40.930126,
+    "lon": 14.49789
+   },
+   "estimatedEnd": {
+    "lat": 41.031941,
+    "lon": 14.341701
+   }
+  },
+  {
+   "id": 170,
+   "road": "A30",
+   "direction": "dir. Nord",
+   "from": "Palma Campania",
+   "to": "All. A30-A16",
+   "kmStart": 32.14,
+   "kmEnd": 22.1,
+   "lengthM": 10040.0,
+   "limit": 130,
+   "variableLimit": false,
+   "reliability": "LOW",
+   "start": {
+    "lat": 40.832331,
+    "lon": 14.56141
+   },
+   "end": {
+    "lat": 40.914807,
+    "lon": 14.523447
+   },
+   "geometry": "aafxFy_{wAiHrJkv@d~@sP`RsFzEqNtJgQhIwKjDi_Bta@uMpByQbAe`CrFaJh@aQdCiq@nPkInDaG|DqIjIqJhO",
+   "startSource": "stima",
+   "endSource": "stima",
+   "estimatedStart": {
+    "lat": 40.832331,
+    "lon": 14.56141
+   },
+   "estimatedEnd": {
+    "lat": 40.914807,
+    "lon": 14.523447
+   }
+  },
+  {
+   "id": 171,
+   "road": "A30",
+   "direction": "dir. Nord",
+   "from": "Sarno",
+   "to": "Palma Campania",
+   "kmStart": 38.33,
+   "kmEnd": 32.14,
+   "lengthM": 6190.0,
+   "limit": 130,
+   "variableLimit": false,
+   "reliability": "LOW",
+   "start": {
+    "lat": 40.79601,
+    "lon": 14.60798
+   },
+   "end": {
+    "lat": 40.83562,
+    "lon": 14.55752
+   },
+   "geometry": "a~~wF{bdxAoJzCqNfIiExDehA`pAsMnScxAnnCaI`OsE~GeR`Y",
+   "startSource": "sicve",
+   "endSource": "sicve",
+   "estimatedStart": {
+    "lat": 40.79189,
+    "lon": 14.610266
+   },
+   "estimatedEnd": {
+    "lat": 40.832331,
+    "lon": 14.56141
+   }
+  },
+  {
+   "id": 172,
+   "road": "A30",
+   "direction": "dir. Nord",
+   "from": "Nocera-Pagani",
+   "to": "Sarno",
+   "kmStart": 40.94,
+   "kmEnd": 38.33,
+   "lengthM": 2610.0,
+   "limit": 130,
+   "variableLimit": false,
+   "reliability": "LOW",
+   "start": {
+    "lat": 40.776321,
+    "lon": 14.633115
+   },
+   "end": {
+    "lat": 40.79189,
+    "lon": 14.610266
+   },
+   "geometry": "_c{wF_`ixAgEtLkf@bbAiF`HgVfUsMfVoElF",
+   "startSource": "stima",
+   "endSource": "stima",
+   "estimatedStart": {
+    "lat": 40.776321,
+    "lon": 14.633115
+   },
+   "estimatedEnd": {
+    "lat": 40.79189,
+    "lon": 14.610266
+   }
+  },
+  {
+   "id": 173,
+   "road": "A30",
+   "direction": "dir. Nord",
+   "from": "Salerno-San Severino",
+   "to": "Nocera-Pagani",
+   "kmStart": 49.47,
+   "kmEnd": 40.94,
+   "lengthM": 8530.0,
+   "limit": 130,
+   "variableLimit": false,
+   "reliability": "LOW",
+   "start": {
+    "lat": 40.772656,
+    "lon": 14.729864
+   },
+   "end": {
+    "lat": 40.776321,
+    "lon": 14.633115
+   },
+   "geometry": "clzwFs|{xA@tFi@~Hf@fHE|r@RxCnApGlBxFlVtf@xAbEp@zENpKoBdVW~JnDdmAAzEe@dN_Ch[eCbNaKjZuCrN}TdnB{Cr[m@dMXf_@MjHcA|KsAzG",
+   "startSource": "stima",
+   "endSource": "stima",
+   "estimatedStart": {
+    "lat": 40.772656,
+    "lon": 14.729864
+   },
+   "estimatedEnd": {
+    "lat": 40.776321,
+    "lon": 14.633115
+   }
+  },
+  {
+   "id": 174,
+   "road": "A30",
+   "direction": "dir. Sud",
+   "from": "All. A30-A1",
+   "to": "Nola",
+   "kmStart": 1.85,
+   "kmEnd": 17.2,
+   "lengthM": 15350.0,
+   "limit": 130,
+   "variableLimit": false,
+   "reliability": "MEDIUM",
+   "start": {
+    "lat": 41.03136,
+    "lon": 14.34333
+   },
+   "end": {
+    "lat": 40.94794,
+    "lon": 14.47882
+   },
+   "geometry": "a}lyFylpvAjBsKhDiOdK_[jG_Nx}@ucB~F_NjEcMrF}SlE_WbBsOtEsn@zAkL`EsPzG{OdEuG|E{FvF_FzGeElLgEbqAyZvNcI~EmErGeIh]ii@zHmNxDaKfQwl@xf@cgBdF_N`Zul@bGcIpReSpEiG`F{Ibc@gaAVm@",
+   "startSource": "sicve",
+   "endSource": "sicve",
+   "estimatedStart": {
+    "lat": 41.031657,
+    "lon": 14.342247
+   },
+   "estimatedEnd": {
+    "lat": 40.948082,
+    "lon": 14.478615
+   }
+  },
+  {
+   "id": 175,
+   "road": "A30",
+   "direction": "dir. Sud",
+   "from": "All. A30-A16",
+   "to": "Palma Campania",
+   "kmStart": 22.16,
+   "kmEnd": 29,
+   "lengthM": 6840.0,
+   "limit": 130,
+   "variableLimit": false,
+   "reliability": "MEDIUM",
+   "start": {
+    "lat": 40.91674,
+    "lon": 14.51841
+   },
+   "end": {
+    "lat": 40.85927,
+    "lon": 14.53884
+   },
+   "geometry": "ypvxFesrwARu@fFqRfFmLhHeK`FkFbGsEhGeDfa@wKl[cHrTmBxuB_Fj\\wAvMuBh}@mUx@S",
+   "startSource": "sicve",
+   "endSource": "sicve",
+   "estimatedStart": {
+    "lat": 40.916675,
+    "lon": 14.518699
+   },
+   "estimatedEnd": {
+    "lat": 40.859568,
+    "lon": 14.538785
+   }
+  },
+  {
+   "id": 176,
+   "road": "A30",
+   "direction": "dir. Sud",
+   "from": "Palma Campania",
+   "to": "Sarno",
+   "kmStart": 29,
+   "kmEnd": 34.365,
+   "lengthM": 5365.0,
+   "limit": 130,
+   "variableLimit": false,
+   "reliability": "MEDIUM",
+   "start": {
+    "lat": 40.85927,
+    "lon": 14.53884
+   },
+   "end": {
+    "lat": 40.82234,
+    "lon": 14.57691
+   },
+   "geometry": "oikxFasvwAt^eJ~KsD`L}EhTmNhMuLrk@cq@~\\qb@|F{Ibu@quA\\o@",
+   "startSource": "sicve",
+   "endSource": "sicve",
+   "estimatedStart": {
+    "lat": 40.859568,
+    "lon": 14.538785
+   },
+   "estimatedEnd": {
+    "lat": 40.822466,
+    "lon": 14.576646
+   }
+  },
+  {
+   "id": 177,
+   "road": "A30",
+   "direction": "dir. Sud",
+   "from": "Sarno",
+   "to": "Nocera-Pagani",
+   "kmStart": 34.365,
+   "kmEnd": 38.4,
+   "lengthM": 4035.0,
+   "limit": 130,
+   "variableLimit": false,
+   "reliability": "MEDIUM",
+   "start": {
+    "lat": 40.82234,
+    "lon": 14.57691
+   },
+   "end": {
+    "lat": 40.79521,
+    "lon": 14.60809
+   },
+   "geometry": "obdxFq`~wA|k@_hA~FoJrIgL`eA{kApFiEdHaEtOeFhA_@",
+   "startSource": "sicve",
+   "endSource": "sicve",
+   "estimatedStart": {
+    "lat": 40.822466,
+    "lon": 14.576646
+   },
+   "estimatedEnd": {
+    "lat": 40.795593,
+    "lon": 14.607964
+   }
+  },
+  {
+   "id": 178,
+   "road": "A4",
+   "direction": "dir. Ovest",
+   "from": "Villesse",
+   "to": "Palmanova",
+   "kmStart": null,
+   "kmEnd": null,
+   "lengthM": 10440.0,
+   "limit": 130,
+   "variableLimit": false,
+   "reliability": "LOW",
+   "start": {
+    "lat": 45.85684,
+    "lon": 13.431872
+   },
+   "end": {
+    "lat": 45.892634,
+    "lon": 13.307679
+   },
+   "geometry": "gl{vGel~pAyw@xfCaSbq@qDfOeaCjjOaJrq@",
+   "startSource": "stima",
+   "endSource": "stima",
+   "estimatedStart": {
+    "lat": 45.85684,
+    "lon": 13.431872
+   },
+   "estimatedEnd": {
+    "lat": 45.892634,
+    "lon": 13.307679
+   }
+  },
+  {
+   "id": 179,
+   "road": "A4",
+   "direction": "dir. Ovest",
+   "from": "San Giorgio di Nogaro",
+   "to": "Latisana",
+   "kmStart": null,
+   "kmEnd": null,
+   "lengthM": 15910.0,
+   "limit": 130,
+   "variableLimit": false,
+   "reliability": "LOW",
+   "start": {
+    "lat": 45.86589,
+    "lon": 13.215181
+   },
+   "end": {
+    "lat": 45.818089,
+    "lon": 13.022846
+   },
+   "geometry": "yd}vG{atoA`lAv~FjtB|eJhI|c@tDvYnEvg@tj@pkHbE`[pTfkAzBhOjBpVdBde@",
+   "startSource": "stima",
+   "endSource": "stima",
+   "estimatedStart": {
+    "lat": 45.86589,
+    "lon": 13.215181
+   },
+   "estimatedEnd": {
+    "lat": 45.818089,
+    "lon": 13.022846
+   }
+  },
+  {
+   "id": 180,
+   "road": "A4",
+   "direction": "dir. Ovest",
+   "from": "San Stino",
+   "to": "San Donà",
+   "kmStart": null,
+   "kmEnd": null,
+   "lengthM": 14690.0,
+   "limit": 110,
+   "variableLimit": false,
+   "reliability": "LOW",
+   "start": {
+    "lat": 45.740324,
+    "lon": 12.690864
+   },
+   "end": {
+    "lat": 45.671113,
+    "lon": 12.53064
+   },
+   "geometry": "_tdvG{tmlAzgAtcFnGpWtHfWhL~[rGrO`eA`xBnSfg@bLr^ve@pjBrNne@n`DfrI",
+   "startSource": "stima",
+   "endSource": "stima",
+   "estimatedStart": {
+    "lat": 45.740324,
+    "lon": 12.690864
+   },
+   "estimatedEnd": {
+    "lat": 45.671113,
+    "lon": 12.53064
+   }
+  },
+  {
+   "id": 181,
+   "road": "A4",
+   "direction": "dir. Est",
+   "from": "Cessalto",
+   "to": "San Stino",
+   "kmStart": null,
+   "kmEnd": null,
+   "lengthM": 5830.0,
+   "limit": 110,
+   "variableLimit": false,
+   "reliability": "LOW",
+   "start": {
+    "lat": 45.709317,
+    "lon": 12.616822
+   },
+   "end": {
+    "lat": 45.736819,
+    "lon": 12.680167
+   },
+   "geometry": "gr~uGcf_lAmImRsdAiwBcL{XgHqSmHwVoGmWor@q`D",
+   "startSource": "stima",
+   "endSource": "stima",
+   "estimatedStart": {
+    "lat": 45.709317,
+    "lon": 12.616822
+   },
+   "estimatedEnd": {
+    "lat": 45.736819,
+    "lon": 12.680167
+   }
+  },
+  {
+   "id": 182,
+   "road": "A4",
+   "direction": "dir. Est",
+   "from": "San Stino",
+   "to": "Portogruaro",
+   "kmStart": null,
+   "kmEnd": null,
+   "lengthM": 13190.0,
+   "limit": 110,
+   "variableLimit": false,
+   "reliability": "LOW",
+   "start": {
+    "lat": 45.736819,
+    "lon": 12.680167
+   },
+   "end": {
+    "lat": 45.792757,
+    "lon": 12.827461
+   },
+   "geometry": "c~cvGarklAooAu{FuHqYmFqPgIgT{L_Xem@kfAkJyQsr@a}Acb@i`AqLu\\eHiVoKie@qIgh@}Fgj@yFcz@}BkVyE_^gJse@",
+   "startSource": "stima",
+   "endSource": "stima",
+   "estimatedStart": {
+    "lat": 45.736819,
+    "lon": 12.680167
+   },
+   "estimatedEnd": {
+    "lat": 45.792757,
+    "lon": 12.827461
+   }
+  },
+  {
+   "id": 183,
+   "road": "A4",
+   "direction": "dir. Est",
+   "from": "Latisana",
+   "to": "San Giorgio di Nogaro",
+   "kmStart": null,
+   "kmEnd": null,
+   "lengthM": 16010.0,
+   "limit": 130,
+   "variableLimit": false,
+   "reliability": "LOW",
+   "start": {
+    "lat": 45.817046,
+    "lon": 13.011908
+   },
+   "end": {
+    "lat": 45.863061,
+    "lon": 13.2063
+   },
+   "geometry": "qssvGmklnA_HqiBmAgQaDeU{RaeAqFsa@wn@sfIsGuj@kHc`@qvBskJiy@eaE",
+   "startSource": "stima",
+   "endSource": "stima",
+   "estimatedStart": {
+    "lat": 45.817046,
+    "lon": 13.011908
+   },
+   "estimatedEnd": {
+    "lat": 45.863061,
+    "lon": 13.2063
+   }
+  },
+  {
+   "id": 184,
+   "road": "A4",
+   "direction": "dir. Est",
+   "from": "San Giorgio di Nogaro",
+   "to": "Nodo A4/A23",
+   "kmStart": null,
+   "kmEnd": null,
+   "lengthM": 6920.0,
+   "limit": 130,
+   "variableLimit": false,
+   "reliability": "LOW",
+   "start": {
+    "lat": 45.863061,
+    "lon": 13.2063
+   },
+   "end": {
+    "lat": 45.894529,
+    "lon": 13.283021
+   },
+   "geometry": "cs|vGkjroAgSc`Ag~AuaGqM__@saAuzB",
+   "startSource": "stima",
+   "endSource": "stima",
+   "estimatedStart": {
+    "lat": 45.863061,
+    "lon": 13.2063
+   },
+   "estimatedEnd": {
+    "lat": 45.894529,
+    "lon": 13.283021
+   }
+  },
+  {
+   "id": 185,
+   "road": "A4",
+   "direction": "dir. Est",
+   "from": "Villesse",
+   "to": "Redipuglia",
+   "kmStart": null,
+   "kmEnd": null,
+   "lengthM": 5000,
+   "limit": 130,
+   "variableLimit": false,
+   "reliability": "LOW",
+   "start": {
+    "lat": 45.86011,
+    "lon": 13.423751
+   },
+   "end": {
+    "lat": 45.842916,
+    "lon": 13.482612
+   },
+   "geometry": "u`|vGmy|pAjUcu@jDuQbTakCnC}RzEiRdn@wrB",
+   "startSource": "stima",
+   "endSource": "stima",
+   "estimatedStart": {
+    "lat": 45.86011,
+    "lon": 13.423751
+   },
+   "estimatedEnd": {
+    "lat": 45.842916,
+    "lon": 13.482612
+   }
+  },
+  {
+   "id": 186,
+   "road": "A5 - T1 Traforo del Monte Bianco",
+   "direction": "dir. Francia",
+   "from": "Traforo Monte Bianco Sud",
+   "to": "Traforo Monte Bianco Nord",
+   "kmStart": null,
+   "kmEnd": null,
+   "lengthM": 11600.0,
+   "limit": 70,
+   "variableLimit": false,
+   "reliability": "MEDIUM",
+   "start": {
+    "lat": 45.81807,
+    "lon": 6.95172
+   },
+   "end": {
+    "lat": 45.902116,
+    "lon": 6.862669
+   },
+   "geometry": "}ysvGiwli@EDclOlkP",
+   "startSource": "sicve",
+   "endSource": "stima",
+   "estimatedStart": {
+    "lat": 45.818096,
+    "lon": 6.9517
+   },
+   "estimatedEnd": {
+    "lat": 45.902116,
+    "lon": 6.862669
+   }
+  },
+  {
+   "id": 187,
+   "road": "A5 - T1 Traforo del Monte Bianco",
+   "direction": "dir. Italia",
+   "from": "Traforo Monte Bianco Nord",
+   "to": "Traforo Monte Bianco Sud",
+   "kmStart": null,
+   "kmEnd": null,
+   "lengthM": 11600.0,
+   "limit": 70,
+   "variableLimit": false,
+   "reliability": "MEDIUM",
+   "start": {
+    "lat": 45.902116,
+    "lon": 6.862669
+   },
+   "end": {
+    "lat": 45.81803,
+    "lon": 6.95171
+   },
+   "geometry": "ggdwGuj{h@blOmkPHI",
+   "startSource": "stima",
+   "endSource": "sicve",
+   "estimatedStart": {
+    "lat": 45.902116,
+    "lon": 6.862669
+   },
+   "estimatedEnd": {
+    "lat": 45.818096,
+    "lon": 6.9517
+   }
+  },
+  {
+   "id": 188,
+   "road": "A6",
+   "direction": "dir. Nord",
+   "from": "Pione",
+   "to": "Ceva Nord",
+   "kmStart": null,
+   "kmEnd": null,
+   "lengthM": 8730.0,
+   "limit": 90,
+   "variableLimit": false,
+   "reliability": "LOW",
+   "start": {
+    "lat": 44.368746,
+    "lon": 8.121796
+   },
+   "end": {
+    "lat": 44.372984,
+    "lon": 8.040012
+   },
+   "geometry": "uwxmGghqp@}DjDqKfBoEzAgD`CiD`E}LlYw@nFoAdPLvEx@jElItPbBzApHnCpUvFdCvAdBrCpCjM~GzKv@|DMjD_BjD}CfBeEdAyCaA{DaHqAiAuD}@iDPwBnAkAzAeAjCg@tDk@tOzA~iAr@rJxCzT`AdQu@|v@sI~jBJnFp@|FtAjFvA~C",
+   "startSource": "stima",
+   "endSource": "stima",
+   "estimatedStart": {
+    "lat": 44.368746,
+    "lon": 8.121796
+   },
+   "estimatedEnd": {
+    "lat": 44.372984,
+    "lon": 8.040012
+   }
+  },
+  {
+   "id": 189,
+   "road": "A6",
+   "direction": "dir. Sud",
+   "from": "Altare",
+   "to": "Zinola Sud",
+   "kmStart": null,
+   "kmEnd": null,
+   "lengthM": 15500.0,
+   "limit": 90,
+   "variableLimit": false,
+   "reliability": "LOW",
+   "start": {
+    "lat": 44.346613,
+    "lon": 8.318638
+   },
+   "end": {
+    "lat": 44.290465,
+    "lon": 8.440064
+   },
+   "geometry": "imtmGovwq@DoRj@{CpAaC`KoGhFqIhNoKdDOhFjDfCHlDiCjCcGbDcJfB}QbBeK@iC_C_R\\wHjJwUbJ{W`BgDbD}CvQgI`B?tM~DnBWfBiBh@uBlAsOi@sQ@qOrBwKvHsMl@oBdCy^B}C[eCcDcJScEJiC|C{HbAuA~AmAtLyD`CFvAv@|@tAx@pCCfFo@|BaAtAua@`UyFFiD_BaBsEIaCVcCx@yBfEyDhAoBbCyPjB}DhEuBxHZjHkDfJm@pAgArFuL^iF_BmKRqErNmXdFsRxKaUbD_PbEiLhEoJvDeLdNcPzIoF`BmD`CaSeAuUtAo`@d@}ClAyCxE_HpWmd@bCyFjDaM|E{K",
+   "startSource": "stima",
+   "endSource": "stima",
+   "estimatedStart": {
+    "lat": 44.346613,
+    "lon": 8.318638
+   },
+   "estimatedEnd": {
+    "lat": 44.290465,
+    "lon": 8.440064
+   }
+  },
+  {
+   "id": 190,
+   "road": "A7",
+   "direction": "dir. Nord",
+   "from": "Gropello",
+   "to": "Bereguardo",
+   "kmStart": null,
+   "kmEnd": null,
+   "lengthM": 9150.0,
+   "limit": 130,
+   "variableLimit": false,
+   "reliability": "LOW",
+   "start": {
+    "lat": 45.173002,
+    "lon": 9.003849
+   },
+   "end": {
+    "lat": 45.248205,
+    "lon": 9.043697
+   },
+   "geometry": "gzurGaq}u@uU_Jq}BejAyGoBwFi@aHHov@zIwGSeYoD_M{CeJkFewCwcCiZcQ",
+   "startSource": "stima",
+   "endSource": "stima",
+   "estimatedStart": {
+    "lat": 45.173002,
+    "lon": 9.003849
+   },
+   "estimatedEnd": {
+    "lat": 45.248205,
+    "lon": 9.043697
+   }
+  },
+  {
+   "id": 191,
+   "road": "A7",
+   "direction": "dir. Nord",
+   "from": "Casei",
+   "to": "Gropello",
+   "kmStart": null,
+   "kmEnd": null,
+   "lengthM": 19390.0,
+   "limit": 130,
+   "variableLimit": false,
+   "reliability": "LOW",
+   "start": {
+    "lat": 45.013155,
+    "lon": 8.923135
+   },
+   "end": {
+    "lat": 45.173002,
+    "lon": 9.003849
+   },
+   "geometry": "gsvqGsxmu@ygGazDeGoFocB{lBuCkCeF{C_GeByDe@{IPcH|Ae}@zXgHzAuNp@}He@{FcAqzAqf@krAwNqLqComCgvA{nCwdA",
+   "startSource": "stima",
+   "endSource": "stima",
+   "estimatedStart": {
+    "lat": 45.013155,
+    "lon": 8.923135
+   },
+   "estimatedEnd": {
+    "lat": 45.173002,
+    "lon": 9.003849
+   }
+  },
+  {
+   "id": 192,
+   "road": "A7",
+   "direction": "dir. Sud",
+   "from": "Gropello",
+   "to": "Casei",
+   "kmStart": null,
+   "kmEnd": null,
+   "lengthM": 19130.0,
+   "limit": 130,
+   "variableLimit": false,
+   "reliability": "LOW",
+   "start": {
+    "lat": 45.174179,
+    "lon": 9.004205
+   },
+   "end": {
+    "lat": 45.016385,
+    "lon": 8.925246
+   },
+   "geometry": "savrGis}u@rvCjhAplCxuA~LtCnrA|Nz~A`h@tNpA~Mq@dJqBdaAmZnKs@~JbBdFlCxDbDxcBdmB~DrDf_BxcA`vC|hB",
+   "startSource": "stima",
+   "endSource": "stima",
+   "estimatedStart": {
+    "lat": 45.174179,
+    "lon": 9.004205
+   },
+   "estimatedEnd": {
+    "lat": 45.016385,
+    "lon": 8.925246
+   }
+  },
+  {
+   "id": 193,
+   "road": "A7",
+   "direction": "dir. Sud",
+   "from": "Casei",
+   "to": "Castelnuovo Scrivia",
+   "kmStart": null,
+   "kmEnd": null,
+   "lengthM": 4440.0,
+   "limit": 130,
+   "variableLimit": false,
+   "reliability": "LOW",
+   "start": {
+    "lat": 45.016385,
+    "lon": 8.925246
+   },
+   "end": {
+    "lat": 44.980782,
+    "lon": 8.899736
+   },
+   "geometry": "kgwqGyenu@n}El~C",
+   "startSource": "stima",
+   "endSource": "stima",
+   "estimatedStart": {
+    "lat": 45.016385,
+    "lon": 8.925246
+   },
+   "estimatedEnd": {
+    "lat": 44.980782,
+    "lon": 8.899736
+   }
+  },
+  {
+   "id": 194,
+   "road": "A23",
+   "direction": "dir. Sud",
+   "from": "Udine Sud",
+   "to": "Nodo A23-A4",
+   "kmStart": null,
+   "kmEnd": null,
+   "lengthM": 13880.0,
+   "limit": 130,
+   "variableLimit": false,
+   "reliability": "LOW",
+   "start": {
+    "lat": 46.01777,
+    "lon": 13.216792
+   },
+   "end": {
+    "lat": 45.902568,
+    "lon": 13.284497
+   },
+   "geometry": "azzwG}ktoAb~CkrBxcAgo@tOaHtMsExmAo[xUcIbO{GnzEykCfQwHztAsf@vGsBpIqA",
+   "startSource": "stima",
+   "endSource": "stima",
+   "estimatedStart": {
+    "lat": 46.01777,
+    "lon": 13.216792
+   },
+   "estimatedEnd": {
+    "lat": 45.902568,
+    "lon": 13.284497
+   }
+  },
+  {
+   "id": 195,
+   "road": "A28",
+   "direction": "dir. Sud",
+   "from": "Azzano Decimo",
+   "to": "Villotta",
+   "kmStart": null,
+   "kmEnd": null,
+   "lengthM": 5730.0,
+   "limit": 130,
+   "variableLimit": false,
+   "reliability": "LOW",
+   "start": {
+    "lat": 45.899651,
+    "lon": 12.725696
+   },
+   "end": {
+    "lat": 45.859839,
+    "lon": 12.772698
+   },
+   "geometry": "ywcwGsntlAv_C{vCzlAqtAjLsOx[uf@",
+   "startSource": "stima",
+   "endSource": "stima",
+   "estimatedStart": {
+    "lat": 45.899651,
+    "lon": 12.725696
+   },
+   "estimatedEnd": {
+    "lat": 45.859839,
+    "lon": 12.772698
+   }
+  },
+  {
+   "id": 196,
+   "road": "A56",
+   "direction": "dir. Ovest",
+   "from": "Viadotto Corso Malta",
+   "to": "Capodimonte",
+   "kmStart": null,
+   "kmEnd": null,
+   "lengthM": 3160.0,
+   "limit": 80,
+   "variableLimit": false,
+   "reliability": "LOW",
+   "start": {
+    "lat": 40.872355,
+    "lon": 14.279409
+   },
+   "end": {
+    "lat": 40.866841,
+    "lon": 14.24429
+   },
+   "geometry": "e{mxFi}cvAJhFr@pDnItQvC`L|@tI|A|[JlFQjGiCvX~@lReC`RFpFpDtMtD`SnFzK",
+   "startSource": "stima",
+   "endSource": "stima",
+   "estimatedStart": {
+    "lat": 40.872355,
+    "lon": 14.279409
+   },
+   "estimatedEnd": {
+    "lat": 40.866841,
+    "lon": 14.24429
+   }
+  },
+  {
+   "id": 197,
+   "road": "A56",
+   "direction": "dir. Ovest",
+   "from": "Camaldoli",
+   "to": "Vomero",
+   "kmStart": null,
+   "kmEnd": null,
+   "lengthM": 1310.0,
+   "limit": 80,
+   "variableLimit": false,
+   "reliability": "LOW",
+   "start": {
+    "lat": 40.856199,
+    "lon": 14.220564
+   },
+   "end": {
+    "lat": 40.846223,
+    "lon": 14.216086
+   },
+   "geometry": "gvjxFomxuAvKnJhOrThDpBpBVrBQxS}G",
+   "startSource": "stima",
+   "endSource": "stima",
+   "estimatedStart": {
+    "lat": 40.856199,
+    "lon": 14.220564
+   },
+   "estimatedEnd": {
+    "lat": 40.846223,
+    "lon": 14.216086
+   }
+  },
+  {
+   "id": 198,
+   "road": "A56",
+   "direction": "dir. Ovest",
+   "from": "Fuorigrotta",
+   "to": "Agnano",
+   "kmStart": null,
+   "kmEnd": null,
+   "lengthM": 3030.0,
+   "limit": 80,
+   "variableLimit": false,
+   "reliability": "LOW",
+   "start": {
+    "lat": 40.836695,
+    "lon": 14.198733
+   },
+   "end": {
+    "lat": 40.839702,
+    "lon": 14.166479
+   },
+   "geometry": "k|fxFaetuAhK~e@hHlSTrEE|HWlEq@lCuOdb@kD`H_JxMaBbEeAbKGjd@",
+   "startSource": "stima",
+   "endSource": "stima",
+   "estimatedStart": {
+    "lat": 40.836695,
+    "lon": 14.198733
+   },
+   "estimatedEnd": {
+    "lat": 40.839702,
+    "lon": 14.166479
+   }
+  },
+  {
+   "id": 199,
+   "road": "A56",
+   "direction": "dir. Ovest",
+   "from": "Solfatare",
+   "to": "Arco Felice",
+   "kmStart": null,
+   "kmEnd": null,
+   "lengthM": 4220.0,
+   "limit": 80,
+   "variableLimit": false,
+   "reliability": "LOW",
+   "start": {
+    "lat": 40.835982,
+    "lon": 14.131813
+   },
+   "end": {
+    "lat": 40.839988,
+    "lon": 14.085126
+   },
+   "geometry": "{wfxFybguAWhWaA`ZyA`HuF|KeBzF{I~bAoAp^kBfK{FtNo@xEB|Ev@vE`M|WxCfKh@fG?jFk@dDcBnC",
+   "startSource": "stima",
+   "endSource": "stima",
+   "estimatedStart": {
+    "lat": 40.835982,
+    "lon": 14.131813
+   },
+   "estimatedEnd": {
+    "lat": 40.839988,
+    "lon": 14.085126
+   }
+  },
+  {
+   "id": 200,
+   "road": "A56",
+   "direction": "dir. Est",
+   "from": "Arco Felice",
+   "to": "Astroni",
+   "kmStart": null,
+   "kmEnd": null,
+   "lengthM": 4750.0,
+   "limit": 80,
+   "variableLimit": false,
+   "reliability": "LOW",
+   "start": {
+    "lat": 40.839332,
+    "lon": 14.088862
+   },
+   "end": {
+    "lat": 40.835099,
+    "lon": 14.142073
+   },
+   "geometry": "ylgxFkv~tAgCkKeNkZq@gEGwDl@gF~F_OlBsJtAg_@nIuaAtBgHbG{L~@yEp@kNfEudB",
+   "startSource": "stima",
+   "endSource": "stima",
+   "estimatedStart": {
+    "lat": 40.839332,
+    "lon": 14.088862
+   },
+   "estimatedEnd": {
+    "lat": 40.835099,
+    "lon": 14.142073
+   }
+  },
+  {
+   "id": 201,
+   "road": "A56",
+   "direction": "dir. Est",
+   "from": "Solfatare",
+   "to": "Agnano",
+   "kmStart": null,
+   "kmEnd": null,
+   "lengthM": 1820.0,
+   "limit": 80,
+   "variableLimit": false,
+   "reliability": "LOW",
+   "start": {
+    "lat": 40.835162,
+    "lon": 14.140906
+   },
+   "end": {
+    "lat": 40.838462,
+    "lon": 14.161218
+   },
+   "geometry": "wrfxFu{huAPuOs@adAiAsIiCoI}KaS",
+   "startSource": "stima",
+   "endSource": "stima",
+   "estimatedStart": {
+    "lat": 40.835162,
+    "lon": 14.140906
+   },
+   "estimatedEnd": {
+    "lat": 40.838462,
+    "lon": 14.161218
+   }
+  },
+  {
+   "id": 202,
+   "road": "A56",
+   "direction": "dir. Est",
+   "from": "Agnano",
+   "to": "Fuorigrotta",
+   "kmStart": null,
+   "kmEnd": null,
+   "lengthM": 2850.0,
+   "limit": 80,
+   "variableLimit": false,
+   "reliability": "LOW",
+   "start": {
+    "lat": 40.838462,
+    "lon": 14.161218
+   },
+   "end": {
+    "lat": 40.834181,
+    "lon": 14.191544
+   },
+   "geometry": "kggxFszluA{CeJcAkKTyr@f@qDvAeE~KwOvCuFjPie@j@aKGuIk@}CyD}J",
+   "startSource": "stima",
+   "endSource": "stima",
+   "estimatedStart": {
+    "lat": 40.838462,
+    "lon": 14.161218
+   },
+   "estimatedEnd": {
+    "lat": 40.834181,
+    "lon": 14.191544
+   }
+  },
+  {
+   "id": 203,
+   "road": "A56",
+   "direction": "dir. Est",
+   "from": "Arenella",
+   "to": "Capodimonte",
+   "kmStart": null,
+   "kmEnd": null,
+   "lengthM": 610.0,
+   "limit": 80,
+   "variableLimit": false,
+   "reliability": "LOW",
+   "start": {
+    "lat": 40.861374,
+    "lon": 14.232801
+   },
+   "end": {
+    "lat": 40.863954,
+    "lon": 14.239217
+   },
+   "geometry": "qvkxF_zzuAcOcg@",
+   "startSource": "stima",
+   "endSource": "stima",
+   "estimatedStart": {
+    "lat": 40.861374,
+    "lon": 14.232801
+   },
+   "estimatedEnd": {
+    "lat": 40.863954,
+    "lon": 14.239217
+   }
+  },
+  {
+   "id": 204,
+   "road": "A30",
+   "direction": "dir. Sud",
+   "from": "Nocera-Pagani",
+   "to": "Castel San Giorgio",
+   "kmStart": 38.4,
+   "kmEnd": 42.765,
+   "lengthM": 4365.0,
+   "limit": 130,
+   "variableLimit": false,
+   "reliability": "MEDIUM",
+   "start": {
+    "lat": 40.79521,
+    "lon": 14.60809
+   },
+   "end": {
+    "lat": 40.77462,
+    "lon": 14.64865
+   },
+   "geometry": "cy~wFwcdxAnIoCdJkGrFiH`KwRt[q[`GeKfa@{y@pCeHrCaMdA}LJ}I_@mVr@uSvBqR",
+   "startSource": "sicve",
+   "endSource": "sicve",
+   "estimatedStart": {
+    "lat": 40.795593,
+    "lon": 14.607964
+   },
+   "estimatedEnd": {
+    "lat": 40.771829,
+    "lon": 14.663374
    }
   }
  ]

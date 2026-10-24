@@ -436,12 +436,17 @@ function resultHtml(r) {
 }
 function renderResult() { $('result').innerHTML = lastResult ? resultHtml(lastResult) : ''; }
 
+let tratteAll = false;
 function renderTratte() {
-  const list = allSections.filter(s => ROUTE.includes(s.id)).sort((a, b) => (a.json.direction || '').localeCompare(b.json.direction || '') || a.json.kmStart - b.json.kmStart);
-  $('tratteList').innerHTML = `<p class="dim">Database tratte: versione ${dataVersion} (si aggiorna da solo a ogni avvio)</p>` + list.map(s => `<div class="item">
-      <div><b>${s.label}</b><div class="dim">${s.json.direction ?? ''} · ${km(s.officialLength, 2)} · limite ${s.limitKmh ?? '?'}</div>
+  const list = allSections.filter(s => tratteAll || ROUTE.includes(s.id))
+    .sort((a, b) => a.json.road.localeCompare(b.json.road, 'it', { numeric: true }) || (a.json.direction || '').localeCompare(b.json.direction || '') || (a.json.kmStart ?? 0) - (b.json.kmStart ?? 0));
+  $('tratteList').innerHTML = `<div class="seg" style="justify-content:flex-start;margin-bottom:10px"><button id="trRoute" class="${tratteAll ? '' : 'on'}">Tivoli – Ferentino</button><button id="trAll" class="${tratteAll ? 'on' : ''}">Tutte le autostrade (${allSections.length})</button></div>
+    <p class="dim">Database tratte: versione ${dataVersion} (si aggiorna da solo a ogni avvio)</p>` + list.map(s => `<div class="item">
+      <div><b>${s.label}</b><div class="dim">${s.json.road.split(' ')[0]} · ${s.json.direction ?? ''} · ${km(s.officialLength, 2)} · limite ${s.limitKmh ?? '?'}</div>
       <div class="dim">${disabled.has(s.id) ? '⛔ Disattivata' : s.portalsMeasured ? '🟢 Portali verificati in auto' : '⚪ Portali da verificare'}</div></div>
       <label class="switch"><input type="checkbox" data-id="${s.id}" ${disabled.has(s.id) ? '' : 'checked'}><span></span></label></div>`).join('');
+  $('trRoute').onclick = () => { tratteAll = false; renderTratte(); };
+  $('trAll').onclick = () => { tratteAll = true; renderTratte(); };
   $('tratteList').querySelectorAll('input[data-id]').forEach(b => b.onchange = () => {
     const id = Number(b.dataset.id);
     b.checked = !disabled.has(id); // lo stato vero lo decide la conferma
