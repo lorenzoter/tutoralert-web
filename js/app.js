@@ -14,7 +14,7 @@ const ROUTE = [35, 36, 37, 38, 45, 46, 47, 48];
 // ---------- Impostazioni (per dispositivo) ----------
 const DEFAULTS = {
   audio: 'nulla', volume: 1, tapSound: 'bip', approach: 1000, slowRepeat: false, endAverage: true,
-  targetExact: true, personalMax: null, rain: false, decimals: 1, speedoPct: 0, testMode: false, layout: 'auto', portalChime: true, segmentCheck: true,
+  targetExact: true, personalMax: null, rain: false, decimals: 1, speedoPct: 0, testMode: false, layout: 'auto', portalChime: true, segmentCheck: true, cameras: true,
 };
 const settings = { ...DEFAULTS, ...store.get('settings', {}) };
 if (settings.voice === false && !store.get('settings', {}).audio) settings.audio = 'nulla';
@@ -130,7 +130,7 @@ async function start(sim) {
   try { await loadVoice(); } catch { /* senza voce si va avanti */ }
   if (!allSections.length) await loadSections();
   tracker = new Tracker(sections);
-  fixes = []; taps = []; trips = []; announced.clear(); portalCheck.reset(); allPortalCheck.reset(); segment.reset(); seg = null;
+  fixes = []; taps = []; trips = []; announced.clear(); portalCheck.reset(); allPortalCheck.reset(); segment.reset(); seg = null; cameras.reset(); cam = null;
   status = next = nextPortal = portalToCheck = null; lastFix = null; lastFedAt = 0;
   simulated = !!sim; running = true; sessionId = Date.now();
   document.body.classList.add('running');
@@ -196,6 +196,19 @@ function onFix(fix) {
   const pa = allPortalCheck.justPassed;
   seg = settings.segmentCheck ? segment.update(fix, pa, pa ? Policy.effectiveLimit(allSections.find(x => x.id === pa.sectionId)?.limitKmh) : null) : null;
   if (seg?.justOver) say(['segmento'], false, true);
+  cam = null;
+  if (settings.cameras) {
+    const c = cameras.update(fix, settings.approach > 0 ? settings.approach : 500);
+    cam = c.ahead;
+    for (const e of c.events) {
+      const lim = e.camera.limit;
+      if (e.type === 'approach') {
+        const m = Math.max(100, Math.round(e.distanceM / 100) * 100);
+        say(m >= 1000 ? ['autovelox_km', lim ? 'limite' : null, num(lim)] : ['autovelox_tra', 'n' + m, 'metri', lim ? 'limite' : null, num(lim)]);
+      } else if (e.type === 'fast') say(['autovelox_rallenta', num(lim)], false, true);
+      else if (e.type === 'passed' && settings.portalChime) chime();
+    }
+  }
   if (portalCheck.justPassed && settings.portalChime) chime();
   if (portalToCheck && disabled.has(portalToCheck.sectionId)) portalToCheck = null;
   if (pendingEval && fix.timeMs > (taps[taps.length - 1] ?? 0)) evaluate();
@@ -320,6 +333,38 @@ const segment = {
 };
 let seg = null;
 
+// ---------- Autovelox fissi (stessa logica di CameraMonitor.kt) ----------
+let cameraList = [], cam = null;
+fetch('data/autovelox.json?t=' + Date.now(), { cache: 'no-store' }).then(r => r.json()).then(d => { cameraList = d.cameras || []; }).catch(() => {});
+const cameras = {
+  announced: new Map(), warned: new Map(), current: null,
+  reset() { this.announced.clear(); this.warned.clear(); this.current = null; },
+  update(fix, approachM) {
+    const ev = [], speed = (fix.speedMps ?? 0) * 3.6;
+    const course = fix.bearingDeg != null && speed >= 10 ? fix.bearingDeg : null;
+    const prev = this.current;
+    let best = null;
+    if (course != null) for (const c of cameraList) {
+      if (Math.abs(c.lat - fix.lat) > 0.012 || Math.abs(c.lon - fix.lon) > 0.016) continue;
+      const d = Geo.dist(fix.lat, fix.lon, c.lat, c.lon);
+      if (d > 1200) continue;
+      const delta = Geo.angleDiff(course, Geo.bearing(fix.lat, fix.lon, c.lat, c.lon)) * Math.PI / 180;
+      if (d * Math.cos(delta) <= 0 || d * Math.sin(delta) > 80) continue;
+      if (c.bearing != null && Geo.angleDiff(course, c.bearing) > 50) continue;
+      if (!best || d < best.distanceM) best = { camera: c, distanceM: d };
+    }
+    const now = fix.timeMs;
+    if (best) {
+      const id = best.camera.id, a = this.announced.get(id), w = this.warned.get(id), lim = best.camera.limit;
+      if (approachM > 0 && best.distanceM <= approachM && (a == null || now - a > 600000)) { this.announced.set(id, now); ev.push({ type: 'approach', ...best }); }
+      if (lim != null && best.distanceM <= 300 && speed > lim + 1 && (w == null || now - w > 600000)) { this.warned.set(id, now); ev.push({ type: 'fast', ...best }); }
+    }
+    if (prev && prev.distanceM < 120 && best?.camera.id !== prev.camera.id) ev.push({ type: 'passed', camera: prev.camera });
+    this.current = best;
+    return { ahead: best, events: ev };
+  },
+};
+
 // GPS perso (galleria): ogni secondo la media continua con una stima.
 setInterval(() => {
   if (!running || simulated || !lastFix) return;
@@ -398,6 +443,11 @@ function render() {
     $('nextSub').textContent = next ? `${next.ts.label} · ${km(next.ts.officialLength)} · limite ${next.ts.limitKmh ?? '?'}` : '';
   }
   // Controllo tra ogni portale
+  const camFast = cam && cam.camera.limit != null && lastFix && (lastFix.speedMps ?? 0) * 3.6 > cam.camera.limit + 1;
+  $('camBanner').hidden = !(camFast && cam.distanceM <= 300);
+  $('camBanner').textContent = cam ? `Autovelox: rallenta a ${cam.camera.limit}` : '';
+  $('camLine').textContent = cam ? `📷 Autovelox tra ${Math.round(cam.distanceM / 10) * 10} m · ${cam.camera.limit ? 'limite ' + cam.camera.limit : 'limite non noto'}` : '';
+  $('camLine').className = 'segLine' + (camFast ? ' bad' : '');
   $('segBanner').hidden = !(seg && seg.over);
   $('segLine').textContent = seg ? `Dall'ultimo portale: ${seg.avgKmh != null ? fmt(seg.avgKmh, settings.decimals) + ' km/h' : 'calcolo…'} · ${km(seg.distanceM)}${seg.limitKmh ? ' · limite ' + seg.limitKmh : ''}` : '';
   $('segLine').className = 'segLine ' + (!seg || seg.avgKmh == null ? '' : seg.over ? 'bad' : 'ok');
@@ -472,6 +522,7 @@ const SCHEMA = [
     ['tapSound', 'Al tocco di PORTALE', [['voce', 'Voce'], ['bip', 'Bip']]],
   ]],
   ['Avvisi', [
+    ['cameras', 'Autovelox fissi', [[true, 'Sì'], [false, 'No']]],
     ['approach', 'Preavviso Tutor', [[1000, '1 km'], [500, '500 m'], [0, 'Spento']]],
     ['slowRepeat', '«Rallenta»', [[true, 'Ogni minuto'], [false, 'Una volta']]],
     ['endAverage', 'Media a fine tratta', [[true, 'Sì'], [false, 'No']]],
@@ -490,6 +541,7 @@ const SCHEMA = [
   ]],
 ];
 const HELP = {
+  cameras: 'Avviso prima degli autovelox fissi (Lazio, da OpenStreetMap, da verificare) con il limite, e «rallenta» se negli ultimi 300 m sei oltre il limite.',
   portalChime: 'Due toni brevi quando passi sotto un portale Tutor (inizio o fine), anche con gli avvisi su Nessuno.',
   audio: 'Si cambia anche durante la guida con il pulsante in alto.',
   segmentCheck: 'Massima sicurezza: ogni portale conta come fine e inizio. Se la media resta sotto il limite tra ogni coppia di portali, resta sotto anche su qualunque tratta. Si va un po\' più piano.',
