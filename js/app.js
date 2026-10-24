@@ -12,11 +12,14 @@ const store = {
 const ROUTE = [35, 36, 37, 38, 45, 46, 47, 48];
 
 // ---------- Impostazioni (per dispositivo) ----------
+// Vecchio valore sì/no degli autovelox → 2 (tutti) / 0.
+const fixCams = v => v === true ? 2 : v === false ? 0 : v;
 const DEFAULTS = {
   audio: 'nulla', volume: 1, tapSound: 'bip', approach: 1000, slowRepeat: false, endAverage: true,
-  targetExact: true, personalMax: null, rain: false, decimals: 1, speedoPct: 0, testMode: false, layout: 'auto', portalChime: true, segmentCheck: true, cameras: true,
+  targetExact: true, personalMax: null, rain: false, decimals: 1, speedoPct: 0, testMode: false, layout: 'auto', portalChime: true, segmentCheck: true, cameras: 2,
 };
 const settings = { ...DEFAULTS, ...store.get('settings', {}) };
+settings.cameras = fixCams(settings.cameras);
 if (settings.voice === false && !store.get('settings', {}).audio) settings.audio = 'nulla';
 delete settings.voice;
 function applySettings() {
@@ -197,7 +200,7 @@ function onFix(fix) {
   seg = settings.segmentCheck ? segment.update(fix, pa, pa ? Policy.effectiveLimit(allSections.find(x => x.id === pa.sectionId)?.limitKmh) : null) : null;
   if (seg?.justOver) say(['segmento'], false, true);
   cam = null;
-  if (settings.cameras) {
+  if (settings.cameras > 0) {
     const c = cameras.update(fix, settings.approach > 0 ? settings.approach : 500);
     cam = c.ahead;
     for (const e of c.events) {
@@ -345,6 +348,7 @@ const cameras = {
     const prev = this.current;
     let best = null;
     if (course != null) for (const c of cameraList) {
+      if (settings.cameras === 1 && c.mit !== 'fisso') continue;
       if (Math.abs(c.lat - fix.lat) > 0.012 || Math.abs(c.lon - fix.lon) > 0.016) continue;
       const d = Geo.dist(fix.lat, fix.lon, c.lat, c.lon);
       if (d > 1200) continue;
@@ -446,7 +450,7 @@ function render() {
   const camFast = cam && cam.camera.limit != null && lastFix && (lastFix.speedMps ?? 0) * 3.6 > cam.camera.limit + 1;
   $('camBanner').hidden = !(camFast && cam.distanceM <= 300);
   $('camBanner').textContent = cam ? `Autovelox: rallenta a ${cam.camera.limit}` : '';
-  $('camLine').textContent = cam ? `📷 Autovelox tra ${Math.round(cam.distanceM / 10) * 10} m · ${cam.camera.limit ? 'limite ' + cam.camera.limit : 'limite non noto'}` : '';
+  $('camLine').textContent = cam ? `📷 Autovelox tra ${Math.round(cam.distanceM / 10) * 10} m · ${cam.camera.limit ? 'limite ' + cam.camera.limit : 'limite non noto'}${cam.camera.mit === 'fisso' ? '' : ' · non censito'}` : '';
   $('camLine').className = 'segLine' + (camFast ? ' bad' : '');
   $('segBanner').hidden = !(seg && seg.over);
   $('segLine').textContent = seg ? `Dall'ultimo portale: ${seg.avgKmh != null ? fmt(seg.avgKmh, settings.decimals) + ' km/h' : 'calcolo…'} · ${km(seg.distanceM)}${seg.limitKmh ? ' · limite ' + seg.limitKmh : ''}` : '';
@@ -522,7 +526,7 @@ const SCHEMA = [
     ['tapSound', 'Al tocco di PORTALE', [['voce', 'Voce'], ['bip', 'Bip']]],
   ]],
   ['Avvisi', [
-    ['cameras', 'Autovelox fissi', [[true, 'Sì'], [false, 'No']]],
+    ['cameras', 'Autovelox fissi', [[2, 'Tutti'], [1, 'Solo censiti'], [0, 'No']]],
     ['approach', 'Preavviso Tutor', [[1000, '1 km'], [500, '500 m'], [0, 'Spento']]],
     ['slowRepeat', '«Rallenta»', [[true, 'Ogni minuto'], [false, 'Una volta']]],
     ['endAverage', 'Media a fine tratta', [[true, 'Sì'], [false, 'No']]],
@@ -541,7 +545,7 @@ const SCHEMA = [
   ]],
 ];
 const HELP = {
-  cameras: 'Avviso prima degli autovelox fissi (Lazio, da OpenStreetMap, da verificare) con il limite, e «rallenta» se negli ultimi 300 m sei oltre il limite.',
+  cameras: 'Lazio, da OpenStreetMap, confrontati con l\'elenco del Ministero. Solo censiti: salta quelli dei comuni che non hanno autovelox fissi nell\'elenco (probabilmente spenti).',
   portalChime: 'Due toni brevi quando passi sotto un portale Tutor (inizio o fine), anche con gli avvisi su Nessuno.',
   audio: 'Si cambia anche durante la guida con il pulsante in alto.',
   segmentCheck: 'Massima sicurezza: ogni portale conta come fine e inizio. Se la media resta sotto il limite tra ogni coppia di portali, resta sotto anche su qualunque tratta. Si va un po\' più piano.',
