@@ -196,7 +196,9 @@ function onFix(fix) {
   nextPortal = findNextPortal(fix);
   portalToCheck = portalCheck.update(fix, nextPortal);
   allPortalCheck.update(fix, findNextPortal(fix, allSections));
-  const pa = allPortalCheck.justPassed;
+  // Inizio di una tratta spenta (portale segnalato come inesistente): non conta come portale.
+  let pa = allPortalCheck.justPassed;
+  if (pa && pa.isStart && !pa.endAndStart && disabled.has(pa.sectionId)) pa = null;
   seg = settings.segmentCheck ? segment.update(fix, pa, pa ? Policy.effectiveLimit(allSections.find(x => x.id === pa.sectionId)?.limitKmh) : null) : null;
   if (seg?.justOver) say(['segmento'], false, true);
   cam = null;
