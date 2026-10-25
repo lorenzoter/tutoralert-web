@@ -34,6 +34,7 @@
   .res .label { margin-bottom:4px; }
   .rRow .ok { color:var(--ok); } .rRow .warn { color:var(--warn); } .rRow .bad { color:var(--bad); }
   body.running #home { display:none; }
+  body.running { height:100vh; overflow:hidden; }
   body:not(.running) #drive { display:none; }
 
   /* Guida */
@@ -162,7 +163,6 @@
       <div class="card next" id="nextCard"><div id="nextTitle"></div><div id="nextSub"></div></div>
     </div>
     <div class="segBox"><div class="banner bad" id="camBanner" hidden></div><div id="camLine" class="segLine"></div></div>
-    <div class="segBox"><div class="banner bad" id="segBanner" hidden>Media tra i portali alta: rallenta</div><div id="segLine" class="segLine"></div></div>
   </div>
 
   <div class="card" id="prova">

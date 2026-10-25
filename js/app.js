@@ -16,10 +16,11 @@ const ROUTE = [35, 36, 37, 38, 45, 46, 47, 48];
 const fixCams = v => v === true ? 2 : v === false ? 0 : v;
 const DEFAULTS = {
   audio: 'nulla', volume: 1, tapSound: 'bip', approach: 1000, slowRepeat: false, endAverage: true,
-  targetExact: true, personalMax: null, rain: false, decimals: 1, speedoPct: 0, testMode: false, layout: 'auto', portalChime: true, segmentCheck: true, cameras: 2,
+  targetExact: true, personalMax: null, rain: false, decimals: 1, speedoPct: 0, testMode: false, layout: 'auto', portalChime: true, segmentCheck: false, advice: true, cameras: 2,
 };
 const settings = { ...DEFAULTS, ...store.get('settings', {}) };
 settings.cameras = fixCams(settings.cameras);
+settings.segmentCheck = false; // tolta: la media tra i portali non si usa più
 if (settings.voice === false && !store.get('settings', {}).audio) settings.audio = 'nulla';
 delete settings.voice;
 function applySettings() {
@@ -249,7 +250,7 @@ function overSpeech(s, now) {
   lastOverSpeech = now;
   const rec = s.recommendedKmh != null ? Math.round(s.recommendedKmh) : null;
   if (s.cannotRecover) say(['oltre'], false, true);
-  else if (rec != null && s.limitKmh != null && rec < s.limitKmh) say(['rallenta', num(rec)], false, true);
+  else if (settings.advice && rec != null && s.limitKmh != null && rec < s.limitKmh) say(['rallenta', num(rec)], false, true);
   else say(['attenzione'], false, true);
 }
 
@@ -419,7 +420,20 @@ function refreshAppAverages(sectionId) {
 }
 
 // ---------- Schermo ----------
+// La schermata di guida entra sempre tutta nella finestra (browser Tesla): se è più alta, si rimpicciolisce.
+let fitK = 1;
+function fitDrive() {
+  const d = $('drive');
+  const k = document.body.classList.contains('running') ? Math.min(1, (window.innerHeight - 6) / d.offsetHeight) : 1;
+  if (Math.abs(k - fitK) < 0.01) return;
+  fitK = k;
+  d.style.transformOrigin = 'top center';
+  d.style.transform = k < 1 ? `scale(${k.toFixed(3)})` : '';
+}
+window.addEventListener('resize', () => { fitK = 0; fitDrive(); });
+
 function render() {
+  queueMicrotask(fitDrive);
   $('gps').textContent = !running ? '' : simulated ? 'SIMULAZIONE' : lastFix ? `GPS ±${Math.round(lastFix.accuracyM ?? 0)} m` : 'GPS: in attesa…';
   const s = status;
   $('tutor').hidden = !s; $('free').hidden = !!s;
@@ -440,7 +454,7 @@ function render() {
     const banner = gpsLostS != null ? [`GPS perso da ${gpsLostS} s · media stimata`, 'warn']
       : s.suspended ? ['Fuori percorso', 'warn']
       : s.cannotRecover ? ['Media oltre il limite', 'bad']
-      : s.level === 'OVER' && rec != null && lim != null && rec < lim ? [`Rallenta a ${rec}`, 'warn'] : null;
+      : settings.advice && s.level === 'OVER' && rec != null && lim != null && rec < lim ? [`Rallenta a ${rec}`, 'warn'] : null;
     $('banner').hidden = !banner;
     if (banner) { $('banner').textContent = banner[0]; $('banner').className = 'banner ' + banner[1]; }
     $('tState').textContent = (s.section.portalsMeasured ? '🟢 Portali verificati in auto · formula del Tutor' : '⚪ Portali da verificare: media prudente') + ` · ${km(s.totalMeters, 2)}`;
@@ -456,9 +470,6 @@ function render() {
   $('camBanner').textContent = cam ? `Autovelox: rallenta a ${cam.camera.limit}` : '';
   $('camLine').textContent = cam ? `📷 Autovelox tra ${Math.round(cam.distanceM / 10) * 10} m · ${cam.camera.limit ? 'limite ' + cam.camera.limit : 'limite non noto'}${cam.camera.mit === 'fisso' ? '' : ' · non censito'}` : '';
   $('camLine').className = 'segLine' + (camFast ? ' bad' : '');
-  $('segBanner').hidden = !(seg && seg.over);
-  $('segLine').textContent = seg ? `Dall'ultimo portale: ${seg.avgKmh != null ? fmt(seg.avgKmh, settings.decimals) + ' km/h' : 'calcolo…'} · ${km(seg.distanceM)}${seg.limitKmh ? ' · limite ' + seg.limitKmh : ''}` : '';
-  $('segLine').className = 'segLine ' + (!seg || seg.avgKmh == null ? '' : seg.over ? 'bad' : 'ok');
   // Prova
   const np = nextPortal;
   $('hint').textContent = np ? `Portale ${np.kind} tra circa ${Math.round(np.distanceM / 50) * 50} m` + (np.verified ? '' : ' (posizione approssimativa)')
@@ -533,10 +544,10 @@ const SCHEMA = [
     ['cameras', 'Autovelox fissi', [[2, 'Tutti'], [1, 'Solo censiti'], [0, 'No']]],
     ['approach', 'Preavviso Tutor', [[1000, '1 km'], [500, '500 m'], [0, 'Spento']]],
     ['slowRepeat', '«Rallenta»', [[true, 'Ogni minuto'], [false, 'Una volta']]],
+    ['advice', 'Consiglio «Rallenta a…»', [[true, 'Sì'], [false, 'No']]],
     ['endAverage', 'Media a fine tratta', [[true, 'Sì'], [false, 'No']]],
   ]],
   ['Calcolo della media', [
-    ['segmentCheck', 'Media tra ogni portale', [[true, 'Sì'], [false, 'No']]],
     ['targetExact', 'Obiettivo', [[false, 'Tolleranza di legge'], [true, 'Limite esatto']]],
     ['personalMax', 'Limite personale', [[null, 'Nessuno'], [110, '110'], [100, '100'], [90, '90'], [80, '80']]],
     ['rain', 'Pioggia (limite 110)', [[false, 'No'], [true, 'Sì']]],
@@ -549,10 +560,10 @@ const SCHEMA = [
   ]],
 ];
 const HELP = {
+  advice: 'Quando la media è sopra il limite: riquadro e voce con la velocità da tenere. Con No resta solo il colore e «Attenzione».',
   cameras: 'Lazio, da OpenStreetMap, confrontati con l\'elenco del Ministero. Solo censiti: salta quelli dei comuni che non hanno autovelox fissi nell\'elenco (probabilmente spenti).',
   portalChime: 'Due toni brevi quando passi sotto un portale Tutor (inizio o fine), anche con gli avvisi su Nessuno.',
   audio: 'Si cambia anche durante la guida con il pulsante in alto.',
-  segmentCheck: 'Massima sicurezza: ogni portale conta come fine e inizio. Se la media resta sotto il limite tra ogni coppia di portali, resta sotto anche su qualunque tratta. Si va un po\' più piano.',
   targetExact: 'Tolleranza di legge: la media può arrivare al limite + 5%. Limite esatto: più prudente.',
   speedoPct: 'Solo la velocità mostrata, per farla coincidere col cruscotto. La media non cambia.',
   layout: 'Una colonna è comoda con il browser affiancato alla mappa. Automatica sceglie in base alla larghezza.',
