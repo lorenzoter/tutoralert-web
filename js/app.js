@@ -322,6 +322,8 @@ const segment = {
   reset() { this.startT = null; this.prev = null; this.odo = 0; this.alerted = false; },
   update(fix, passed, limit) {
     if ((fix.accuracyM ?? 0) <= 50) { if (this.prev) this.odo += Geo.dist(this.prev.lat, this.prev.lon, fix.lat, fix.lon); this.prev = fix; }
+    // Portale solo di fine: dopo non c'è nessuna tratta Tutor, niente media da controllare.
+    if (passed && !passed.isStart && !passed.endAndStart) { this.startT = null; return null; }
     if (passed) { this.startT = fix.timeMs; this.startOdo = this.odo; this.limit = limit; this.alerted = false; }
     if (this.startT == null) return null;
     const dist = this.odo - this.startOdo, el = fix.timeMs - this.startT;
