@@ -1,9 +1,7 @@
 {
  "version": 2,
- "dataVersion": 202610300617,
- "disabled": [
-  45
- ],
+ "dataVersion": 202610300619,
+ "disabled": [],
  "sections": [
   {
    "id": 1,
