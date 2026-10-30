@@ -1,6 +1,6 @@
 {
  "version": 2,
- "dataVersion": 202610241250,
+ "dataVersion": 202610300617,
  "disabled": [
   45
  ],
@@ -1419,30 +1419,30 @@
    "direction": "dir. Sud",
    "from": "All. A24-A1",
    "to": "All. Diramazione Roma Sud-A1",
-   "kmStart": 564,
-   "kmEnd": 574,
-   "lengthM": 10000,
+   "kmStart": 564.05,
+   "kmEnd": 574.6,
+   "lengthM": 10550.0,
    "limit": 130,
    "variableLimit": false,
    "reliability": "MEDIUM",
    "start": {
-    "lat": 41.910387,
-    "lon": 12.749289
+    "lat": 41.90809,
+    "lon": 12.75033
    },
    "end": {
-    "lat": 41.831134,
-    "lon": 12.800598
+    "lat": 41.82273,
+    "lon": 12.8055
    },
-   "geometry": "}rx~FabylAjMkEv_A}WhNcFnHsDfKuGzc@k[lKaFzJqC~i@cHpJwC`EuBnKwHbDmDh`@uk@~KcMvK_Jhg@_[~QyNd\\w[rGgFhNmIn[cOvf@_R",
-   "startSource": "stima",
-   "endSource": "stima",
+   "geometry": "qdx~FmhylAv_A}WhNcFnHsDfKuGzc@k[lKaFzJqC~i@cHpJwC`EuBnKwHbDmDh`@uk@~KcMvK_Jhg@_[~QyNd\\w[rGgFhNmIn[cOvf@_R|r@g]PI",
+   "startSource": "sicve",
+   "endSource": "verificato",
    "estimatedStart": {
     "lat": 41.910387,
     "lon": 12.749289
    },
    "estimatedEnd": {
-    "lat": 41.831134,
-    "lon": 12.800598
+    "lat": 41.82282,
+    "lon": 12.80544
    }
   },
   {
